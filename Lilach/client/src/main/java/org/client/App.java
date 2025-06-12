@@ -19,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //Add here title set (Lilach Store).
+        //Add here title set (Lilachh Store).
         scene = new Scene(loadFXML("StoreSkeleton"), 1000, 600);
         stage.setScene(scene);
         stage.setMinWidth(800);
