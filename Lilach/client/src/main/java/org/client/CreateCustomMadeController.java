@@ -50,7 +50,7 @@ public class CreateCustomMadeController extends Controller{
     private ComboBox<String> sortColor;
 
     @FXML
-    private ComboBox<String> sortType;      
+    private ComboBox<String> sortType;
 
     private List<PreMadeProduct> bases;
 

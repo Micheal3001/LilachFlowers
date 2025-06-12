@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="89.0" prefWidth="444.0" style="-fx-background-color: f2d8ff; -fx-border-color: ffffff; -fx-border-radius: 23; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.SummaryCustomProductController">
+<AnchorPane prefHeight="89.0" prefWidth="444.0" style="-fx-background-color: FFE8CD; -fx-border-color: ffffff; -fx-border-radius: 23; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.SummaryCustomProductController">
    <children>
-      <Label fx:id="type" layoutX="56.0" layoutY="14.0" prefHeight="23.0" prefWidth="169.0" text="type" textFill="#9a03a4">
+      <Label fx:id="type" layoutX="56.0" layoutY="14.0" prefHeight="23.0" prefWidth="169.0" text="type" textFill="#ff9999">
          <font>
             <Font name="Calibri Bold" size="18.0" />
          </font>
@@ -17,7 +17,7 @@
             <Insets left="7.0" />
          </padding>
       </Label>
-      <Label layoutX="231.0" layoutY="4.0" prefHeight="21.0" prefWidth="47.0" text="Price:" textFill="#750280">
+      <Label layoutX="231.0" layoutY="4.0" prefHeight="21.0" prefWidth="47.0" text="Price:" textFill="#ff9999">
          <font>
             <Font name="Calibri" size="17.0" />
          </font>
@@ -30,7 +30,7 @@
             <Insets left="7.0" />
          </padding>
       </Label>
-      <Label layoutX="231.0" layoutY="26.0" prefHeight="21.0" prefWidth="81.0" text="Total Price:" textFill="#750280">
+      <Label layoutX="231.0" layoutY="26.0" prefHeight="21.0" prefWidth="81.0" text="Total Price:" textFill="#ff9999">
          <font>
             <Font name="Calibri" size="17.0" />
          </font>
@@ -61,7 +61,7 @@
       </Label>
       <TextFlow layoutX="20.0" layoutY="47.0" prefHeight="47.0" prefWidth="403.0">
          <children>
-            <Text fx:id="description" fill="#9a03a4" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: " wrappingWidth="31.203125">
+            <Text fx:id="description" fill="#ff9999" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: " wrappingWidth="31.203125">
                <font>
                   <Font size="14.0" />
                </font>

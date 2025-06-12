@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="400.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 0 20 0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ManagerMenuController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="400.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 0 20 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ManagerMenuController">
    <children>
-      <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="400.0" prefWidth="220.0" style="-fx-background-color: #9bc98c;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="400.0" prefWidth="220.0" style="-fx-background-color: FFDCDC;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="editCatalogBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToEditCatalog" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #9bc98c;" text="Edit Catalog" textFill="WHITE">
+            <Button fx:id="editCatalogBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToEditCatalog" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FFDCDC;" text="Edit Catalog" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -18,7 +18,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="reportsBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToReports" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #62a74d;" text="Reports" textFill="WHITE">
+            <Button fx:id="reportsBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToReports" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FF9898;" text="Reports" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -31,7 +31,7 @@
             <Insets bottom="10.0" />
          </padding>
       </VBox>
-      <Button fx:id="logoutBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #9bc98c; -fx-background-radius: 0 0 20 0;" text="Logout" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Button fx:id="logoutBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FFF2EB; -fx-background-radius: 0 0 20 0;" text="Logout" textFill="#b9b6b6" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="20.0" />
          </font>

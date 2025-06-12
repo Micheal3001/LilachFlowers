@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CreateOrderController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CreateOrderController">
    <children>
       <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
@@ -25,7 +25,7 @@
                <children>
                   <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1100.0" prefWidth="2000.0" style="-fx-background-color: ffffff;" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMaxWidth="120.0" tabMinHeight="40.0" tabMinWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <tabs>
-                        <Tab fx:id="selfTab" onSelectionChanged="#tabClicked" style="-fx-background-color: e6b3ff; -fx-font-size: 16px;" text="self shipping">
+                        <Tab fx:id="selfTab" onSelectionChanged="#tabClicked" style="-fx-background-color: FFD6BA; -fx-font-size: 16px;" text="self shipping">
                            <content>
                               <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
                                  <children>
@@ -63,8 +63,8 @@
                                                 <VBox maxWidth="400.0" prefHeight="484.0" prefWidth="750.0" spacing="28.0">
                                                    <children>
                                                       <TextField fx:id="selfAddressText" maxWidth="300.0" prefWidth="300.0" />
-                                                      <DatePicker fx:id="selfShippingDate" maxWidth="300.0" onAction="#selfEnableHours" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: e6b3ff;" />
-                                                      <ComboBox fx:id="selfHourPicker" maxWidth="300.0" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: e6b3ff;" />
+                                                      <DatePicker fx:id="selfShippingDate" maxWidth="300.0" onAction="#selfEnableHours" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: FFD6BA;" />
+                                                      <ComboBox fx:id="selfHourPicker" maxWidth="300.0" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: FFD6BA;" />
                                                    </children>
                                                    <HBox.margin>
                                                       <Insets right="150.0" top="68.0" />
@@ -72,7 +72,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: f2d8ff;">
+                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: FFF2EB;">
                                              <children>
                                                 <Label alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="170.0" text="Order Summary:">
                                                    <font>
@@ -176,7 +176,7 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <TextArea fx:id="selfGreetingText" layoutX="14.0" layoutY="285.0" prefHeight="167.0" prefWidth="558.0" style="-fx-background-color: e6b3ff;" />
+                                    <TextArea fx:id="selfGreetingText" layoutX="14.0" layoutY="285.0" prefHeight="167.0" prefWidth="558.0" style="-fx-background-color: FFD6BA;" />
                                     <Label layoutX="14.0" layoutY="252.0" prefHeight="22.0" prefWidth="318.0" text="Add greeting card to the order: (optional)">
                                        <font>
                                           <Font name="Calibri" size="18.0" />
@@ -186,7 +186,7 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="giftTab" onSelectionChanged="#tabClicked" style="-fx-background-color: e6b3ff; -fx-font-size: 16px;" text="shipping as gift">
+                        <Tab fx:id="giftTab" onSelectionChanged="#tabClicked" style="-fx-background-color: FFD6BA; -fx-font-size: 16px;" text="shipping as gift">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="312.0" prefWidth="1050.0">
                                  <children>
@@ -236,8 +236,8 @@
                                                       <TextField fx:id="giftReceiverNameText" maxWidth="300.0" prefHeight="25.0" prefWidth="237.0" />
                                                       <TextField fx:id="giftReceiverAddressText" maxWidth="300.0" prefWidth="237.0" />
                                                       <TextField fx:id="giftReceiverPhoneText" maxWidth="300.0" prefWidth="237.0" />
-                                                      <DatePicker fx:id="giftShippingDate" maxWidth="300.0" onAction="#giftEnableHours" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: e6b3ff;" />
-                                                      <ComboBox fx:id="giftHourPicker" maxWidth="300.0" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: e6b3ff;" />
+                                                      <DatePicker fx:id="giftShippingDate" maxWidth="300.0" onAction="#giftEnableHours" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: FFD6BA;" />
+                                                      <ComboBox fx:id="giftHourPicker" maxWidth="300.0" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: FFD6BA;" />
                                                    </children>
                                                    <HBox.margin>
                                                       <Insets right="150.0" top="65.0" />
@@ -245,7 +245,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: f2d8ff;">
+                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: FFF2EB;">
                                              <children>
                                                 <Label alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="170.0" text="Order Summary:">
                                                    <font>
@@ -352,7 +352,7 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <TextArea fx:id="giftGreetingText" layoutX="18.0" layoutY="365.0" prefHeight="163.0" prefWidth="606.0" style="-fx-background-color: e6b3ff;" />
+                                    <TextArea fx:id="giftGreetingText" layoutX="18.0" layoutY="365.0" prefHeight="163.0" prefWidth="606.0" style="-fx-background-color: FFD6BA;" />
                                     <Label layoutX="19.0" layoutY="325.0" prefHeight="22.0" prefWidth="318.0" text="Add greeting card to the order: (optional)">
                                        <font>
                                           <Font name="Calibri" size="18.0" />
@@ -362,7 +362,7 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="TATab" onSelectionChanged="#tabClicked" style="-fx-background-color: e6b3ff; -fx-font-size: 16px;" text="take away">
+                        <Tab fx:id="TATab" onSelectionChanged="#tabClicked" style="-fx-background-color: FFD6BA; -fx-font-size: 16px;" text="take away">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -399,9 +399,9 @@
                                                 </VBox>
                                                 <VBox minWidth="280.0" prefHeight="688.0" prefWidth="836.0" spacing="27.0">
                                                    <children>
-                                                      <ComboBox fx:id="TAStorePicker" prefHeight="22.0" prefWidth="300.0" style="-fx-background-color: e6b3ff;" />
-                                                      <DatePicker fx:id="TADate" onAction="#TAEnableHours" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: e6b3ff;" />
-                                                      <ComboBox fx:id="TAHourPicker" prefHeight="22.0" prefWidth="300.0" style="-fx-background-color: e6b3ff;" />
+                                                      <ComboBox fx:id="TAStorePicker" prefHeight="22.0" prefWidth="300.0" style="-fx-background-color: FFD6BA;" />
+                                                      <DatePicker fx:id="TADate" onAction="#TAEnableHours" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: FFD6BA;" />
+                                                      <ComboBox fx:id="TAHourPicker" prefHeight="22.0" prefWidth="300.0" style="-fx-background-color: FFD6BA;" />
                                                    </children>
                                                    <HBox.margin>
                                                       <Insets right="220.0" top="65.0" />
@@ -409,7 +409,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: f2d8ff;">
+                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: FFF2EB;">
                                              <children>
                                                 <Label alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="170.0" text="Order Summary:">
                                                    <font>
@@ -485,7 +485,7 @@
                                                       </TextFlow>
                                                    </children>
                                                 </TextFlow>
-                                                <Button fx:id="TASubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: c44dff;" text="Submit Order" textFill="WHITE">
+                                                <Button fx:id="TASubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: FF9898;" text="Submit Order" textFill="WHITE">
                                                    <font>
                                                       <Font name="Guttman Aharoni" size="15.0" />
                                                    </font>
@@ -497,7 +497,7 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <TextArea fx:id="TAGreetingText" layoutX="14.0" layoutY="285.0" prefHeight="167.0" prefWidth="589.0" style="-fx-background-color: e6b3ff;" />
+                                    <TextArea fx:id="TAGreetingText" layoutX="14.0" layoutY="285.0" prefHeight="167.0" prefWidth="589.0" style="-fx-background-color: FFD6BA;" />
                                     <Label layoutX="14.0" layoutY="252.0" prefHeight="22.0" prefWidth="318.0" text="Add greeting card to the order: (optional)">
                                        <font>
                                           <Font name="Calibri" size="18.0" />

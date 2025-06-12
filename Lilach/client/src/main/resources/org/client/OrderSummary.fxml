@@ -7,17 +7,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="150.0" maxWidth="900.0" minHeight="150.0" minWidth="800.0" prefHeight="150.0" prefWidth="800.0" style="-fx-background-radius: 24 24 24 24; -fx-border-color: ffffff; -fx-background-color: f2d8ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.OrderSummaryController">
+<AnchorPane maxHeight="150.0" maxWidth="900.0" minHeight="150.0" minWidth="800.0" prefHeight="150.0" prefWidth="800.0" style="-fx-background-radius: 24 24 24 24; -fx-border-color: ffffff; -fx-background-color: FFF2EB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.OrderSummaryController">
    <children>
-      <ScrollPane layoutX="274.0" minWidth="460.0" prefHeight="290.0" prefWidth="460.0" style="-fx-background-color: #c6acef;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane layoutX="274.0" minWidth="460.0" prefHeight="290.0" prefWidth="460.0" style="-fx-background-color: FFF2EB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
           <AnchorPane maxHeight="1.7976931348623157E308" minWidth="444.0" prefHeight="146.0" prefWidth="444.0" style="-fx-background-color: e6b3ff;">
                <children>
-                  <VBox fx:id="vbox" fillWidth="false" minWidth="444.0" prefWidth="444.0" style="-fx-background-color: f2d8ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <VBox fx:id="vbox" fillWidth="false" minWidth="444.0" prefWidth="444.0" style="-fx-background-color: FFF2EB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="cancelOrder" layoutX="720.0" layoutY="98.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: f2d8ff; -fx-border-radius: 50; -fx-border-color: ffffff; -fx-border-width: 2;" text="Cancel" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0">
+      <Button fx:id="cancelOrder" layoutX="720.0" layoutY="98.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: FFF2EB; -fx-border-radius: 50; -fx-border-color: ffffff; -fx-border-width: 2;" text="Cancel" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

@@ -73,11 +73,11 @@ public class CustomerMenuController extends Controller {
     }
 
     private void coolMenuClick(Button button) {
-        cartBtn.setStyle("-fx-background-color: #9bc98c");
-        catalogBtn.setStyle("-fx-background-color: #9bc98c");
-        complaintBtn.setStyle("-fx-background-color: #9bc98c");
-        customMadeBtn.setStyle("-fx-background-color: #9bc98c");
-        ordersBtn.setStyle("-fx-background-color: #9bc98c");
+        cartBtn.setStyle("-fx-background-color: #ffaaaa");
+        catalogBtn.setStyle("-fx-background-color: #ffaaaa");
+        complaintBtn.setStyle("-fx-background-color: #ffaaaa");
+        customMadeBtn.setStyle("-fx-background-color: #ffaaaa");
+        ordersBtn.setStyle("-fx-background-color: #ffaaaa");
         button.setStyle("-fx-background-color: #62a74d");
 
     }

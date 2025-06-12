@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="615.0" prefWidth="1075.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ReportController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="615.0" prefWidth="1075.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ReportController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="650.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
@@ -44,7 +44,7 @@
                                     <Insets right="70.0" top="5.0" />
                                  </HBox.margin>
                               </DatePicker>
-                              <Button fx:id="makeReportBtn" mnemonicParsing="false" onAction="#makeReport" prefHeight="36.0" prefWidth="125.0" style="-fx-background-color: #c6acef;" text="make report">
+                              <Button fx:id="makeReportBtn" mnemonicParsing="false" onAction="#makeReport" prefHeight="36.0" prefWidth="125.0" style="-fx-background-color: FFF2EB;" text="make report">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

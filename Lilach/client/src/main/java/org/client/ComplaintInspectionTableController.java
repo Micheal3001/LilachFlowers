@@ -106,7 +106,7 @@ public class ComplaintInspectionTableController extends Controller{
                             Complaint complaint = getTableView().getItems().get(getIndex());
                             goToComplaintInspection(complaint);
                         });
-                        btn.setStyle("-fx-background-color:  #c6acef");
+                        btn.setStyle("-fx-background-color:  #ffaaaa");
                         btn.setText("Inspect");
                     }
 

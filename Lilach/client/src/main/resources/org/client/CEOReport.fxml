@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="635.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CEOReportController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="635.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CEOReportController">
     <children>
         <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="635.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
@@ -296,7 +296,7 @@
                                                 <Insets right="20.0" />
                                             </HBox.margin>
                                         </DatePicker>
-                                        <Button fx:id="makeReportBtn1" mnemonicParsing="false" onAction="#makeReport" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #c6acef;" text="make report">
+                                        <Button fx:id="makeReportBtn1" mnemonicParsing="false" onAction="#makeReport" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: FFD6BA;" text="make report">
                                             <font>
                                                 <Font name="Guttman Aharoni" size="15.0" />
                                             </font>
@@ -304,7 +304,7 @@
                                                 <Insets right="50.0" />
                                             </HBox.margin>
                                         </Button>
-                                        <ComboBox fx:id="storePicker" prefHeight="36.0" prefWidth="120.0" promptText="pick a store" style="-fx-background-color: #c6acef;">
+                                        <ComboBox fx:id="storePicker" prefHeight="36.0" prefWidth="120.0" promptText="pick a store" style="-fx-background-color: FFD6BA;">
                                             <HBox.margin>
                                                 <Insets left="40.0" right="90.0" />
                                             </HBox.margin>
@@ -317,7 +317,7 @@
                                                 <Insets right="20.0" />
                                             </HBox.margin>
                                         </DatePicker>
-                                        <Button fx:id="makeReportBtn2" mnemonicParsing="false" onAction="#makeReport" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #c6acef;" text="make report">
+                                        <Button fx:id="makeReportBtn2" mnemonicParsing="false" onAction="#makeReport" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: FFD6BA;" text="make report">
                                             <font>
                                                 <Font name="Guttman Aharoni" size="15.0" />
                                             </font>

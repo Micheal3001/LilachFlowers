@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="408.0" prefWidth="706.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.AddProductController">
+<AnchorPane prefHeight="408.0" prefWidth="706.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.AddProductController">
     <children>
         <ImageView fx:id="mainImage" fitHeight="290.0" fitWidth="290.0" layoutX="63.0" layoutY="36.0" pickOnBounds="true" />
         <TextArea fx:id="descriptionText" layoutX="407.0" layoutY="124.0" prefHeight="96.0" prefWidth="234.0" promptText="Add description:">
@@ -36,12 +36,12 @@
          <font>
             <Font size="13.0" />
          </font></Label>
-        <Button fx:id="saveBtn" layoutX="407.0" layoutY="350.0" mnemonicParsing="false" onAction="#clickedAdd" prefHeight="30.0" prefWidth="234.0" style="-fx-background-color: #c6acef;" text="add product">
+        <Button fx:id="saveBtn" layoutX="407.0" layoutY="350.0" mnemonicParsing="false" onAction="#clickedAdd" prefHeight="30.0" prefWidth="234.0" style="-fx-background-color: FFD6BA;" text="add product">
             <font>
                 <Font name="Cambria" size="15.0" />
             </font>
         </Button>
-        <Button fx:id="addImageBtn" layoutX="147.0" layoutY="350.0" mnemonicParsing="false" onAction="#addImage" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #c6acef;" text="Add image">
+        <Button fx:id="addImageBtn" layoutX="147.0" layoutY="350.0" mnemonicParsing="false" onAction="#addImage" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: FFD6BA;" text="Add image">
             <font>
                 <Font name="Cambria" size="15.0" />
             </font>
@@ -51,8 +51,8 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <ComboBox fx:id="colorBox" layoutX="527.0" layoutY="254.0" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: #c6acef;" />
-      <ComboBox fx:id="productTypeBox" layoutX="406.0" layoutY="254.0" onAction="#openColor" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: #c6acef;" />
+      <ComboBox fx:id="colorBox" layoutX="527.0" layoutY="254.0" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: FFD6BA;" />
+      <ComboBox fx:id="productTypeBox" layoutX="406.0" layoutY="254.0" onAction="#openColor" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: FFD6BA;" />
       <Label layoutX="407.0" layoutY="232.0" prefHeight="18.0" prefWidth="105.0" text="Product:">
          <font>
             <Font size="13.0" />

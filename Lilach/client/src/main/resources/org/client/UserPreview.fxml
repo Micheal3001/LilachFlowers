@@ -4,9 +4,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goToCustomerView" onMouseEntered="#mouseOnProduct" onMouseExited="#mouseOffProduct" prefHeight="269.0" prefWidth="269.0" style="-fx-background-color: #ffffff; -fx-border-radius: 23; -fx-border-color: #c6acef; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.UserPreviewController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goToCustomerView" onMouseEntered="#mouseOnProduct" onMouseExited="#mouseOffProduct" prefHeight="269.0" prefWidth="269.0" style="-fx-background-color: #ffffff; -fx-border-radius: 23; -fx-border-color: FF9999; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.UserPreviewController">
    <children>
-      <Text fx:id="name" boundsType="LOGICAL_VERTICAL_CENTER" fill="#9b5cff" layoutX="15.0" layoutY="23.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="full name" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="240.20001220703125">
+      <Text fx:id="name" boundsType="LOGICAL_VERTICAL_CENTER" fill="#ff9999" layoutX="15.0" layoutY="23.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="full name" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="240.20001220703125">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -51,7 +51,7 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fx:id="status" fill="#008200" layoutX="129.0" layoutY="213.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="RIGHT" wrappingWidth="130.0000000000001">
+      <Text fx:id="status" fill="#80d45f" layoutX="129.0" layoutY="213.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="RIGHT" wrappingWidth="130.0000000000001">
          <font>
             <Font size="19.0" />
          </font>

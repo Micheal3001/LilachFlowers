@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.StoreSkeleton">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.StoreSkeleton">
     <children>
         <BorderPane fx:id="mainScreen" layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="438.0" prefWidth="672.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -17,16 +17,16 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                            <ToolBar style="-fx-background-color: #62a74d;" HBox.hgrow="ALWAYS">
+                            <ToolBar style="-fx-background-color: FF9898;" HBox.hgrow="ALWAYS">
                                 <items>
-                                    <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="178.0" style="-fx-background-color: #62a74d;" text="Lilach Store" textFill="WHITE">
+                                    <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="178.0" style="-fx-background-color: FF9898;" text="Lilach Store" textFill="WHITE">
                                         <font>
                                             <Font name="Script MT Bold" size="24.0" />
                                         </font>
                                     </Button>
                                 </items>
                             </ToolBar>
-                        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #62a74d; -fx-background-radius: 0 0 20 0;">
+                        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: FF9898; -fx-background-radius: 0 0 20 0;">
                            <items>
                               <Label fx:id="helloLabel" alignment="CENTER_RIGHT" text="Hello Guest" textFill="WHITE">
                                  <font>

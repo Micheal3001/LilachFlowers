@@ -15,7 +15,7 @@
     <children>
         <VBox alignment="CENTER" layoutX="485.0" layoutY="60.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Text fill="#c6acef" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+                <Text fill="#ff9898" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                     <font>
                         <Font name="Script MT Bold" size="72.0" />
                     </font>
@@ -30,7 +30,7 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <FontAwesomeIconView fill="#c6acef" glyphName="USER" layoutY="42.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="7.5" AnchorPane.topAnchor="5.0" />
+                  <FontAwesomeIconView fill="#ff9898" glyphName="USER" layoutY="42.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="7.5" AnchorPane.topAnchor="5.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" />
@@ -38,7 +38,7 @@
             </AnchorPane>
             <AnchorPane maxHeight="-Infinity" maxWidth="600.0" prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <FontAwesomeIconView fill="#c6acef" glyphName="LOCK" layoutY="42.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="7.5" AnchorPane.topAnchor="5.0" />
+                  <FontAwesomeIconView fill="#ff9898" glyphName="LOCK" layoutY="42.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="7.5" AnchorPane.topAnchor="5.0" />
                   <PasswordField fx:id="passwordText" layoutX="61.0" layoutY="13.0" promptText="Password" style="-fx-background-radius: 15 15 15 15;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="16.0" />
@@ -51,7 +51,7 @@
             </AnchorPane>
             <HBox alignment="CENTER" maxWidth="600.0" prefHeight="50.0" prefWidth="600.0">
                <children>
-                      <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #c6acef;" text="Log-in">
+                      <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #ff9898;" text="Log-in">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>
@@ -64,7 +64,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text fx:id="signUpText" fill="#009bf2" onMouseClicked="#goToSignup" strokeType="OUTSIDE" strokeWidth="0.0" text="sign up now!" underline="true">
+                  <Text fx:id="signUpText" fill="#ff9898" onMouseClicked="#goToSignup" strokeType="OUTSIDE" strokeWidth="0.0" text="sign up now!" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>

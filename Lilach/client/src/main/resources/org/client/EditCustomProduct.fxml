@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="408.0" prefWidth="706.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.EditCustomProductController">
+<AnchorPane prefHeight="408.0" prefWidth="706.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.EditCustomProductController">
    <children>
       <ImageView fx:id="mainImage" fitHeight="290.0" fitWidth="290.0" layoutX="63.0" layoutY="36.0" pickOnBounds="true" />
       <TextArea fx:id="descriptionText" layoutX="407.0" layoutY="114.0" prefHeight="84.0" prefWidth="242.0" text="Description:">
@@ -44,12 +44,12 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="saveBtn" layoutX="408.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickedSave" prefHeight="26.0" prefWidth="234.0" style="-fx-background-color: #c6acef;" text="Save changes">
+      <Button fx:id="saveBtn" layoutX="408.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickedSave" prefHeight="26.0" prefWidth="234.0" style="-fx-background-color: FFD6BA;" text="Save changes">
          <font>
             <Font name="Cambria" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="changeImageBtn" layoutX="147.0" layoutY="356.0" mnemonicParsing="false" onAction="#changeImage" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #c6acef;" text="Change image">
+      <Button fx:id="changeImageBtn" layoutX="147.0" layoutY="356.0" mnemonicParsing="false" onAction="#changeImage" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: FFD6BA;" text="Change image">
          <font>
             <Font name="Cambria" size="15.0" />
          </font>
@@ -59,7 +59,7 @@
             <Font name="Cambria" size="15.0" />
          </font>
       </Button>
-      <ComboBox fx:id="colorBox" layoutX="471.0" layoutY="223.0" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: #c6acef;" />
+      <ComboBox fx:id="colorBox" layoutX="471.0" layoutY="223.0" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: FFD6BA;" />
       <Label layoutX="472.0" layoutY="201.0" prefHeight="19.0" prefWidth="113.0" text="Color:">
          <font>
             <Font size="13.0" />

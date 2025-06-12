@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="522.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ComplaintInspectionController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="522.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ComplaintInspectionController">
    <children>
       <VBox alignment="CENTER" prefHeight="482.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <opaqueInsets>
@@ -48,7 +48,7 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#submitInspection" style="-fx-background-color: #c6acef;" text="Submit inspection" />
+                  <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#submitInspection" style="-fx-background-color: FFD6BA;" text="Submit inspection" />
                </children>
             </HBox>
          </children>

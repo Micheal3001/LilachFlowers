@@ -67,7 +67,7 @@ public class CustomMadeBaseProductController extends ItemController{
 
     @FXML
     protected void mouseOnProduct(MouseEvent event) {
-        anchor_pane.setStyle("-fx-background-color: #e5dcff");
+        anchor_pane.setStyle("-fx-background-color: #ffaaaa");
     }
 
     @FXML
