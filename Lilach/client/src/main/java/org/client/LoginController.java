@@ -75,10 +75,10 @@ public class LoginController extends Controller{
 
         for(Node node : buttons){
             if(node.getId().equals("loginBtn"))
-                node.setStyle("-fx-background-color: #9bc98c");
+                node.setStyle("-fx-background-color: #ffaaaa");
 
             if(node.getId().equals("signUpBtn"))
-                node.setStyle("-fx-background-color: #62a74d");
+                node.setStyle("-fx-background-color: #ff9898");
         }
 
         this.getSkeleton().changeCenter("SignUp");

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CartProductController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CartProductController">
    <children>
       <ImageView fx:id="image" fitHeight="179.0" fitWidth="297.0" layoutX="454.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="480.0" AnchorPane.topAnchor="20.0" />
       <AnchorPane layoutX="55.0" prefHeight="200.0" prefWidth="454.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -22,17 +22,17 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button fx:id="remove" layoutX="34.0" layoutY="149.0" mnemonicParsing="false" onAction="#remove" style="-fx-background-color: #c6acef;" text="Remove">
+            <Button fx:id="remove" layoutX="34.0" layoutY="149.0" mnemonicParsing="false" onAction="#remove" style="-fx-background-color: FFD6BA;" text="Remove">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="plus" layoutX="376.0" layoutY="156.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="29.0" prefWidth="29.0" style="-fx-background-color: #c6acef;" text="+">
+            <Button fx:id="plus" layoutX="376.0" layoutY="156.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="29.0" prefWidth="29.0" style="-fx-background-color: FFD6BA;" text="+">
                <font>
                   <Font name="Guttman Aharoni" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="minus" layoutX="323.0" layoutY="156.0" mnemonicParsing="false" onAction="#minusProduct" prefHeight="29.0" prefWidth="29.0" style="-fx-background-color: #c6acef;" text="-">
+            <Button fx:id="minus" layoutX="323.0" layoutY="156.0" mnemonicParsing="false" onAction="#minusProduct" prefHeight="29.0" prefWidth="29.0" style="-fx-background-color: FFD6BA;" text="-">
                <font>
                   <Font name="Guttman Aharoni" size="12.0" />
                </font>

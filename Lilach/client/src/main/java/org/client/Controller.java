@@ -25,13 +25,13 @@ public abstract class Controller {
     protected void coolButtonClick(Button button) throws InterruptedException {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            button.setStyle("-fx-background-color: #8c73ea");
+            button.setStyle("-fx-background-color: #ffaaaa");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            button.setStyle("-fx-background-color: #c6acef");
+            button.setStyle("-fx-background-color: #ffaaaa");
         });
     }
 

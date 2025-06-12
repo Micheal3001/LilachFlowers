@@ -15,8 +15,8 @@ public class AdminMenuController extends WorkerMenuController {
     }
 
     protected void coolMenuClick(Button button) throws InterruptedException {
-        manageAccountsBtn.setStyle("-fx-background-color: #9bc98c");
-        button.setStyle("-fx-background-color: #62a74d");
+        manageAccountsBtn.setStyle("-fx-background-color: #ffaaaa");
+        button.setStyle("-fx-background-color: #ff9898");
     }
 
 }

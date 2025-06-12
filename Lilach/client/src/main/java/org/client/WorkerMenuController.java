@@ -25,8 +25,8 @@ public class WorkerMenuController extends Controller {
     }
 
     protected void coolMenuClick(Button button) throws InterruptedException {
-        editCatalogBtn.setStyle("-fx-background-color: #9bc98c");
-        button.setStyle("-fx-background-color: #62a74d");
+        editCatalogBtn.setStyle("-fx-background-color: #ffaaaa");
+        button.setStyle("-fx-background-color: #ff9898");
     }
 
 

@@ -82,15 +82,15 @@ public class UserPreviewController extends ItemController {
     @FXML
     @Override
     protected void mouseOnProduct(MouseEvent event) {
-        pane.setStyle("-fx-background-color: #e5dcff ; -fx-border-radius: 23 ;" +
-                "-fx-border-color: #8359e5 ; -fx-border-width: 3 ");
+        pane.setStyle("-fx-background-color: #ffaaaa ; -fx-border-radius: 23 ;" +
+                "-fx-border-color: #ff9898 ; -fx-border-width: 3 ");
     }
 
     @FXML
     @Override
     protected void mouseOffProduct(MouseEvent event) {
         pane.setStyle("-fx-background-color: #ffffff ; -fx-border-radius: 23 ;" +
-                "-fx-border-color: #c6acef ; -fx-border-width: 3 ");
+                "-fx-border-color: #ffaaaa ; -fx-border-width: 3 ");
     }
 
 

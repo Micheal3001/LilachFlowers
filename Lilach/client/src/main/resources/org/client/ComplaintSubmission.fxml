@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ComplaintSubmissionController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ComplaintSubmissionController">
    <children>
       <VBox alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="49.0" prefWidth="600.0">
                <children>
-                  <ComboBox fx:id="complaintTopic" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: #c6acef;" />
-                  <ComboBox fx:id="storePick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #c6acef;">
+                  <ComboBox fx:id="complaintTopic" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: FFD6BA;" />
+                  <ComboBox fx:id="storePick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: FFD6BA;">
                      <HBox.margin>
                         <Insets left="25.0" />
                      </HBox.margin>
@@ -36,7 +36,7 @@
             </TextArea>
             <HBox alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="400.0">
                <children>
-                  <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#sendComplaint" style="-fx-background-color: #c6acef;" text="Complete complaint">
+                  <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#sendComplaint" style="-fx-background-color: FFD6BA;" text="Complete complaint">
                      <font>
                         <Font size="14.0" />
                      </font>

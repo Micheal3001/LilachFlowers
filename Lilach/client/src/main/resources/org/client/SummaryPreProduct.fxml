@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="444.0" prefHeight="54.0" prefWidth="444.0" style="-fx-background-color: f2d8ff; -fx-border-color: ffffff; -fx-border-radius: 23; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.SummaryPreProductController">
+<AnchorPane maxWidth="444.0" prefHeight="54.0" prefWidth="444.0" style="-fx-background-color: FFE8CD; -fx-border-color: ffffff; -fx-border-radius: 23; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.SummaryPreProductController">
    <children>
-      <Label fx:id="name" layoutX="56.0" layoutY="14.0" prefHeight="23.0" prefWidth="163.0" text="Product name" textFill="#9a03a4">
+      <Label fx:id="name" layoutX="56.0" layoutY="14.0" prefHeight="23.0" prefWidth="163.0" text="Product name" textFill="#ff9999">
          <font>
             <Font name="Calibri Bold" size="19.0" />
          </font>
@@ -15,7 +15,7 @@
             <Insets left="7.0" />
          </padding>
       </Label>
-      <Label layoutX="231.0" layoutY="4.0" prefHeight="20.0" prefWidth="54.0" text="Price:" textFill="#750280">
+      <Label layoutX="231.0" layoutY="4.0" prefHeight="20.0" prefWidth="54.0" text="Price:" textFill="#ff9999">
          <font>
             <Font name="Calibri" size="17.0" />
          </font>
@@ -31,7 +31,7 @@
             <Insets left="7.0" />
          </padding>
       </Label>
-      <Label layoutX="231.0" layoutY="26.0" prefHeight="21.0" prefWidth="87.0" text="Total Price:" textFill="#750280">
+      <Label layoutX="231.0" layoutY="26.0" prefHeight="21.0" prefWidth="87.0" text="Total Price:" textFill="#ff9999">
          <font>
             <Font name="Calibri" size="17.0" />
          </font>

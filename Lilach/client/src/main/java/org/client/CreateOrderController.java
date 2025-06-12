@@ -290,13 +290,13 @@ public class CreateOrderController extends Controller {
     private void coolSubmitClick(Button button) throws InterruptedException {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            button.setStyle("-fx-background-color: #733dba");
+            button.setStyle("-fx-background-color: #ff9898");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            button.setStyle("-fx-background-color: #c44dff");
+            button.setStyle("-fx-background-color: #ffdcdc");
         });
     }
 

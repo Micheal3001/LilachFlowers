@@ -19,7 +19,7 @@ public abstract class ItemController extends Controller {
 
     @FXML
     protected void mouseOnProduct(MouseEvent event) {
-        pane.setStyle("-fx-background-color: #e5dcff");
+        pane.setStyle("-fx-background-color: #ffaaaa");
     }
 
     @FXML
@@ -29,7 +29,7 @@ public abstract class ItemController extends Controller {
 
     protected void clickOnProductEffect(MouseEvent event) throws InterruptedException {
 
-        pane.setStyle("-fx-background-color: #a8a1d5");
+        pane.setStyle("-fx-background-color: #ffaaaa");
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
