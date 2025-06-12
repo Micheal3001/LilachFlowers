@@ -70,11 +70,11 @@ public class GuestMenuController extends Controller {
 
 
     protected void coolMenuClick(Button button) throws InterruptedException {
-        cartBtn.setStyle("-fx-background-color: #ffaaaa");
-        catalogBtn.setStyle("-fx-background-color: #ffaaaa");
-        signUpBtn.setStyle("-fx-background-color: #ffaaaa");
-        loginBtn.setStyle("-fx-background-color: #ffaaaa");
-        customMade.setStyle("-fx-background-color: #ffaaaa");
+        cartBtn.setStyle("-fx-background-color: #ffdcdc");
+        catalogBtn.setStyle("-fx-background-color: #ffdcdc");
+        signUpBtn.setStyle("-fx-background-color: #ffdcdc");
+        loginBtn.setStyle("-fx-background-color: #ffdcdc");
+        customMade.setStyle("-fx-background-color: #ffdcdc");
         button.setStyle("-fx-background-color: #ff9898");
     }
 

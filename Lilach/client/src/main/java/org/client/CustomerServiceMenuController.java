@@ -31,7 +31,7 @@ public class CustomerServiceMenuController extends WorkerMenuController {
     }
     @Override
     protected void coolMenuClick(Button button) throws InterruptedException {
-        complaintsBtn.setStyle("-fx-background-color: #ffaaaa");
+        complaintsBtn.setStyle("-fx-background-color: #ffdcdc");
         button.setStyle("-fx-background-color: #ff9898");
     }
 
