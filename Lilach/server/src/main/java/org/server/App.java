@@ -80,7 +80,7 @@ public class App {
         orders = generateOrders(products,(LinkedList<Customer>) customers,stores);
         //--------------------END-OF-ORDERS----------------------------------------------
         //--------------------EXAMPLE-FOR-EMAIL-DELIVERY---------------------------------
-        Customer cust = new Customer("234655423", "Sagii","Sagii","Sagii","sagiman14@gmail.com","563464544","credit", Customer.AccountType.MEMBERSHIP,stores.get(stores.size()-1));
+        Customer cust = new Customer("234655423", "Jacob","Jacob","Jacob123","Jacob123@gmail.com","0563464544","credit", Customer.AccountType.MEMBERSHIP,stores.get(stores.size()-1));
         Date date = new Date();
         date.setYear(date.getYear() - 2);
         cust.setMemberShipExpireTODELETE(date);
@@ -127,9 +127,9 @@ public class App {
     private static List<Customer> generateCustomers(List<Store> s) throws Exception {       //generates new products
         List<Customer> customers = new LinkedList<Customer>();
         String[] customerId = new String[]{"123456789","234567891","345678912","456789123","567891234","678912345","789123456","891234567"};
-        String[] customerNames = new String[]{"user","Ash Ketchum", "Obi-Wan Kenobi", "Cynthia", "Amity Blight", "Mariette Cheng", "Matt", "Augustus Porter"};
-        String[] customerUserNames = new String[]{"user","pokemon", "Jedi_master", "Cynthi", "Cotton", "Ladybug", "Wii1", "TOH"};
-        String[] customerEmails = new String[]{"user67@gmail.com","Ash467@gmail.com","Obi-Wan4@gmail.com","Cynthia5@gmail.com","Amity47@gmail.com","Mariette7@gmail.com","Matt46@gmail.com", "Augustus@gmail.com"};
+        String[] customerNames = new String[]{"Thomas","Daniel", "Matthew", "Anthony", "Mark Blight", "Joshua Smith", "Kevin", "Sam Brown"};
+        String[] customerUserNames = new String[]{"Thomi","Dani", "Mat", "Anthony", "Blight", "JS", "Matt", "SamB"};
+        String[] customerEmails = new String[]{"Tomas73@gmail.com","Daniel123@gmail.com","Matthew@gmail.com","Anthony5@gmail.com","MarkBlight@gmail.com","Joshua1990@gmail.com","Kevin555@gmail.com", "SamB@gmail.com"};
         int storeN=0;
         for(int i=0;i< customerNames.length-3;i++) {
             storeN = i%(s.size()-1);
@@ -164,10 +164,10 @@ public class App {
         List<Employee> employees = new LinkedList<Employee>();
         String[] employeeId = new String[]{"987654321","876543219","765432198","654321987","543219876","432198765","321987654","219876543","334574567","345234556",
         "534563456","345634564","332141234","567856786","653294462","870767907","567944332"};
-        String[] employeeNames = new String[]{"Itai","Sagi","Gal","Tahel","Yahav","May", "Lillian", "Nellie", "Chantelle", "Tia", "Christine", "Hayley", "Alice", "Wanda", "Tara", "Rose", "Ruby"};
-        String[] employeeUserNames = new String[]{"itai","sagi","gal","tahel","yahav","may", "lilly", "nella", "chantelle", "tia", "christa", "took", "Halle", "Ali", "Scarlet", "Tara", "Rose"};
-        String[] employeeEmails = new String[]{"Itai@gmail.com", "Sagi@gmail.com", "Gal@gmail.com", "Tahel@gmail.com", "Yahav@gmail.com", "May@gmail.com",
-        "Lillian@gmail.com", "Nellie@gmail.com", "Chantelle@gmail.com", "Tia@gmail.com", "Christa@gmail.com", "took@gmail.com", "Halle@gmail.com", "Ali@gmail.com", "Scarlet@gmail.com", "Tara@gmail.com", "Rose@gmail.com"};
+        String[] employeeNames = new String[]{"Ofek","Michael","Reema","Ginwa","Mohamad","Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
+        String[] employeeUserNames = new String[]{"Ofek","Michael","Reema","Ginwa","Mohamad","Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
+        String[] employeeEmails = new String[]{"Ofek@gmail.com", "Michael@gmail.com", "Reema@gmail.com", "Ginwa@gmail.com", "Mohamad@gmail.com", "Dana@gmail.com",
+        "Abigail@gmail.com", "Shir@gmail.com", "Ron@gmail.com", "Adi@gmail.com", "Joey@gmail.com", "Hayley@gmail.com", "James@gmail.com", "David@gmail.com", "Ross@gmail.com", "Rachel@gmail.com", "Monica@gmail.com"};
         int storeN;
         for(int i=0;i< employeeNames.length;i++){
             storeN=i%7;
@@ -182,15 +182,15 @@ public class App {
         }
 
 
-        Employee cService = new Employee("465364524", "Karen", "karen", "karen", "Karen@gmail.com", "0522245342", Employee.Role.values()[1], s.get(s.size()-1));
+        Employee cService = new Employee("465364524", "John", "John", "John", "John@gmail.com", "0522245342", Employee.Role.values()[1], s.get(s.size()-1));
         employees.add(cService);
         session.save(cService);
         session.flush();
-        Employee ceo = new Employee("345623411", "TonyStark", "ironman", "ironman", "TonyStark@gmail.com", "0522245483", Employee.Role.values()[3], s.get(s.size()-1));
+        Employee ceo = new Employee("345623411", "Richard", "Richard", "Richard", "Richard@gmail.com", "0522245483", Employee.Role.values()[3], s.get(s.size()-1));
         employees.add(ceo);
         session.save(ceo);
         session.flush();
-        Employee admin = new Employee("796079534", "Anakin Skywalker", "slayer", "slayer", "Anakin@gmail.com", "0522245483", Employee.Role.values()[4], s.get(s.size()-1));
+        Employee admin = new Employee("796079534", "William Callen", "Willi", "Willi", "Callen@gmail.com", "0522245483", Employee.Role.values()[4], s.get(s.size()-1));
         employees.add(admin);
         session.save(admin);
         session.flush();
