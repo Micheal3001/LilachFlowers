@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="466.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CustomerViewController">
+   <children>
+      <Label layoutX="29.0" layoutY="34.0" prefHeight="36.0" prefWidth="94.0" text="Username:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="username" layoutX="153.0" layoutY="34.0" prefHeight="36.0" prefWidth="187.0" text="username">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <Label layoutX="29.0" layoutY="230.0" prefHeight="36.0" prefWidth="94.0" text="Full Name:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="99.0" prefHeight="36.0" prefWidth="94.0" text="Password:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="password" layoutX="152.0" layoutY="99.0" prefHeight="36.0" prefWidth="187.0" text="password">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <TextField fx:id="name" layoutX="153.0" layoutY="229.0" prefHeight="36.0" prefWidth="187.0" text="name">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <Label layoutX="29.0" layoutY="293.0" prefHeight="36.0" prefWidth="33.0" text="ID:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="430.0" layoutY="163.0" prefHeight="36.0" prefWidth="94.0" text="Balance:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="163.0" prefHeight="36.0" prefWidth="94.0" text="Email:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="152.0" layoutY="163.0" prefHeight="36.0" prefWidth="187.0" text="\@gmail.com">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <Label layoutX="477.0" layoutY="229.0" prefHeight="36.0" prefWidth="94.0" text="Status:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Text fx:id="status" fill="#699e25" layoutX="608.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="CENTER" wrappingWidth="109.0">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Text>
+      <Button fx:id="statusBtn" layoutX="513.0" layoutY="291.0" mnemonicParsing="false" onAction="#changeStatus" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: #c6acef;" text="Freeze\Unfreeze">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="id" layoutX="152.0" layoutY="293.0" prefHeight="36.0" prefWidth="187.0" text="123456789">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <TextField fx:id="balance" layoutX="545.0" layoutY="163.0" prefHeight="36.0" prefWidth="195.0" text="₪ 999999">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <Label layoutX="429.0" layoutY="99.0" prefHeight="36.0" prefWidth="84.0" text="User Type:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="typePicker" layoutX="545.0" layoutY="99.0" prefHeight="36.0" prefWidth="195.0" style="-fx-background-color: #c6acef;" />
+      <Button fx:id="saveBtn" layoutX="317.0" layoutY="399.0" mnemonicParsing="false" onAction="#clickedSaveCustomer" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #c6acef;" text="Save Changes">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Button>
+      <Label layoutX="429.0" layoutY="34.0" prefHeight="36.0" prefWidth="60.0" text="Store:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="storePicker" layoutX="545.0" layoutY="34.0" prefHeight="36.0" prefWidth="195.0" style="-fx-background-color: #c6acef;" />
+   </children>
+</AnchorPane>

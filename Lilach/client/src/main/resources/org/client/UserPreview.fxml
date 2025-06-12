@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goToCustomerView" onMouseEntered="#mouseOnProduct" onMouseExited="#mouseOffProduct" prefHeight="269.0" prefWidth="269.0" style="-fx-background-color: #ffffff; -fx-border-radius: 23; -fx-border-color: #c6acef; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.UserPreviewController">
+   <children>
+      <Text fx:id="name" boundsType="LOGICAL_VERTICAL_CENTER" fill="#9b5cff" layoutX="15.0" layoutY="23.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="full name" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="240.20001220703125">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="email" layoutX="63.0" layoutY="155.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="\@gmail.com" textAlignment="RIGHT" wrappingWidth="196.99994277954113">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text boundsType="LOGICAL_VERTICAL_CENTER" layoutX="8.0" layoutY="85.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" textOrigin="CENTER" wrappingWidth="110.66667938232422">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="type" boundsType="LOGICAL_VERTICAL_CENTER" layoutY="49.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="type" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="268.9999999999999">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text boundsType="LOGICAL_VERTICAL_CENTER" layoutX="9.0" layoutY="117.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" textOrigin="CENTER" wrappingWidth="37.99999618530262">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text boundsType="LOGICAL_VERTICAL_CENTER" layoutX="8.0" layoutY="147.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" textOrigin="CENTER" wrappingWidth="87.719482421875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="id" layoutX="129.0" layoutY="125.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="203010011" textAlignment="RIGHT" wrappingWidth="130.0000000000001">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="username" layoutX="126.0" layoutY="94.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="user" textAlignment="RIGHT" wrappingWidth="130.0000000000001">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text boundsType="LOGICAL_VERTICAL_CENTER" layoutX="9.0" layoutY="205.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" textOrigin="CENTER" wrappingWidth="87.719482421875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="status" fill="#008200" layoutX="129.0" layoutY="213.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="RIGHT" wrappingWidth="130.0000000000001">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text boundsType="LOGICAL_VERTICAL_CENTER" layoutX="8.0" layoutY="177.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Store:" textOrigin="CENTER" wrappingWidth="87.719482421875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="store" layoutX="77.0" layoutY="184.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="put store" textAlignment="RIGHT" wrappingWidth="181.99994277954113">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

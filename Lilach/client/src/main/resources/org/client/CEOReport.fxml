@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="635.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.CEOReportController">
+    <children>
+        <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="635.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="615.0" prefWidth="1200.0" style="-fx-background-color: ffffff;">
+                    <children>
+                        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="1050.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <left>
+                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="815.0" prefWidth="600.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <content>
+                                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="819.0" prefWidth="585.0" style="-fx-background-color: ffffff;">
+                                                    <children>
+                                                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="1150.0" prefHeight="1150.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <Label alignment="TOP_LEFT" minWidth="167.0" prefHeight="29.0" prefWidth="202.0" text="Company Report 1:">
+                                                                    <font>
+                                                                        <Font name="Script MT Bold" size="23.0" />
+                                                                    </font>
+                                                                    <padding>
+                                                                        <Insets left="10.0" />
+                                                                    </padding>
+                                                                </Label>
+                                                                <HBox prefHeight="382.0" prefWidth="598.0">
+                                                                    <children>
+                                                                        <VBox prefHeight="282.0" prefWidth="188.0">
+                                                                            <children>
+                                                                                <Label alignment="TOP_LEFT" minWidth="190.0" prefHeight="35.0" prefWidth="190.0" text="Income Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                    <padding>
+                                                                                        <Insets left="10.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                                <Label fx:id="incomeCompany1" alignment="TOP_LEFT" prefHeight="55.0" prefWidth="190.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                    <padding>
+                                                                                        <Insets left="10.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                                <Label fx:id="ordersCompany1" alignment="TOP_LEFT" prefHeight="52.0" prefWidth="200.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                    <padding>
+                                                                                        <Insets left="10.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                        <VBox prefHeight="282.0" prefWidth="398.0">
+                                                                            <children>
+                                                                                <Label prefHeight="28.0" prefWidth="398.0" text="Orders Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <PieChart fx:id="ordersCompanyChart1" legendSide="LEFT" legendVisible="false" prefHeight="341.0" prefWidth="398.0" />
+                                                                                <Label fx:id="salesCompany1" alignment="CENTER" prefHeight="48.0" prefWidth="398.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="15.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </HBox>
+                                                                <Label alignment="TOP_LEFT" minWidth="167.0" prefHeight="29.0" prefWidth="167.0" text="Store Report 1:">
+                                                                    <font>
+                                                                        <Font name="Script MT Bold" size="23.0" />
+                                                                    </font>
+                                                                    <padding>
+                                                                        <Insets left="10.0" />
+                                                                    </padding>
+                                                                </Label>
+                                                                <HBox prefHeight="382.0" prefWidth="598.0">
+                                                                    <children>
+                                                                        <VBox prefHeight="282.0" prefWidth="188.0">
+                                                                            <children>
+                                                                                <Label alignment="TOP_LEFT" minWidth="190.0" prefHeight="35.0" prefWidth="190.0" text="Income Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                    <padding>
+                                                                                        <Insets left="10.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                                <Label fx:id="incomeStore1" alignment="TOP_LEFT" prefHeight="63.0" prefWidth="200.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                    <padding>
+                                                                                        <Insets left="10.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                                <Label fx:id="ordersStore1" alignment="TOP_LEFT" prefHeight="52.0" prefWidth="200.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                    <padding>
+                                                                                        <Insets left="10.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                        <VBox prefHeight="282.0" prefWidth="398.0">
+                                                                            <children>
+                                                                                <Label prefHeight="28.0" prefWidth="398.0" text="Orders Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <PieChart fx:id="ordersStoreChart1" legendSide="LEFT" legendVisible="false" prefHeight="341.0" prefWidth="398.0" />
+                                                                                <Label fx:id="salesStore1" alignment="CENTER" prefHeight="48.0" prefWidth="398.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="15.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </HBox>
+                                                                <Label prefHeight="28.0" prefWidth="601.0" text="Complaint Chart:">
+                                                                    <font>
+                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <StackedBarChart fx:id="complaintChart1" animated="false" minHeight="300.0" prefHeight="350.0" prefWidth="598.0">
+                                                                    <xAxis>
+                                                                        <CategoryAxis fx:id="daysAxis" label="Days" side="BOTTOM" />
+                                                                    </xAxis>
+                                                                    <yAxis>
+                                                                        <NumberAxis fx:id="complaintsAxis" label="Number Of Complaints" side="LEFT" upperBound="20.0" />
+                                                                    </yAxis>
+                                                                </StackedBarChart>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                </AnchorPane>
+                            </left>
+                            <center>
+                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="615.0" prefWidth="600.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <content>
+                                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="585.0" prefHeight="903.0" prefWidth="582.0" style="-fx-background-color: ffffff;">
+                                                    <children>
+                                                        <VBox maxHeight="1.7976931348623157E308" minHeight="1150.0" prefHeight="1150.0" prefWidth="585.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <Label alignment="TOP_LEFT" minWidth="167.0" prefHeight="29.0" prefWidth="198.0" text="Company Report 2:">
+                                                                    <font>
+                                                                        <Font name="Script MT Bold" size="23.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <HBox prefHeight="382.0" prefWidth="598.0" style="-fx-background-color: ffffff;">
+                                                                    <children>
+                                                                        <VBox prefHeight="282.0" prefWidth="188.0">
+                                                                            <children>
+                                                                                <Label alignment="TOP_LEFT" minWidth="190.0" prefHeight="35.0" prefWidth="190.0" text="Income Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <Label fx:id="incomeCompany2" alignment="TOP_LEFT" prefHeight="63.0" prefWidth="200.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <Label fx:id="ordersCompany2" alignment="TOP_LEFT" prefHeight="52.0" prefWidth="200.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                        <VBox prefHeight="282.0" prefWidth="398.0">
+                                                                            <children>
+                                                                                <Label prefHeight="28.0" prefWidth="398.0" text="Orders Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <PieChart fx:id="ordersCompanyChart2" legendSide="LEFT" legendVisible="false" prefHeight="341.0" prefWidth="398.0" />
+                                                                                <Label fx:id="salesCompany2" alignment="CENTER" prefHeight="48.0" prefWidth="398.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="15.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </HBox>
+                                                                <Label alignment="TOP_LEFT" minWidth="167.0" prefHeight="29.0" prefWidth="167.0" text="Store Report 2:">
+                                                                    <font>
+                                                                        <Font name="Script MT Bold" size="23.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <HBox prefHeight="382.0" prefWidth="598.0" style="-fx-background-color: ffffff;">
+                                                                    <children>
+                                                                        <VBox prefHeight="282.0" prefWidth="188.0">
+                                                                            <children>
+                                                                                <Label alignment="TOP_LEFT" minWidth="190.0" prefHeight="35.0" prefWidth="190.0" text="Income Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <Label fx:id="incomeStore2" alignment="TOP_LEFT" prefHeight="63.0" prefWidth="200.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <Label fx:id="ordersStore2" alignment="TOP_LEFT" prefHeight="52.0" prefWidth="200.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="13.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                        <VBox prefHeight="282.0" prefWidth="398.0">
+                                                                            <children>
+                                                                                <Label prefHeight="28.0" prefWidth="398.0" text="Orders Report:">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                                <PieChart fx:id="ordersStoreChart2" legendSide="LEFT" legendVisible="false" prefHeight="341.0" prefWidth="398.0" />
+                                                                                <Label fx:id="salesStore2" alignment="CENTER" prefHeight="48.0" prefWidth="398.0">
+                                                                                    <font>
+                                                                                        <Font name="Yu Gothic Medium" size="15.0" />
+                                                                                    </font>
+                                                                                </Label>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </HBox>
+                                                                <Label prefHeight="28.0" prefWidth="601.0" text="Complaint Chart:">
+                                                                    <font>
+                                                                        <Font name="Yu Gothic Regular" size="16.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <StackedBarChart fx:id="complaintChart2" animated="false" minHeight="300.0" prefHeight="350.0" prefWidth="598.0">
+                                                                    <xAxis>
+                                                                        <CategoryAxis fx:id="daysAxis1" label="Days" side="BOTTOM" />
+                                                                    </xAxis>
+                                                                    <yAxis>
+                                                                        <NumberAxis fx:id="complaintsAxis1" label="Number Of Complaints" side="LEFT" upperBound="20.0" />
+                                                                    </yAxis>
+                                                                </StackedBarChart>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                </AnchorPane>
+                            </center>
+                            <top>
+                                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="1083.0" spacing="10.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <Label text="from" />
+                                        <DatePicker fx:id="fromDate1" onAction="#changedFromDate" prefHeight="28.0" prefWidth="100.0">
+                                            <HBox.margin>
+                                                <Insets right="20.0" />
+                                            </HBox.margin>
+                                        </DatePicker>
+                                        <Label text="to" />
+                                        <DatePicker fx:id="toDate1" disable="true" onAction="#changedToDate" prefHeight="28.0" prefWidth="100.0">
+                                            <HBox.margin>
+                                                <Insets right="20.0" />
+                                            </HBox.margin>
+                                        </DatePicker>
+                                        <Button fx:id="makeReportBtn1" mnemonicParsing="false" onAction="#makeReport" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #c6acef;" text="make report">
+                                            <font>
+                                                <Font name="Guttman Aharoni" size="15.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets right="50.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                        <ComboBox fx:id="storePicker" prefHeight="36.0" prefWidth="120.0" promptText="pick a store" style="-fx-background-color: #c6acef;">
+                                            <HBox.margin>
+                                                <Insets left="40.0" right="90.0" />
+                                            </HBox.margin>
+                                        </ComboBox>
+                                        <Label text="from" />
+                                        <DatePicker fx:id="fromDate2" onAction="#changedFromDate" prefHeight="28.0" prefWidth="100.0" />
+                                        <Label text="to" />
+                                        <DatePicker fx:id="toDate2" disable="true" onAction="#changedToDate" prefHeight="28.0" prefWidth="100.0">
+                                            <HBox.margin>
+                                                <Insets right="20.0" />
+                                            </HBox.margin>
+                                        </DatePicker>
+                                        <Button fx:id="makeReportBtn2" mnemonicParsing="false" onAction="#makeReport" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #c6acef;" text="make report">
+                                            <font>
+                                                <Font name="Guttman Aharoni" size="15.0" />
+                                            </font>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </top>
+                            <right>
+                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER" />
+                            </right>
+                        </BorderPane>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

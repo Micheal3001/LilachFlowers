@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#enterLogin" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.LoginController">
+    <children>
+        <VBox alignment="CENTER" layoutX="485.0" layoutY="60.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Text fill="#c6acef" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+                    <font>
+                        <Font name="Script MT Bold" size="72.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                </Text>
+            <AnchorPane maxHeight="-Infinity" maxWidth="600.0" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <TextField fx:id="usernameText" layoutX="204.0" layoutY="13.0" promptText="Username" style="-fx-background-radius: 15 15 15 15;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <FontAwesomeIconView fill="#c6acef" glyphName="USER" layoutY="42.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="7.5" AnchorPane.topAnchor="5.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </AnchorPane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="600.0" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <FontAwesomeIconView fill="#c6acef" glyphName="LOCK" layoutY="42.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="7.5" AnchorPane.topAnchor="5.0" />
+                  <PasswordField fx:id="passwordText" layoutX="61.0" layoutY="13.0" promptText="Password" style="-fx-background-radius: 15 15 15 15;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </AnchorPane>
+            <HBox alignment="CENTER" maxWidth="600.0" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                      <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #c6acef;" text="Log-in">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                      </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not signed up yet? ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="signUpText" fill="#009bf2" onMouseClicked="#goToSignup" strokeType="OUTSIDE" strokeWidth="0.0" text="sign up now!" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

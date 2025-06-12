@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxWidth="444.0" prefHeight="54.0" prefWidth="444.0" style="-fx-background-color: f2d8ff; -fx-border-color: ffffff; -fx-border-radius: 23; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.SummaryPreProductController">
+   <children>
+      <Label fx:id="name" layoutX="56.0" layoutY="14.0" prefHeight="23.0" prefWidth="163.0" text="Product name" textFill="#9a03a4">
+         <font>
+            <Font name="Calibri Bold" size="19.0" />
+         </font>
+         <padding>
+            <Insets left="7.0" />
+         </padding>
+      </Label>
+      <Label layoutX="231.0" layoutY="4.0" prefHeight="20.0" prefWidth="54.0" text="Price:" textFill="#750280">
+         <font>
+            <Font name="Calibri" size="17.0" />
+         </font>
+         <padding>
+            <Insets left="7.0" />
+         </padding>
+      </Label>
+      <Label fx:id="totalPrice" layoutX="320.0" layoutY="26.0" prefHeight="21.0" prefWidth="101.0" text="10">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <padding>
+            <Insets left="7.0" />
+         </padding>
+      </Label>
+      <Label layoutX="231.0" layoutY="26.0" prefHeight="21.0" prefWidth="87.0" text="Total Price:" textFill="#750280">
+         <font>
+            <Font name="Calibri" size="17.0" />
+         </font>
+         <padding>
+            <Insets left="7.0" />
+         </padding>
+      </Label>
+      <Label fx:id="price" layoutX="320.0" layoutY="4.0" prefHeight="21.0" prefWidth="101.0" text="10">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <padding>
+            <Insets left="7.0" />
+         </padding>
+      </Label>
+      <Label layoutX="8.0" layoutY="15.0" prefHeight="21.0" prefWidth="23.0" text="x">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets left="7.0" />
+         </padding>
+      </Label>
+      <Label fx:id="count" layoutX="24.0" layoutY="16.0" prefHeight="21.0" prefWidth="37.0" text="10">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets left="7.0" />
+         </padding>
+      </Label>
+   </children>
+</AnchorPane>

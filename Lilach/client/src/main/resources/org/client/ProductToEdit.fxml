@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      onMouseClicked="#goToEditProduct" onMouseEntered="#mouseOnProduct" onMouseExited="#mouseOffProduct"
+      prefHeight="285.0" prefWidth="234.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ProductToEditController">
+    <children>
+        <ImageView fx:id="image" fitHeight="204.0" fitWidth="204.0" layoutX="15.0" layoutY="41.0"
+                   onMouseClicked="#goToEditProduct" pickOnBounds="true" preserveRatio="true"/>
+        <Text fx:id="name" boundsType="LOGICAL_VERTICAL_CENTER" layoutY="24.0" onMouseClicked="#goToEditProduct"
+              strokeType="OUTSIDE" strokeWidth="0.0" text="Rakefet" textAlignment="CENTER" textOrigin="CENTER"
+              wrappingWidth="234.0">
+            <font>
+                <Font name="Guttman Aharoni" size="21.0"/>
+            </font>
+        </Text>
+        <Text fx:id="price" layoutX="78.0" layoutY="273.0" onMouseClicked="#goToEditProduct" strokeType="OUTSIDE"
+              strokeWidth="0.0" text="30₪" textAlignment="CENTER" wrappingWidth="78.51947021484375">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Text>
+        <Text fx:id="priceBeforeDiscount" layoutX="11.0" layoutY="269.0" onMouseClicked="#goToEditProduct"
+              strikethrough="true" strokeType="OUTSIDE" strokeWidth="0.0" text="50₪" textAlignment="CENTER"
+              wrappingWidth="55.3194580078125"/>
+    </children>
+</Pane>

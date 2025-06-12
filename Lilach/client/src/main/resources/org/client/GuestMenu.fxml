@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="400.0" prefWidth="220.0" style="-fx-background-color: #9bc98c; -fx-background-radius: 0 0 20 0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.GuestMenuController">
+    <children>
+      <Button fx:id="loginBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToLogin" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #9bc98c;" text="Login" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="signUpBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToSignUp" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #9bc98c;" text="SignUp" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+        <Button fx:id="cartBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToCart" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #9bc98c;" text="Cart" textFill="WHITE">
+            <font>
+                <Font size="20.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </Button>
+        <Button fx:id="catalogBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToCatalog" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #62a74d;" text="Catalog" textFill="WHITE">
+            <font>
+                <Font size="20.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Button>
+      <Button fx:id="customMade" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToCustomMade" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #9bc98c;" text="Custom-Made" textFill="WHITE">
+
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+    </children>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <padding>
+        <Insets bottom="10.0" />
+    </padding>
+</VBox>
