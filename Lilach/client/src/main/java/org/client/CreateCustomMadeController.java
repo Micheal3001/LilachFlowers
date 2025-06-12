@@ -109,10 +109,14 @@ public class CreateCustomMadeController extends Controller{
     }
 
     public static byte[] loadImageFromResources(String imageName) throws IOException {
-        var stream = org.client.App.class.getClassLoader().getResourceAsStream(String.format("Icons/%s", imageName));
-
-        return Objects.requireNonNull(stream).readAllBytes();
+        var path = String.format("Icons/%s", imageName);
+        var stream = org.client.App.class.getClassLoader().getResourceAsStream(path);
+        if (stream == null) {
+            throw new IOException("Resource not found: " + path);
+        }
+        return stream.readAllBytes();
     }
+
 
     @FXML
     void sort(ActionEvent event) {
