@@ -17,9 +17,16 @@ import java.util.*;
 public class App {
     public static Session session;// encapsulation make public function so this can be private
 
-    private static SessionFactory getSessionFactory() throws HibernateException {       //creates session factory for database use
+    private static SessionFactory getSessionFactory() throws HibernateException {
+        // שלב 1: קלט סיסמה מהמשתמש
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your MySQL password: ");
+        String password = scanner.nextLine();
+
+        // שלב 2: טעינת ההגדרות מקובץ
         Configuration configuration = new Configuration();
-        // Add ALL of your entities here. You can also try adding a whole package.
+
+        // שלב 3: הוספת מחלקות
         configuration.addAnnotatedClass(Product.class);
         configuration.addAnnotatedClass(PreMadeProduct.class);
         configuration.addAnnotatedClass(CustomMadeProduct.class);
@@ -30,13 +37,17 @@ public class App {
         configuration.addAnnotatedClass(Complaint.class);
         configuration.addAnnotatedClass(Order.class);
         configuration.addAnnotatedClass(Store.class);
-/*        configuration.addAnnotatedClass(Report.class);
-        configuration.addAnnotatedClass(Cart.class);*/
 
+        // שלב 4: דריסת הסיסמה מקלט המשתמש
+        configuration.setProperty("hibernate.connection.password", password);
 
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();        //pull session factory config from hibernate properties
+        // שלב 5: יצירת sessionFactory
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
+
         return configuration.buildSessionFactory(serviceRegistry);
     }
+
 
 
     private static void generateEntities() throws Exception {       //generates all entities

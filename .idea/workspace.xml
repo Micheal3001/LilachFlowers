@@ -4,181 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e44f6d2f-d4fd-41e2-923b-1f76cea77ba4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/client.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/AbstractReport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/AddItemController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/AddProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/AdminMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CEOReportController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CartProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CatalogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ClientBootController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ComplaintInspectionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ComplaintInspectionTableController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ComplaintSubmissionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CreateCustomMadeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CreateOrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CustomMadeBaseProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CustomerMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CustomerServiceMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/CustomerViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/EditCatalogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/EditCustomProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/EditProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/EmployeeViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/GuestMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ItemController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ManageAccountsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ManagerMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/OrderSummaryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ProductToEditController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ProductViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ReportController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/SignUpController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/StoreSkeleton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/SummaryCustomProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/SummaryOrdersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/SummaryPreProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/SummaryProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/UserPreviewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/WorkerMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ocsf/AbstractClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ocsf/AdaptableClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ocsf/ObservableClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/java/org/client/ocsf/ObservableSWRClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/Icons/Blooming_Pot.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/Icons/Bouquet.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/Icons/Bridal_Bouquet.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/Icons/Flower_Arrangement.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/Icons/cart_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/Icons/catalog_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/Icons/plusSign.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/AddItem.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/AddProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/AdminMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CEOReport.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/Cart.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CartProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/Catalog.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ClientBoot.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ComplaintInspection.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ComplaintInspectionTable.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ComplaintSubmission.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CreateCustomMade.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CreateOrder.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CustomMadeBaseProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CustomerMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CustomerServiceMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/CustomerView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/EditCatalog.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/EditCustomProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/EditProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/EmployeeView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/GuestMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/Login.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ManageAccounts.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ManagerMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/OrderSummary.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/Product.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ProductToEdit.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/ProductView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/Report.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/SignUp.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/StoreSkeleton.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/SummaryCustomProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/SummaryOrders.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/SummaryPreProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/SummaryProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/UserPreview.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/main/resources/org/client/WorkerMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/client/src/test/java/org/client/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/email/email.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/email/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/email/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/email/src/main/java/org/email/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/email/src/main/java/org/email/SendMail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/email/src/test/java/org/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/entities.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Complaint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/CustomMadeProduct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Guest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/PreMadeProduct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Report.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/Store.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/main/java/org/entities/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/entities/src/test/java/org/entities/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/out/artifacts/Lilachcreate_jar/Lilach.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/server.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ScheduleMailing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ocsf/AbstractConnectionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ocsf/AbstractServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ocsf/AdaptableServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ocsf/ConnectionToClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ocsf/ObservableOriginatorServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ocsf/ObservableServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/ocsf/OriginatorMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower0.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower13.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower14.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower15.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower16.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/Flower9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base0.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/Images/base9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/hibernate.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lilach/server/src/test/java/org/server/AppTest.java" afterDir="false" />
+    <list default="true" id="783e5466-dfa2-4183-a096-d16100f60d9f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lilach/server/src/main/java/org/server/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lilach/server/src/main/resources/hibernate.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Lilach/server/src/main/resources/hibernate.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,49 +15,171 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
-  <component name="ProjectId" id="2yPDTZaGRnYI7Ke9EIZMC8zx5Tu" />
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Ofek-D&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Micheal3001/LilachFlowers.git&quot;,
+    &quot;accountId&quot;: &quot;99cd7965-2495-4556-81e7-c9801151d78c&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2yPCdAQ4X0wUvDJiBDzvR3IbySI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Maven.Lilach [clean,install].executor": "Run",
+    "Maven.client.executor": "Run",
+    "Maven.server.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/miche/Dropbox/PC/Downloads/Lilach123",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Ofek",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ofekd/Labs-Software_Engeneering/LilachFlowers/Lilach/client",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager" selected="Maven.client">
+    <configuration name="Lilach [clean,install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/Lilach" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="client" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="javafx:run" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/Lilach/client" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="server" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+                <option value="exec:java" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/Lilach/server" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Maven.Lilach [clean,install]" />
+      <item itemvalue="Maven.server" />
+      <item itemvalue="Maven.client" />
+    </list>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
-        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e44f6d2f-d4fd-41e2-923b-1f76cea77ba4" name="Changes" comment="" />
-      <created>1749727322773</created>
+      <changelist id="783e5466-dfa2-4183-a096-d16100f60d9f" name="Changes" comment="" />
+      <created>1749726906416</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1749727322773</updated>
-      <workItem from="1749727323853" duration="334000" />
+      <updated>1749726906416</updated>
+      <workItem from="1749726907915" duration="1410000" />
+      <workItem from="1749728327018" duration="1094000" />
     </task>
     <servers />
   </component>
