@@ -140,7 +140,7 @@ public class App {
             session.flush();
         }
 
-        Customer cust = new Customer(customerId[5], customerNames[5], customerUserNames[5], "pass", customerEmails[5], "052224548"+5, "543445632158123"+6, Customer.AccountType.values()[1], s.get(s.size()-1));
+        Customer cust = new Customer(customerId[5], customerNames[5], customerUserNames[5], "12345", customerEmails[5], "052224548"+5, "543445632158123"+6, Customer.AccountType.values()[1], s.get(s.size()-1));
         cust.setBalance(50*(new Random().nextInt(10)));
         customers.add(cust);
         session.save(cust);
@@ -150,7 +150,7 @@ public class App {
         customers.add(cust);
         session.save(cust);
         session.flush();
-        cust = new Customer(customerId[7], customerNames[7], customerUserNames[7], "pass", customerEmails[7], "052224548"+7, "543445632158123"+7, Customer.AccountType.values()[2], s.get(s.size()-1));
+        cust = new Customer(customerId[7], customerNames[7], customerUserNames[7], "password", customerEmails[7], "052224548"+7, "543445632158123"+7, Customer.AccountType.values()[2], s.get(s.size()-1));
         cust.setBalance(50*(new Random().nextInt(10)));
         customers.add(cust);
         session.save(cust);
