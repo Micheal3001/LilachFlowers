@@ -25,7 +25,7 @@
                <children>
                   <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1100.0" prefWidth="2000.0" style="-fx-background-color: ffffff;" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMaxWidth="120.0" tabMinHeight="40.0" tabMinWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <tabs>
-                        <Tab fx:id="selfTab" onSelectionChanged="#tabClicked" style="-fx-background-color: FFD6BA; -fx-font-size: 16px;" text="self shipping">
+                        <Tab fx:id="selfTab" onSelectionChanged="#tabClicked" style="-fx-background-color: #FFD6BA; -fx-font-size: 16px;" text="self shipping">
                            <content>
                               <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
                                  <children>
@@ -164,7 +164,7 @@
                                                       </TextFlow>
                                                    </children>
                                                 </TextFlow>
-                                                <Button fx:id="selfSubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: c44dff;" text="Submit Order" textFill="WHITE">
+                                                <Button fx:id="selfSubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: #FF9898;" text="Submit Order" textFill="WHITE">
                                                    <font>
                                                       <Font name="Guttman Aharoni" size="15.0" />
                                                    </font>
@@ -337,7 +337,7 @@
                                                       </TextFlow>
                                                    </children>
                                                 </TextFlow>
-                                                <Button fx:id="giftSubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: c44dff;" text="Submit Order" textFill="WHITE">
+                                                <Button fx:id="giftSubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: #FF9898;" text="Submit Order" textFill="WHITE">
                                                    <font>
                                                       <Font name="Guttman Aharoni" size="15.0" />
                                                    </font>
@@ -409,7 +409,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: FFF2EB;">
+                                          <VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #FFF2EB;">
                                              <children>
                                                 <Label alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="170.0" text="Order Summary:">
                                                    <font>
@@ -485,7 +485,7 @@
                                                       </TextFlow>
                                                    </children>
                                                 </TextFlow>
-                                                <Button fx:id="TASubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: FF9898;" text="Submit Order" textFill="WHITE">
+                                                <Button fx:id="TASubmitBtn" mnemonicParsing="false" onAction="#SubmitOrder" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: #FF9898;" text="Submit Order" textFill="WHITE">
                                                    <font>
                                                       <Font name="Guttman Aharoni" size="15.0" />
                                                    </font>
