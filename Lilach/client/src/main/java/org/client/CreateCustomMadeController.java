@@ -18,6 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import org.entities.CustomMadeProduct;
 import org.entities.PreMadeProduct;
+import java.io.InputStream;
+
 
 public class CreateCustomMadeController extends Controller{
 
@@ -109,13 +111,15 @@ public class CreateCustomMadeController extends Controller{
     }
 
     public static byte[] loadImageFromResources(String imageName) throws IOException {
-        var path = String.format("Icons/%s", imageName);
-        var stream = org.client.App.class.getClassLoader().getResourceAsStream(path);
-        if (stream == null) {
-            throw new IOException("Resource not found: " + path);
+        String path = "/Icons/" + imageName; // include leading slash
+        try (InputStream stream = App.class.getResourceAsStream(path)) {
+            if (stream == null) {
+                throw new IOException("Resource not found: " + path);
+            }
+            return stream.readAllBytes();
         }
-        return stream.readAllBytes();
     }
+
 
 
     @FXML

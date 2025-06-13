@@ -51,7 +51,7 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fx:id="status" fill="#80d45f" layoutX="129.0" layoutY="213.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="RIGHT" wrappingWidth="130.0000000000001">
+      <Text fx:id="status" fill="#FFAAAAFF" layoutX="129.0" layoutY="213.0" onMouseClicked="#goToCustomerView" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="RIGHT" wrappingWidth="130.0000000000001">
          <font>
             <Font size="19.0" />
          </font>

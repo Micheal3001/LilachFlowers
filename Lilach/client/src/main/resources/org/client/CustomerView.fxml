@@ -61,7 +61,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Text fx:id="status" fill="#80d45f" layoutX="608.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="CENTER" wrappingWidth="109.0">
+      <Text fx:id="status" fill="#FFAAAAFF" layoutX="608.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" textAlignment="CENTER" wrappingWidth="109.0">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
