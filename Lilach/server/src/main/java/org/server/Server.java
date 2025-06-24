@@ -1,3 +1,4 @@
+
 package org.server;
 
 import javafx.scene.control.Alert;
@@ -15,9 +16,54 @@ import java.util.concurrent.TimeUnit;
 
 public class Server extends AbstractServer {
 
+    private java.util.concurrent.ScheduledExecutorService scheduler = java.util.concurrent.Executors.newScheduledThreadPool(1);
+
     public Server(int port) {
         super(port);
+        startComplaintChecker();
     }
+
+    private void startComplaintChecker() {
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                checkComplaintsForDelay();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 0, 10, java.util.concurrent.TimeUnit.MINUTES);
+    }
+
+    private void checkComplaintsForDelay() throws IOException {
+        List<Complaint> complaints = App.getAllOpenComplaints();
+        Date now = new Date();
+        for (Complaint complaint : complaints) {
+            long diff = now.getTime() - complaint.getDate().getTime();
+            if (diff >= TimeUnit.HOURS.toMillis(24) && !complaint.isDelayedNotified()) {
+                notifyComplaintDelayed(complaint);
+                markComplaintAsNotified(complaint);
+            }
+        }
+    }
+
+
+
+    private void notifyComplaintDelayed(Complaint complaint) {
+        SendMail.main(new String[]{
+                complaint.getCustomer().getEmail(),
+                "We apologize for the delay in handling your complaint. We are working on it and you will receive a response within 24 hours.",
+                "Complaint Processing Delay"
+        });
+    }
+
+    private void markComplaintAsNotified(Complaint complaint) {
+        App.session.beginTransaction();
+        App.session.evict(complaint);
+        complaint.setDelayedNotified(true);
+        App.session.merge(complaint);
+        App.session.flush();
+        App.session.getTransaction().commit();
+    }
+
 
     @Override
     /**
@@ -343,15 +389,15 @@ public class Server extends AbstractServer {
             if(user.getId()!=(int)msg.get(3)) {
                 if((msg.get(4)) instanceof Employee){ //user is employee
                     if(msg.get(5).equals("Store Manager") && (user instanceof Employee) &&
-                    ((Employee) user).getRole() == Employee.Role.STORE_MANAGER && (msg.get(6).equals(user.getStore().getName()))) {
+                            ((Employee) user).getRole() == Employee.Role.STORE_MANAGER && (msg.get(6).equals(user.getStore().getName()))) {
                         newMsg.add("#STORE_INVALID"); //checks if username or user id already exists
                         client.sendToClient(newMsg);
                         return;
                     }
                     else if (user.getUserName().equals(msg.get(1).toString()) || (user.getUserID().equals(msg.get(2)) && (user instanceof Employee))){
-                            newMsg.add("#USER_EXISTS"); //checks if username or user id already exists
-                            client.sendToClient(newMsg);
-                            return;
+                        newMsg.add("#USER_EXISTS"); //checks if username or user id already exists
+                        client.sendToClient(newMsg);
+                        return;
                     }
                 }
                 else {
@@ -563,7 +609,7 @@ public class Server extends AbstractServer {
 
             orders.removeIf(order -> order.getStore().getId() != rightStore.getId()
                     || order.getOrderDate().compareTo(fromDate) < 0 || order.getOrderDate().compareTo(toDate) > 0
-                        || order.isDelivered() == Order.Status.CANCELED);
+                    || order.isDelivered() == Order.Status.CANCELED);
 
             complaints.removeIf(complaint -> complaint.getStore().getId() != rightStore.getId()
                     || complaint.getDate().compareTo(fromDate) < 0 || complaint.getDate().compareTo(toDate) > 0);
@@ -628,4 +674,3 @@ public class Server extends AbstractServer {
         }
     }
 }
-
