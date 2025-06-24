@@ -6,7 +6,7 @@ module org.server {
     requires org.entities;
     requires org.email;
     requires javafx.controls;
-    exports org.server;
+    exports org.server.ocsf;
 
 
 }

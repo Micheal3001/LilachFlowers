@@ -17,11 +17,20 @@ public class Complaint implements Serializable {    //only for customers
     private Date date;
     private String compText;
     private Boolean appStatus=true;        // true= complaint filed successfully- yet to be inspected, false = complaint fulfilled
+    private boolean delayedNotified = false;
     private Boolean completedOnTime=false;
     public enum Topic{BAD_SERVICE, LATE_ARRIVAL, BAD_PRODUCT, PAYMENT, OTHER}
     private Topic topic;
     @ManyToOne
     private Store store;
+
+    public boolean isDelayedNotified() {
+        return delayedNotified;
+    }
+
+    public void setDelayedNotified(boolean delayedNotified) {
+        this.delayedNotified = delayedNotified;
+    }
 
 
     public static Complaint.Topic convertToTopic(String topic) {
