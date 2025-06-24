@@ -45,8 +45,6 @@ public class SendMail {
 
         });
 
-        // Used to debug SMTP issues
-        session.setDebug(true);
 
         try {
             // Create a default MimeMessage object.
@@ -64,10 +62,11 @@ public class SendMail {
             // Now set the actual message
             message.setText(args[1]);
 
-            System.out.println("sending...");
+            System.out.println("sending... to " + to + " | subject: " + args[2]);
             // Send message
             Transport.send(message);
-            System.out.println("Sent message successfully....");
+            System.out.println("Sent message successfully.... to " + to + " | subject: " + args[2]);
+
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }

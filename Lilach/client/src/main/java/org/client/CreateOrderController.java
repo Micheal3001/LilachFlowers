@@ -153,22 +153,37 @@ public class CreateOrderController extends Controller {
         setPrices();
     }
 
-    private void getStores() {
-        if (((Customer) (App.client.user)).getAccountType() == Customer.AccountType.STORE)  //if there is certain store for this costumer
-        {
-            TAStorePicker.setDisable(true); //disable the combobox
-            TAStorePicker.setValue(((Customer) (App.client.user)).getStore().getName());
+    public void getStores() {
+        if (!(App.client.user instanceof Customer)) {
+            System.out.println("משתמש עדיין לא הוגדר או לא לקוח רגיל");
+            return;
         }
 
-        else { //get stores for the combobox from db
+        Customer customer = (Customer) App.client.user;
+
+        if (customer.getAccountType() == Customer.AccountType.STORE) {
+            TAStorePicker.setDisable(true);
+            TAStorePicker.getItems().clear();
+            TAStorePicker.getItems().add(customer.getStore().getName());
+            TAStorePicker.setValue(customer.getStore().getName());
+
+        } else {
             this.stores = App.client.getStores();
+            TAStorePicker.getItems().clear();
             TAStorePicker.getItems().add("Set Store");
             TAStorePicker.setValue("Set Store");
-            for (Store s : stores)
-                if(!s.getName().equals("Chain"))
+
+            for (Store s : stores) {
+                if (!s.getName().equals("Chain")) {
                     TAStorePicker.getItems().add(s.getName());
+                }
+            }
         }
     }
+
+
+
+
 
     public void displaySummary() throws IOException { //function is called to display all products from cart
         CreateOrderController createOrderController = this;

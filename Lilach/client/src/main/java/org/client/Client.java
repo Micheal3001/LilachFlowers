@@ -100,6 +100,13 @@ public class Client extends AbstractClient {
                 }else if(msg.get(1).toString().equals("NOTFROZEN")){
                     user = (Customer) msg.get(2);
                     updateBalance((Customer) msg.get(2));
+                } else if (msg.get(1).toString().equals("MEMBERSHIPUPDATE")) {
+                    user = (Customer) msg.get(2);
+                    if (controller instanceof CreateOrderController) {
+                        Platform.runLater(() -> ((CreateOrderController) controller).getStores());
+                    }
+
+
                 }
             }
 
@@ -266,6 +273,16 @@ public class Client extends AbstractClient {
 
 
     private void updateNameEmployee(Employee employee) {
+
+        if (this.user instanceof Customer) {
+            Customer customer = (Customer) this.user;
+            if (customer.getAccountType() != Customer.AccountType.MEMBERSHIP) {
+                Platform.runLater(() -> offerMembershipPurchase(customer));
+            } else if (customer.getMemberShipExpire() != null && customer.getMemberShipExpire().before(new Date())) {
+                Platform.runLater(() -> updateAccountType(customer));
+            }
+        }
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -275,13 +292,20 @@ public class Client extends AbstractClient {
     }
 
     private void updateBalance(Customer customer) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                storeSkeleton.helloLabel.setText("Hello " + customer.getUserName() + " Your Balance is " + customer.getBalance());
-            }
+        this.user = customer; // לעדכן תמיד את האובייקט הראשי
+
+        if (customer.getAccountType() != Customer.AccountType.MEMBERSHIP) {
+            Platform.runLater(() -> offerMembershipPurchase(customer));
+        } else if (customer.getMemberShipExpire() != null &&
+                customer.getMemberShipExpire().before(new Date())) {
+            Platform.runLater(() -> updateAccountType(customer));
+        }
+
+        Platform.runLater(() -> {
+            storeSkeleton.helloLabel.setText("Hello " + customer.getUserName() + " Your Balance is " + customer.getBalance());
         });
     }
+
 
     private void deletedOrder(LinkedList<Object> msg) {
         Controller.sendAlert((String) msg.get(1), (String) msg.get(2), Alert.AlertType.INFORMATION);
@@ -338,6 +362,16 @@ public class Client extends AbstractClient {
 
                 Executor executor = Executors.newSingleThreadExecutor();
                 executor.execute(() -> {
+
+                    if (this.user instanceof Customer) {
+                        Customer customer = (Customer) this.user;
+                        if (customer.getAccountType() != Customer.AccountType.MEMBERSHIP) {
+                            Platform.runLater(() -> offerMembershipPurchase(customer));
+                        } else if (customer.getMemberShipExpire() != null && customer.getMemberShipExpire().before(new Date())) {
+                            Platform.runLater(() -> updateAccountType(customer));
+                        }
+                    }
+
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -450,6 +484,16 @@ public class Client extends AbstractClient {
                         Platform.runLater(() -> updateAccountType(customer));
                     }
                 }
+
+                if (this.user instanceof Customer) {
+                    Customer customer = (Customer) this.user;
+                    if (customer.getAccountType() != Customer.AccountType.MEMBERSHIP) {
+                        Platform.runLater(() -> offerMembershipPurchase(customer));
+                    } else if (customer.getMemberShipExpire() != null && customer.getMemberShipExpire().before(new Date())) {
+                        Platform.runLater(() -> updateAccountType(customer));
+                    }
+                }
+
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -493,6 +537,40 @@ public class Client extends AbstractClient {
         }
 
     }
+    private void offerMembershipPurchase(Customer customer) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Membership purchase");
+        alert.setHeaderText("Would you like to purchase a membership subscription?");
+        alert.setContentText("Note: purchasing a membership will cost 100₪.");
+        alert.getButtonTypes().clear();
+        ButtonType confirmBtn = new ButtonType("Confirm");
+        ButtonType rejectBtn = new ButtonType("Reject");
+        alert.getButtonTypes().setAll(confirmBtn, rejectBtn);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        List<Object> msg = new LinkedList<>();
+        msg.add("#UPDATE_CUSTOMER_ACCOUNT");
+        msg.add(customer.getId()); // שלחי רק את ה-ID
+
+        if (result.get() == confirmBtn) {
+            msg.add("CONFIRMED");
+            if (customer.getBalance() > 0)
+                if (customer.getBalance() < 100)
+                    msg.add(0);
+                else
+                    msg.add(customer.getBalance() - 100);
+        } else {
+            msg.add("REJECTED");
+        }
+
+        try {
+            App.client.sendToServer(msg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     public List<Store> getStores() {
