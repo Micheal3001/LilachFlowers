@@ -24,6 +24,7 @@ public class Complaint implements Serializable {    //only for customers
     @ManyToOne
     private Store store;
 
+    @Column(name = "delayedNotified")
     public boolean isDelayedNotified() {
         return delayedNotified;
     }

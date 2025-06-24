@@ -38,12 +38,17 @@ public class Server extends AbstractServer {
         Date now = new Date();
         for (Complaint complaint : complaints) {
             long diff = now.getTime() - complaint.getDate().getTime();
-            if (diff >= TimeUnit.HOURS.toMillis(24) && !complaint.isDelayedNotified()) {
+
+            if (Boolean.TRUE.equals(complaint.getStatus()) &&
+                    diff >= TimeUnit.HOURS.toMillis(24) &&
+                    !complaint.isDelayedNotified()) {
+
                 notifyComplaintDelayed(complaint);
                 markComplaintAsNotified(complaint);
             }
         }
     }
+
 
 
 
@@ -96,6 +101,7 @@ public class Server extends AbstractServer {
                 case "#PULL_CEO_REPORT" -> pullCeoReport((LinkedList<Object>) msg, client);
                 case "#SAVEEMPLOYEE" -> saveEmployee((LinkedList<Object>) msg, client);
                 case "#SAVECUSTOMER" -> saveCustomer((LinkedList<Object>) msg, client);
+                case "#OFFER_MEMBERSHIP" -> offerMembership((LinkedList<Object>) msg, client);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -254,18 +260,22 @@ public class Server extends AbstractServer {
     }
 
     private void updateCustomerAccount(LinkedList<Object> msg, ConnectionToClient client) {
-        Customer customer = (Customer) msg.get(1);
-        if(msg.get(2).toString().equals("CONFIRMED")){
+        int customerId = (int) msg.get(1);
+        Customer customer = App.session.find(Customer.class, customerId);
+
+        if (msg.get(2).toString().equals("CONFIRMED")) {
             updateAccount(customer, Customer.AccountType.MEMBERSHIP);
-            updateBalance(customer, (int) msg.get(3));
-        } else{
-            updateAccount(customer, Customer.AccountType.CHAIN);
+        } else {
+            updateAccount(customer, Customer.AccountType.STORE);
         }
+
+        Customer updatedCustomer = App.session.find(Customer.class, customerId);
 
         List<Object> newMsg = new LinkedList<>();
         newMsg.add("#USERREFRESH");
-        newMsg.add("BALANCEUPDATE");
-        newMsg.add(customer);
+        newMsg.add("MEMBERSHIPUPDATE");
+        newMsg.add(updatedCustomer);
+
         try {
             client.sendToClient(newMsg);
         } catch (IOException e) {
@@ -273,17 +283,28 @@ public class Server extends AbstractServer {
         }
     }
 
+
+
     private void updateAccount(Customer customer, Customer.AccountType type) {
         App.session.beginTransaction();
-        App.session.evict(customer);       //evict current product details from database
-        if(type == Customer.AccountType.MEMBERSHIP)
+        App.session.evict(customer);
+
+        if (type == Customer.AccountType.MEMBERSHIP) {
             customer.setMemberShipExpire();
-        else
             customer.setAccountType(type);
-        App.session.merge(customer);           //merge into database with updated info
+
+            Store chainStore = App.session.createQuery("FROM Store WHERE name = 'Chain'", Store.class).getSingleResult();
+            customer.setStore(chainStore);
+        } else {
+            customer.setAccountType(type);
+        }
+
+        App.session.merge(customer);
         App.session.flush();
-        App.session.getTransaction().commit(); // Save everything.
+        App.session.getTransaction().commit();
     }
+
+
 
     private void closeComplaintAndCompensate(LinkedList<Object> msg/*,ConnectionToClient client*/) {
         Complaint complaint = (Complaint) msg.get(1);
@@ -660,6 +681,21 @@ public class Server extends AbstractServer {
     protected void clientConnected(ConnectionToClient client) {     //is client connected
         super.clientConnected(client);
         System.out.println("Client connected: " + client.getInetAddress());
+    }
+
+    private void offerMembership(LinkedList<Object> msg, ConnectionToClient client) {
+        Customer customer = App.session.find(Customer.class, ((Customer) msg.get(1)).getId());
+
+        if(customer.getAccountType() != Customer.AccountType.MEMBERSHIP) {
+            try {
+                List<Object> response = new LinkedList<>();
+                response.add("#ASK_BUY_MEMBERSHIP");
+                response.add("You currently don't have a membership. Would you like to purchase one?");
+                client.sendToClient(response);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException {
