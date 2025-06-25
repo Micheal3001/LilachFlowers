@@ -126,45 +126,50 @@ public class Client extends AbstractClient {
     }
 
     private void refresh(LinkedList<Object> msg) throws IOException {
-
         Client.products = new LinkedList<>((List<PreMadeProduct>) msg.get(1));
         refreshCart();
+
         Platform.runLater(() -> {
             try {
-                String errorMsg;
-                if (this.user instanceof Employee)
-                    errorMsg = "Notice that there were made some changes in the catalog! have a nice shift :)";
-                else
-                    errorMsg = "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! hope you like it :)";
+                String currentScreen = this.getSkeleton().getCurrentCenter();
+                String alertMsg = null;
 
                 if (this.controller instanceof CatalogController) {
                     try {
                         ((CatalogController) this.controller).pullProductsToClient();
-                        if (this.user instanceof Employee)
-                            errorMsg = "Notice that there were made some changes in the catalog! have a nice shift :)";
-                        else
-                            errorMsg = "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! hope you like it :)";
+
+                        // Show alert only if current screen is Catalog or EditCatalog
+                        if ("Catalog".equals(currentScreen) || "EditCatalog".equals(currentScreen)) {
+                            alertMsg = (this.user instanceof Employee)
+                                    ? "Notice that there were made some changes in the catalog! Have a nice shift :)"
+                                    : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 } else if (this.controller instanceof CartController) {
-                    errorMsg = "We are sorry for the inconvenience, we made some changes in our catalog so notice that your cart is updated now! hope you like it :)";
                     this.getSkeleton().changeCenter("Cart");
+
                 } else if (this.controller instanceof CreateOrderController) {
                     try {
                         if (this.cart.getProducts().isEmpty()) {
                             this.getSkeleton().changeCenter("Catalog");
-                            errorMsg = "We are sorry for the inconvenience, your products are no longer available! check out the catalog :)";
+                            alertMsg = "We are sorry for the inconvenience, your products are no longer available! Check out the catalog :)";
                         } else {
                             ((CreateOrderController) this.controller).displaySummary();
                             ((CreateOrderController) this.controller).setPrices();
-                            errorMsg = "We are sorry for the inconvenience, we made some changes in our catalog so notice that your cart is updated now! hope you like it :)";
+                            // No alert unless on Catalog/EditCatalog
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                Controller.sendAlert(errorMsg, "Catalog Update", Alert.AlertType.INFORMATION);
+
+                if (alertMsg != null) {
+                    Controller.sendAlert(alertMsg, "Catalog Update", Alert.AlertType.INFORMATION);
+                }
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 Controller.sendAlert(e.getMessage(), "Catalog Update", Alert.AlertType.INFORMATION);
@@ -172,40 +177,40 @@ public class Client extends AbstractClient {
         });
     }
 
-    private void refreshCart() { //this function will update the cart: if any product were updated- the cart will be updated as well
-        //if any product was deleted- delete it from the cart (including deleting custom made if base were deleted)
 
+
+    private void refreshCart() {
         List<Product> cartProducts = this.cart.getProducts();
-        boolean preExists, cusExists;
-        int i =0;
+        int i = 0;
 
-        while (i < cartProducts.size()) { //for every cart product
-            cusExists = true; //unless any base product was deleted- dont delete the custom made
+        while (i < cartProducts.size()) {
             Product p = cartProducts.get(i);
 
-            if (p instanceof PreMadeProduct) { //if is catalog product
-                preExists = isExists((PreMadeProduct) p);
-                if (!preExists) { //if the product was deleted
-                    this.cart.removeProduct(p.getId()); //remove from cart
-                    i--;
+            if (p instanceof PreMadeProduct) {
+                if (!isExists((PreMadeProduct) p)) {
+                    this.cart.removeProduct(p.getId());
+                    continue; // Skip increment to stay on current index
                 }
 
-            } else {//if is custom product
+            } else if (p instanceof CustomMadeProduct) {
+                boolean cusExists = true;
                 List<PreMadeProduct> newBases = new LinkedList<>();
-                for (PreMadeProduct base : ((CustomMadeProduct) p).getProducts()) { //check all base products
-                    if (!isExists(base, newBases)) //if any base product was deleted
-                        cusExists = false; //remove from cart soon
+
+                for (PreMadeProduct base : ((CustomMadeProduct) p).getProducts()) {
+                    if (!isExists(base, newBases)) {
+                        cusExists = false;
+                    }
                 }
-                if (!cusExists){
+
+                if (!cusExists) {
                     this.cart.removeProduct(p.getId());
-                    i--;
-                }
-                else {
-                    //reset products.description and price:
+                    continue; // Skip increment
+                } else {
+                    // Recalculate description and price
                     p.setPrice(0);
                     ((CustomMadeProduct) p).setDescription("");
                     ((CustomMadeProduct) p).getProducts().clear();
-                    //calculate from start for the new products
+
                     for (PreMadeProduct base : newBases) {
                         ((CustomMadeProduct) p).getProducts().add(base);
                         p.setPrice(p.getPrice() + base.getPrice() * base.getAmount());
@@ -214,11 +219,12 @@ public class Client extends AbstractClient {
                     }
                 }
             }
+
             this.cart.refreshTotalCost();
             i++;
         }
-
     }
+
 
     //this function finds if our cart catalog product is in the updated products list.
     // if it is- fix it and return true, else return false cause it was deleted
