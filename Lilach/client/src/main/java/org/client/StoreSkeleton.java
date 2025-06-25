@@ -41,12 +41,19 @@ public class StoreSkeleton {
         changeCenter("Catalog");
     }
 
+    private String currentCenter;
+
+    public String getCurrentCenter() {
+        return this.currentCenter;
+    }
+
+
     /**
      * Changed to public from private, returns Controller and set Skeleton to it.
      */
     public Controller changeCenter(String name) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name + ".fxml"));
-        mainScreen.getChildren().remove(mainScreen.getCenter()); //remove existing fxml from center.
+        mainScreen.getChildren().remove(mainScreen.getCenter()); // remove existing fxml from center.
         Controller controller = null;
         try {
             mainScreen.setCenter(fxmlLoader.load());
@@ -54,7 +61,10 @@ public class StoreSkeleton {
 
             controller.setSkeleton(this);
             App.client.setController(controller);
-            //return controller;
+
+            // ✅ Track which screen is currently loaded
+            this.currentCenter = name;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
