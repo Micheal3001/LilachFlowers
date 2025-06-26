@@ -4,13 +4,6 @@
 
 package org.client;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -24,7 +17,14 @@ import org.entities.Complaint;
 import org.entities.Customer;
 import org.entities.Store;
 
-public class ComplaintSubmissionController extends Controller{
+import java.io.IOException;
+import java.net.URL;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class ComplaintSubmissionController extends Controller {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -54,9 +54,9 @@ public class ComplaintSubmissionController extends Controller{
         return pickedStore;
     }
 
-    private boolean checkEmpty(){
-        if(complaintText.getText().isEmpty() || complaintTopic.getValue().equals("Set Complaint Topic") || storePick.getValue().equals("Set Store")){
-            sendAlert("Some fields have not been filled"," Empty or Missing Fields", Alert.AlertType.WARNING);
+    private boolean checkEmpty() {
+        if (complaintText.getText().isEmpty() || complaintTopic.getValue().equals("Set Complaint Topic") || storePick.getValue().equals("Set Store")) {
+            sendAlert("Some fields have not been filled", " Empty or Missing Fields", Alert.AlertType.WARNING);
             return false;
         }
         return true;
@@ -65,10 +65,10 @@ public class ComplaintSubmissionController extends Controller{
     @FXML
     void sendComplaint(ActionEvent event) {
 
-        if(checkEmpty()){
+        if (checkEmpty()) {
             List<Object> msg = new LinkedList<>();
             msg.add("#COMPLAINT");
-            Complaint complaint = new Complaint((Customer)App.client.user, new Date(), complaintText.getText(), Complaint.convertToTopic(complaintTopic.getValue()), getSelectedStore());
+            Complaint complaint = new Complaint((Customer) App.client.user, new Date(), complaintText.getText(), Complaint.convertToTopic(complaintTopic.getValue()), getSelectedStore());
             msg.add(complaint);
             try {
                 App.client.sendToServer(msg);
@@ -83,11 +83,13 @@ public class ComplaintSubmissionController extends Controller{
                 PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
                 pause.setOnFinished((e -> {
                     alert.close();
-                    this.getSkeleton().changeCenter("Catalog");}));
+                    this.getSkeleton().changeCenter("Catalog");
+                }));
                 pause.play();
             });
         }
     }
+
     private void getStores() {
         this.stores = App.client.getStores();
         storePick.getItems().add("Set Store");
@@ -96,14 +98,15 @@ public class ComplaintSubmissionController extends Controller{
             storePick.getItems().add(s.getName());
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert complaintText != null : "fx:id=\"complaintText\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
         assert complaintTopic != null : "fx:id=\"complaintTopic\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
         assert submitBtn != null : "fx:id=\"submitBtn\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
         assert storePick != null : "fx:id=\"storePick\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
         complaintTopic.getItems().addAll("Bad service", "Order didn't arrive in time",
-                    "Defective product/ not what you ordered", "Payment issue", "Other");
+                "Defective product/ not what you ordered", "Payment issue", "Other");
         complaintTopic.setValue("Set Complaint Topic");
         getStores();
 
