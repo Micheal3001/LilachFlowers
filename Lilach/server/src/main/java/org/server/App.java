@@ -10,7 +10,6 @@ import org.hibernate.service.ServiceRegistry;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
@@ -50,70 +49,34 @@ public class App {
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
-    private static boolean dataExists(String entityName) {
-        String hql = "SELECT count(e) FROM " + entityName + " e";
-        Long count = session.createQuery(hql, Long.class).uniqueResult();
-        return count != null && count > 0;
-    }
-
-
     private static void generateEntities() throws Exception {       //generates all entities
         //--------------------STORES-----------------------------------------------------
-        List<Store> stores;
-        if (!dataExists("Store")) {
-            stores = generateStores();
-        } else {
-            stores = session.createQuery("FROM Store", Store.class).list();
-            System.out.println("Stores already exist, skipping generation.");
-        }
+        List<Store> stores = new LinkedList<Store>();
+        stores = generateStores();
         //--------------------END-OF-STORES----------------------------------------------
 
         //--------------------CUSTOMERS-AND-COMPLAINTS-----------------------------------
-        List<Customer> customers;
-        if (!dataExists("Customer")) {
-            customers = generateCustomers(stores);
-        } else {
-            customers = session.createQuery("FROM Customer", Customer.class).list();
-            System.out.println("Customers already exist, skipping generation.");
-        }
+        List<Customer> customers = new LinkedList<Customer>();
+        customers = generateCustomers(stores);
 
-        if (!dataExists("Complaint")) {
-            generateComplaints(stores, customers);
-        } else {
-            System.out.println("Complaints already exist, skipping generation.");
-        }
+        List<Complaint> complaints = new LinkedList<Complaint>();
+        complaints = generateComplaints(stores, customers);
         //--------------------END-OF-CUSTOMERS-AND-COMPLAINTS----------------------------
 
         //--------------------EMPLOYEES--------------------------------------------------
-        if (!dataExists("Employee")) {
-            generateEmployees(stores);
-        } else {
-            System.out.println("Employees already exist, skipping generation.");
-        }
+        List<Employee> employees = new LinkedList<Employee>();
+        employees = generateEmployees(stores);
         //--------------------END-OF-EMPLOYEES-------------------------------------------
 
         //--------------------FLOWERS----------------------------------------------------
-        List<PreMadeProduct> products;
-        if (!dataExists("PreMadeProduct")) {
-            products = generateProducts();
-            products.addAll(generateBaseCustomMadeProduct());
-        } else {
-            products = session.createQuery("FROM PreMadeProduct", PreMadeProduct.class).list();
-            System.out.println("Products already exist, skipping generation.");
-        }
+        List<PreMadeProduct> products = new LinkedList<PreMadeProduct>();
+        products = generateProducts();
+        products.addAll(generateBaseCustomMadeProduct());
         //--------------------END-OF-FLOWERS---------------------------------------------
 
         //--------------------ORDERS-----------------------------------------------------
-        if (!dataExists("Order")) {
-            // הגנה מפני ריקנות שיכולה לגרום ל־nextInt(0)
-            if (!customers.isEmpty() && !products.isEmpty() && !stores.isEmpty()) {
-                generateOrders(products, (LinkedList<Customer>) customers, stores);
-            } else {
-                System.out.println("Skipping orders: dependencies missing.");
-            }
-        } else {
-            System.out.println("Orders already exist, skipping generation.");
-        }
+        List<Order> orders = new LinkedList<Order>();
+        orders = generateOrders(products, (LinkedList<Customer>) customers, stores);
         //--------------------END-OF-ORDERS----------------------------------------------
         //--------------------EXAMPLE-FOR-EMAIL-DELIVERY---------------------------------
         Customer cust = new Customer("234655423", "Jacob", "Jacob", "Jacob123", "Jacob123@gmail.com", "0563464544", "credit", Customer.AccountType.MEMBERSHIP, stores.get(stores.size() - 1));
@@ -124,21 +87,14 @@ public class App {
         session.save(cust);
         session.flush();
 
-        //Complaint c = new Complaint(cust, new Date(122, 04, 5), "I WANT MONEY", Complaint.Topic.PAYMENT, stores.get(stores.size() - 1));
-        //session.save(c);
-        //session.flush();
+        Complaint c = new Complaint(cust, new Date(122, 04, 5), "I WANT MONEY", Complaint.Topic.PAYMENT, stores.get(stores.size() - 1));
+        session.save(c);
+        session.flush();
         //--------------------END-OF-EXAMPLE-FOR-EMAIL-DELIVERY--------------------------
     }
 
     private static List<Store> generateStores() throws Exception {       //generates new products
         List<Store> stores = new LinkedList<Store>();
-        long count = (Long) session.createQuery("select count(c) from Store c").uniqueResult();
-        if (count > 0) {
-            System.out.println("Complaints already exist, skipping generation.");
-            return stores;
-        }
-
-
         String[] storeNames = new String[]{"Lilac Haifa", "Lilac Tel-Aviv", "Lilac Be'er Sheva", "Lilac Rehovot", "Lilac Jerusalem", "Lilac Eilat"};
         String[] storeAddress = new String[]{"Grand Canyon Haifa - Derech Simha Golan 54", "Azrieli Mall - Derech Menachem Begin 132", "Big Beer Sheva - Derekh Hebron 21",
                 "Rehovot Mall - Bilu St 2", "Malcha Mall - Derech Agudat Sport Beitar 1", "Kanyon ha-Ir - HaMelacha St 12"};
@@ -158,11 +114,6 @@ public class App {
     private static List<PreMadeProduct> generateProducts() throws Exception {       //generates new products
         Random random = new Random();
         List<PreMadeProduct> products = new LinkedList<PreMadeProduct>();
-        long count = (Long) session.createQuery("select count(c) from PreMadeProduct c").uniqueResult();
-        if (count > 0) {
-            System.out.println("Complaints already exist, skipping generation.");
-            return products;
-        }
         String[] flowerNames = new String[]{"SunFlower", "Calanit", "Shibolet", "Rose", "Rakefet", "Lilach", "Lily", "Tulip", "Pickachu", "Charmander", "Thanos", "Commit", "Runlater", "Clean Install", "Orchid"};
         for (int i = 0; i < flowerNames.length; i++) {
             var img = loadImageFromResources(String.format("Flower%s.jpg", i));
@@ -176,24 +127,20 @@ public class App {
 
     private static List<Customer> generateCustomers(List<Store> s) throws Exception {       //generates new products
         List<Customer> customers = new LinkedList<Customer>();
-        long count = (Long) session.createQuery("select count(c) from Customer c").uniqueResult();
-        if (count > 0) {
-            System.out.println("Complaints already exist, skipping generation.");
-            return customers;
-        }
-        String[] customerId = new String[]{"123456789", "234567891", "345678912", "456789123", "567891234", "678912345", "789123456", "891234567"};
-        String[] customerNames = new String[]{"Thomas", "Daniel", "Matthew", "Anthony", "Mark Blight", "Joshua Smith", "Kevin", "Sam Brown"};
-        String[] customerUserNames = new String[]{"Thomi", "Dani", "Mat", "Anthony", "Blight", "JS", "Matt", "SamB"};
-        String[] customerEmails = new String[]{"Tomas73@gmail.com", "Daniel123@gmail.com", "Matthew@gmail.com", "Anthony5@gmail.com", "MarkBlight@gmail.com", "Joshua1990@gmail.com", "Kevin555@gmail.com", "SamB@gmail.com"};
-        int storeN = 0;
-        for (int i = 0; i < customerNames.length - 3; i++) {
-            storeN = i % (s.size() - 1);
-            Customer cust = new Customer(customerId[i], customerNames[i], customerUserNames[i], "pass", customerEmails[i], "052224548" + i, "543445632158123" + i % 10, Customer.AccountType.values()[0], s.get(storeN));
-            cust.setBalance(50 * (new Random().nextInt(10)));
-            customers.add(cust);
-            session.save(cust);
-            session.flush();
-        }
+            String[] customerId = new String[]{"123456789", "234567891", "345678912", "456789123", "567891234", "678912345", "789123456", "891234567"};
+            String[] customerNames = new String[]{"Thomas", "Daniel", "Matthew", "Anthony", "Mark Blight", "Joshua Smith", "Kevin", "Sam Brown"};
+            String[] customerUserNames = new String[]{"Thomi", "Dani", "Mat", "Anthony", "Blight", "JS", "Matt", "SamB"};
+            String[] customerEmails = new String[]{"Tomas73@gmail.com", "Daniel123@gmail.com", "Matthew@gmail.com", "Anthony5@gmail.com", "MarkBlight@gmail.com", "Joshua1990@gmail.com", "Kevin555@gmail.com", "SamB@gmail.com"};
+            int storeN;
+            for (int i = 0; i < customerNames.length - 3; i++) {
+                storeN = i % (s.size() - 1);
+                Customer cust = new Customer(customerId[i], customerNames[i], customerUserNames[i], "pass", customerEmails[i], "052224548" + i, "543445632158123" + i % 10, Customer.AccountType.values()[0], s.get(storeN));
+                cust.setBalance(50 * (new Random().nextInt(10)));
+                customers.add(cust);
+                session.save(cust);
+                session.flush();
+            }
+
 
         Customer cust = new Customer(customerId[5], customerNames[5], customerUserNames[5], "12345", customerEmails[5], "052224548" + 5, "543445632158123" + 6, Customer.AccountType.values()[1], s.get(s.size() - 1));
         cust.setBalance(50 * (new Random().nextInt(10)));
@@ -217,29 +164,24 @@ public class App {
 
     private static List<Employee> generateEmployees(List<Store> s) throws Exception {       //generates new products
         List<Employee> employees = new LinkedList<Employee>();
-        long count = (Long) session.createQuery("select count(c) from Employee c").uniqueResult();
-        if (count > 0) {
-            System.out.println("Complaints already exist, skipping generation.");
-            return employees;
-        }
-        String[] employeeId = new String[]{"987654321", "876543219", "765432198", "654321987", "543219876", "432198765", "321987654", "219876543", "334574567", "345234556",
-                "534563456", "345634564", "332141234", "567856786", "653294462", "870767907", "567944332"};
-        String[] employeeNames = new String[]{"Ofek", "Michael", "Reema", "Ginwa", "Mohamad", "Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
-        String[] employeeUserNames = new String[]{"Ofek", "Michael", "Reema", "Ginwa", "Mohamad", "Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
-        String[] employeeEmails = new String[]{"Ofek@gmail.com", "Michael@gmail.com", "Reema@gmail.com", "Ginwa@gmail.com", "Mohamad@gmail.com", "Dana@gmail.com",
-                "Abigail@gmail.com", "Shir@gmail.com", "Ron@gmail.com", "Adi@gmail.com", "Joey@gmail.com", "Hayley@gmail.com", "James@gmail.com", "David@gmail.com", "Ross@gmail.com", "Rachel@gmail.com", "Monica@gmail.com"};
-        int storeN;
-        for (int i = 0; i < employeeNames.length; i++) {
-            storeN = i % 7;
-            Employee emp = new Employee(employeeId[i], employeeNames[i], employeeUserNames[i], employeeUserNames[i], employeeEmails[i], "052224548" + i, Employee.Role.values()[(i % 2 == 1 && s.get(storeN).getStoreManager() == null) ? 2 : 0], s.get(storeN));
-            if (emp.getRole() == Employee.Role.STORE_EMPLOYEE)
-                emp.getStore().addEmployees(emp);
-            else if (emp.getStore().getStoreManager() == null)
-                emp.getStore().setStoreManager(emp);
-            employees.add(emp);
-            session.save(emp);
-            session.flush();
-        }
+            String[] employeeId = new String[]{"987654321", "876543219", "765432198", "654321987", "543219876", "432198765", "321987654", "219876543", "334574567", "345234556",
+                    "534563456", "345634564", "332141234", "567856786", "653294462", "870767907", "567944332"};
+            String[] employeeNames = new String[]{"Ofek", "Michael", "Reema", "Ginwa", "Mohamad", "Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
+            String[] employeeUserNames = new String[]{"Ofek", "Michael", "Reema", "Ginwa", "Mohamad", "Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
+            String[] employeeEmails = new String[]{"Ofek@gmail.com", "Michael@gmail.com", "Reema@gmail.com", "Ginwa@gmail.com", "Mohamad@gmail.com", "Dana@gmail.com",
+                    "Abigail@gmail.com", "Shir@gmail.com", "Ron@gmail.com", "Adi@gmail.com", "Joey@gmail.com", "Hayley@gmail.com", "James@gmail.com", "David@gmail.com", "Ross@gmail.com", "Rachel@gmail.com", "Monica@gmail.com"};
+            int storeN;
+            for (int i = 0; i < employeeNames.length; i++) {
+                storeN = i % 7;
+                Employee emp = new Employee(employeeId[i], employeeNames[i], employeeUserNames[i], employeeUserNames[i], employeeEmails[i], "052224548" + i, Employee.Role.values()[(i % 2 == 1 && s.get(storeN).getStoreManager() == null) ? 2 : 0], s.get(storeN));
+                if (emp.getRole() == Employee.Role.STORE_EMPLOYEE)
+                    emp.getStore().addEmployees(emp);
+                else if (emp.getStore().getStoreManager() == null)
+                    emp.getStore().setStoreManager(emp);
+                employees.add(emp);
+                session.save(emp);
+                session.flush();
+            }
 
 
         Employee cService = new Employee("465364524", "John", "John", "John", "John@gmail.com", "0522245342", Employee.Role.values()[1], s.get(s.size() - 1));
@@ -261,12 +203,6 @@ public class App {
 
     private static List<Complaint> generateComplaints(List<Store> s, List<Customer> c) throws Exception {       //generates new products
         List<Complaint> complaints = new LinkedList<Complaint>();
-        long count = (Long) session.createQuery("select count(c) from Complaint c").uniqueResult();
-        if (count > 0) {
-            System.out.println("Complaints already exist, skipping generation.");
-            complaints = session.createQuery("from Complaint c where c.appStatus = true", Complaint.class).getResultList();
-            return complaints;
-        }
         int storeN = 0;
         String[] complaintsDiscription = new String[]{"Hello, a couple of days ago I went to your store in Haifa, and the receptionist Shlomit was being rude to me. \n Thanks.",
                 "Dear customer support, my order has arrived 2 hours later then what I asked for and ruined the surprise party.",
@@ -556,10 +492,18 @@ public class App {
 
             SessionFactory sessionFactory = getSessionFactory();        //calls and creates session factory
             session = sessionFactory.openSession(); //opens session
-            session.beginTransaction();       //transaction for generation
-            generateEntities();             //generate
-            //generateStores();
-            session.getTransaction().commit(); // Save everything.
+            session.beginTransaction();
+
+            boolean shouldSeedData = (Long) session.createQuery("select count(s) from Store s").uniqueResult() == 0;
+
+            if (shouldSeedData) {
+                generateEntities();
+            } else {
+                System.out.println("Data already exists – skipping generation.");
+            }
+
+            session.getTransaction().commit();
+
 
             ScheduleMailing.main(null);
 
