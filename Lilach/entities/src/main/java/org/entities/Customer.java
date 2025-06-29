@@ -2,7 +2,6 @@ package org.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,21 +15,25 @@ public class Customer extends User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public enum AccountType{STORE, CHAIN, MEMBERSHIP}
+    public enum AccountType { STORE, CHAIN, MEMBERSHIP }
+
     private AccountType accountType;
     private Date memberShipExpire;
-    private int balance=0;
+    private int balance = 0;
     private String creditCard;
+
+    @Column(name = "isConnected")
+    private Boolean isConnected = false;
 
     @OneToMany(targetEntity = Complaint.class, mappedBy = "customer")
     @Column(name = "order")
-    protected List<Order> orders = new LinkedList<Order>();
+    protected List<Order> orders = new LinkedList<>();
 
     @OneToMany(targetEntity = Complaint.class, mappedBy = "customer")
     @Column(name = "complaint")
-    private List<Complaint> complaints = new LinkedList<Complaint>();
+    private List<Complaint> complaints = new LinkedList<>();
 
-    public Customer(String userID, String name, String userName, String password, String email, String phone, String creditCard, AccountType accountType,Store store, boolean frozen, int balance) {
+    public Customer(String userID, String name, String userName, String password, String email, String phone, String creditCard, AccountType accountType, Store store, boolean frozen, int balance) {
         super(userID, name, userName, password, email, phone, store, frozen);
         this.balance = balance;
         this.creditCard = creditCard;
@@ -40,7 +43,8 @@ public class Customer extends User implements Serializable {
             memberShipExpire.setYear(memberShipExpire.getYear() + 1);
         }
     }
-    public Customer(String userID, String name, String userName, String password, String email, String phone, String creditCard, AccountType accountType,Store store, boolean frozen) {
+
+    public Customer(String userID, String name, String userName, String password, String email, String phone, String creditCard, AccountType accountType, Store store, boolean frozen) {
         super(userID, name, userName, password, email, phone, store, frozen);
         this.creditCard = creditCard;
         this.accountType = accountType;
@@ -49,13 +53,14 @@ public class Customer extends User implements Serializable {
             memberShipExpire.setYear(memberShipExpire.getYear() + 1);
         }
     }
-    public Customer(String userID, String name, String userName, String password, String email, String phone, String creditCard, AccountType accountType,Store store) {
+
+    public Customer(String userID, String name, String userName, String password, String email, String phone, String creditCard, AccountType accountType, Store store) {
         super(userID, name, userName, password, email, phone, store);
         this.creditCard = creditCard;
         this.accountType = accountType;
-        if(accountType == AccountType.MEMBERSHIP){
+        if (accountType == AccountType.MEMBERSHIP) {
             memberShipExpire = new Date();
-            memberShipExpire.setYear(memberShipExpire.getYear()+1);
+            memberShipExpire.setYear(memberShipExpire.getYear() + 1);
         }
     }
 
@@ -75,6 +80,7 @@ public class Customer extends User implements Serializable {
     public String getCreditCard() {
         return creditCard;
     }
+
     public AccountType getAccountType() {
         return accountType;
     }
@@ -87,7 +93,7 @@ public class Customer extends User implements Serializable {
         return memberShipExpire;
     }
 
-    public void setMemberShipExpireTODELETE(Date date){
+    public void setMemberShipExpireTODELETE(Date date) {
         this.memberShipExpire = date;
     }
 
@@ -104,6 +110,7 @@ public class Customer extends User implements Serializable {
             default -> "Membership Customer";
         };
     }
+
     public AccountType getStringToType(String type) {
         return switch (type) {
             case "Store Customer" -> STORE;
@@ -112,19 +119,27 @@ public class Customer extends User implements Serializable {
         };
     }
 
-    static public String[] getAllTypes() {
+    public static String[] getAllTypes() {
         String[] types = new String[3];
         types[0] = "Store Customer";
         types[1] = "Chain Customer";
         types[2] = "Membership Customer";
         return types;
     }
+
     public int getBalance() {
         return balance;
     }
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
 
+    public Boolean getIsConnected() {
+        return isConnected;
+    }
+
+    public void setIsConnected(Boolean isConnected) {
+        this.isConnected = isConnected;
     }
 }

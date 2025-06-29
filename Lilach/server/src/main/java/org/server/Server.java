@@ -10,10 +10,14 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class Server extends AbstractServer {
 
     private java.util.concurrent.ScheduledExecutorService scheduler = java.util.concurrent.Executors.newScheduledThreadPool(1);
+    private HashMap<ConnectionToClient, User> connectedUsers = new HashMap<>();
 
     public Server(int port) {
         super(port);
@@ -207,20 +211,28 @@ public class Server extends AbstractServer {
 
     private void clientUserUpdate(String msg, User user) {
         User user1 = null;
+
         if (user instanceof Customer) {
             user1 = App.session.find(Customer.class, user.getId());
+            if (((Customer) user1).getIsConnected()) {
+                List<Object> newMsg = new LinkedList<>();
+                newMsg.add("#USERREFRESH");
+                newMsg.add(msg);
+                newMsg.add(user1);
+                sendToAllClients(newMsg);
+            }
         } else if (user instanceof Employee) {
             user1 = App.session.find(Employee.class, user.getId());
-        }
-
-        if (user1.getConnected()) {
-            List<Object> newMsg = new LinkedList<Object>();
-            newMsg.add("#USERREFRESH");
-            newMsg.add(msg);
-            newMsg.add(user1);
-            sendToAllClients(newMsg);
+            if (((Employee) user1).getIsConnected()) {
+                List<Object> newMsg = new LinkedList<>();
+                newMsg.add("#USERREFRESH");
+                newMsg.add(msg);
+                newMsg.add(user1);
+                sendToAllClients(newMsg);
+            }
         }
     }
+
 
     private void saveCustomer(LinkedList<Object> msg, ConnectionToClient client) {
         App.session.beginTransaction();
@@ -231,18 +243,25 @@ public class Server extends AbstractServer {
         App.session.merge(customerBefore);           //merge into database with updated info
         App.session.flush();
         App.session.getTransaction().commit(); // Save everything.
-        if (customerBefore.getConnected()) {
-            List<Object> newMsg = new LinkedList<Object>();
+
+        // שליפה מחדש מה-DB לוודא סטטוס עדכני
+        Customer updatedCustomer = App.session.find(Customer.class, customerBefore.getId());
+
+        if (updatedCustomer.getIsConnected()) {
+            List<Object> newMsg = new LinkedList<>();
             newMsg.add("#USERREFRESH");
-            if (customerBefore.getFrozen()) {
+
+            if (updatedCustomer.getFrozen()) {
                 newMsg.add("FREEZE");
             } else {
                 newMsg.add("NOTFROZEN");
             }
-            newMsg.add(App.session.find(Customer.class, customerBefore.getId()));
+
+            newMsg.add(updatedCustomer);
             sendToAllClients(newMsg);
         }
     }
+
 
     private void saveEmployee(LinkedList<Object> msg, ConnectionToClient client) {
         App.session.beginTransaction();
@@ -250,22 +269,29 @@ public class Server extends AbstractServer {
         Employee employeeAfter = (Employee) msg.get(2);
 
         App.session.evict(employeeBefore);       //evict current product details from database
-        changeParamEmp(employeeBefore, employeeAfter);   //func changes product to updates details
+        changeParamEmp(employeeBefore, employeeAfter);   //func changes product to updated details
         App.session.merge(employeeBefore);           //merge into database with updated info
         App.session.flush();
         App.session.getTransaction().commit(); // Save everything.
-        if (employeeBefore.getConnected()) {
-            List<Object> newMsg = new LinkedList<Object>();
+
+        // שליפה מחדש מה-DB לוודא סטטוס עדכני
+        Employee updatedEmployee = App.session.find(Employee.class, employeeBefore.getId());
+
+        if (updatedEmployee.getIsConnected()) {
+            List<Object> newMsg = new LinkedList<>();
             newMsg.add("#USERREFRESH");
-            if (employeeBefore.getFrozen()) {
+
+            if (updatedEmployee.getFrozen()) {
                 newMsg.add("FREEZE");
             } else {
                 newMsg.add("NOTFROZEN");
             }
-            newMsg.add(App.session.find(Employee.class, employeeBefore.getId()));
+
+            newMsg.add(updatedEmployee);
             sendToAllClients(newMsg);
         }
     }
+
 
     private void deleteProduct(LinkedList<Object> msg, ConnectionToClient client) throws IOException {
         App.session.beginTransaction();
@@ -394,18 +420,40 @@ public class Server extends AbstractServer {
         App.session.getTransaction().commit();
     }
 
-    private void closeComplaintAndCompensate(LinkedList<Object> msg/*,ConnectionToClient client*/) {
+    private void closeComplaintAndCompensate(LinkedList<Object> msg/*, ConnectionToClient client*/) {
         Complaint complaint = (Complaint) msg.get(1);
         closeComplaint(complaint);
+
         if (msg.get(2).equals("COMPENSATED")) {
-            updateBalance(App.session.find(Customer.class, complaint.getCustomer().getId()), App.session.find(Customer.class, complaint.getCustomer().getId()).getBalance() + (int) msg.get(3));
+            updateBalance(App.session.find(Customer.class, complaint.getCustomer().getId()),
+                    App.session.find(Customer.class, complaint.getCustomer().getId()).getBalance() + (int) msg.get(3));
             clientUserUpdate("BALANCEUPDATE", App.session.find(Customer.class, complaint.getCustomer().getId()));
-            SendMail.main(new String[]{complaint.getCustomer().getEmail(), "your complaint has been processed and you have been compensated in the amount of " + (int) msg.get(3) + "₪\n", "complaint processed"});
+            SendMail.main(new String[]{complaint.getCustomer().getEmail(),
+                    "your complaint has been processed and you have been compensated in the amount of " + (int) msg.get(3) + "₪\n",
+                    "complaint processed"});
         } else {
-            SendMail.main(new String[]{complaint.getCustomer().getEmail(), "your complaint has been processed and no refund has been issued", "complaint processed"});
+            SendMail.main(new String[]{complaint.getCustomer().getEmail(),
+                    "your complaint has been processed and no refund has been issued",
+                    "complaint processed"});
         }
 
+        // הוספה: שליחת רשימת תלונות מעודכנת ללקוח
+        ArrayList<Object> response = new ArrayList<>();
+        response.add("#PULL_COMPLAINTS");
+
+        List<Complaint> complaints = App.session.createQuery("FROM Complaint", Complaint.class).list();
+        response.add(complaints);
+
+        try {
+            msg.getLast(); // מביא את הלקוח ששלח את הבקשה, נניח שזה ConnectionToClient
+            if (msg.getLast() instanceof ConnectionToClient) {
+                ((ConnectionToClient) msg.getLast()).sendToClient(response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     private void updateBalance(Customer customer, int balance) {
         App.session.beginTransaction();
@@ -561,33 +609,34 @@ public class Server extends AbstractServer {
 
     private void updateConnected(User user, Boolean connected) {
         App.session.beginTransaction();
-        App.session.evict(user);       //evict current product details from database
-        user.setConnected(connected);
-        App.session.merge(user);           //merge into database with updated info
+
+        if (user instanceof Employee) {
+            Employee emp = App.session.get(Employee.class, user.getId());
+            emp.setIsConnected(connected);
+            App.session.update(emp);
+        }
+
+        if (user instanceof Customer) {
+            Customer cust = App.session.get(Customer.class, user.getId());
+            cust.setIsConnected(connected);
+            App.session.update(cust);
+        }
+
         App.session.flush();
-        App.session.getTransaction().commit(); // Save everything.
+        App.session.getTransaction().commit();
     }
+
 
     private void loginServer(LinkedList<Object> msg, ConnectionToClient client) throws IOException {
         List<User> users = App.getAllUsers();
         for (User user : users) {
             if (user.getUserName().equals(msg.get(1)) && user.getPassword().equals(msg.get(2))) {
                 if (!user.getFrozen()) {
-                    synchronized (this) {
-                        if (!user.getConnected()) {
-                            updateConnected(user, true);
-                            msg.remove(2);
-                            msg.remove(1);
-                            msg.add("#SUCCESS");
-                            if (user instanceof Customer) {
-                                msg.add("CUSTOMER");
-                            } else if (user instanceof Employee) {
-                                msg.add("EMPLOYEE");
-                            }
-                            msg.add(user);
-                            client.sendToClient(msg);
-                            return;
-                        } else {
+
+                    // בדיקה אם מחובר לפי ה-DB
+                    if (user instanceof Employee) {
+                        Employee emp = App.session.get(Employee.class, user.getId());
+                        if (emp.getIsConnected()) {
                             msg.clear();
                             msg.add("#LOGIN");
                             msg.add("ALREADYCONNECTED");
@@ -595,8 +644,36 @@ public class Server extends AbstractServer {
                             return;
                         }
                     }
+
+                    if (user instanceof Customer) {
+                        Customer cust = App.session.get(Customer.class, user.getId());
+                        if (cust.getIsConnected()) {
+                            msg.clear();
+                            msg.add("#LOGIN");
+                            msg.add("ALREADYCONNECTED");
+                            client.sendToClient(msg);
+                            return;
+                        }
+                    }
+
+                    // מעדכנים חיבור גם בזיכרון וגם ב-DB בפונקציה אחת
+                    updateConnected(user, true);
+
+                    msg.remove(2);
+                    msg.remove(1);
+                    msg.add("#SUCCESS");
+                    if (user instanceof Customer) {
+                        msg.add("CUSTOMER");
+                    } else if (user instanceof Employee) {
+                        msg.add("EMPLOYEE");
+                    }
+
+                    connectedUsers.put(client, user);
+                    msg.add(user);
+                    client.sendToClient(msg);
+                    return;
                 } else {
-                    List<Object> newMsg = new LinkedList<Object>();
+                    List<Object> newMsg = new LinkedList<>();
                     newMsg.add("#ERROR");
                     newMsg.add("User was FROZEN by system Admin");
                     newMsg.add("Frozen User");
@@ -605,28 +682,53 @@ public class Server extends AbstractServer {
                 }
             }
         }
-        List<Object> newMsg = new LinkedList<Object>();
+
+        List<Object> newMsg = new LinkedList<>();
         newMsg.add("#ERROR");
         newMsg.add("UserName or Password do not match");
         newMsg.add("Login Error");
         client.sendToClient(newMsg);
     }
 
+
+
     private void logoutServer(LinkedList<Object> msg, ConnectionToClient client) {
 
-        updateConnected((User) msg.get(1), false);
+        User user = (User) msg.get(1);
+
+        // עדכון סטטוס מחובר ב-DB
+        if (user instanceof Employee) {
+            Employee emp = App.session.get(Employee.class, user.getId());
+            emp.setIsConnected(false);
+            App.session.beginTransaction();
+            App.session.update(emp);
+            App.session.getTransaction().commit();
+        }
+
+        if (user instanceof Customer) {
+            Customer cust = App.session.get(Customer.class, user.getId());
+            cust.setIsConnected(false);
+            App.session.beginTransaction();
+            App.session.update(cust);
+            App.session.getTransaction().commit();
+        }
+
+        // עדכון בזיכרון כרגיל
+        updateConnected(user, false);
+
         msg.remove(1);
         msg.remove(0);
         msg.add("#LOGIN");
         msg.add("#SUCCESS");
         msg.add("GUEST");
+
         try {
             client.sendToClient(msg);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
 
     private void pullManagerReport(LinkedList<Object> msg, ConnectionToClient client) throws IOException {
         try {
@@ -685,10 +787,35 @@ public class Server extends AbstractServer {
     }
 
     @Override
-    protected synchronized void clientDisconnected(ConnectionToClient client) { //is client disconnected
+    protected synchronized void clientDisconnected(ConnectionToClient client) {
         System.out.println("Client Disconnected.");
+
+        User user = connectedUsers.get(client);
+
+        if (user != null) {
+            if (user instanceof Employee) {
+                Employee emp = App.session.get(Employee.class, user.getId());
+                emp.setIsConnected(false);
+                App.session.beginTransaction();
+                App.session.update(emp);
+                App.session.getTransaction().commit();
+            }
+
+            if (user instanceof Customer) {
+                Customer cust = App.session.get(Customer.class, user.getId());
+                cust.setIsConnected(false);
+                App.session.beginTransaction();
+                App.session.update(cust);
+                App.session.getTransaction().commit();
+            }
+
+            updateConnected(user, false);
+            connectedUsers.remove(client);
+        }
+
         super.clientDisconnected(client);
     }
+
 
     @Override
     protected void clientConnected(ConnectionToClient client) {     //is client connected

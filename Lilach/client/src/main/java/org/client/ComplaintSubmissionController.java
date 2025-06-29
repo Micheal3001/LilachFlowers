@@ -73,6 +73,7 @@ public class ComplaintSubmissionController extends Controller {
             try {
                 App.client.sendToServer(msg);
             } catch (IOException e) {
+
                 e.printStackTrace();
             }
 

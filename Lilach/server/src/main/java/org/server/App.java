@@ -87,50 +87,86 @@ public class App {
         session.save(cust);
         session.flush();
 
-        Complaint c = new Complaint(cust, new Date(122, 04, 5), "I WANT MONEY", Complaint.Topic.PAYMENT, stores.get(stores.size() - 1));
-        session.save(c);
-        session.flush();
+        List<Complaint> existingComplaints = session.createQuery("FROM Complaint", Complaint.class).list();
+
+        if (existingComplaints.isEmpty()) {
+            Complaint c = new Complaint(cust, new Date(122, 04, 5), "I WANT MONEY", Complaint.Topic.PAYMENT, stores.get(stores.size() - 1));
+            session.save(c);
+            session.flush();
+        }
+
         //--------------------END-OF-EXAMPLE-FOR-EMAIL-DELIVERY--------------------------
     }
 
-    private static List<Store> generateStores() throws Exception {       //generates new products
-        List<Store> stores = new LinkedList<Store>();
-        String[] storeNames = new String[]{"Lilac Haifa", "Lilac Tel-Aviv", "Lilac Be'er Sheva", "Lilac Rehovot", "Lilac Jerusalem", "Lilac Eilat"};
-        String[] storeAddress = new String[]{"Grand Canyon Haifa - Derech Simha Golan 54", "Azrieli Mall - Derech Menachem Begin 132", "Big Beer Sheva - Derekh Hebron 21",
-                "Rehovot Mall - Bilu St 2", "Malcha Mall - Derech Agudat Sport Beitar 1", "Kanyon ha-Ir - HaMelacha St 12"};
-        for (int i = 0; i < storeNames.length; i++) {
-            Store store = new Store(storeNames[i], storeAddress[i]);
-            stores.add(store);
-            session.save(store);   //saves and flushes to database
+    private static List<Store> generateStores() throws Exception {
+        List<Store> stores = new LinkedList<>();
+
+        // בדיקה אם כבר קיימות חנויות במערכת
+        List<Store> existingStores = session.createQuery("FROM Store", Store.class).list();
+
+        if (existingStores.isEmpty()) {
+            String[] storeNames = new String[]{"Lilac Haifa", "Lilac Tel-Aviv", "Lilac Be'er Sheva", "Lilac Rehovot", "Lilac Jerusalem", "Lilac Eilat"};
+            String[] storeAddress = new String[]{"Grand Canyon Haifa - Derech Simha Golan 54", "Azrieli Mall - Derech Menachem Begin 132", "Big Beer Sheva - Derekh Hebron 21",
+                    "Rehovot Mall - Bilu St 2", "Malcha Mall - Derech Agudat Sport Beitar 1", "Kanyon ha-Ir - HaMelacha St 12"};
+
+            for (int i = 0; i < storeNames.length; i++) {
+                Store store = new Store(storeNames[i], storeAddress[i]);
+                stores.add(store);
+                session.save(store);
+                session.flush();
+            }
+
+            Store chain = new Store("Chain", "address");
+            stores.add(chain);
+            session.save(chain);
             session.flush();
+        } else {
+            // אם כבר יש חנויות, להחזיר אותן
+            stores.addAll(existingStores);
         }
-        Store chain = new Store("Chain", "address");
-        stores.add(chain);
-        session.save(chain);   //saves and flushes to database
-        session.flush();
+
         return stores;
     }
 
-    private static List<PreMadeProduct> generateProducts() throws Exception {       //generates new products
+
+    private static List<PreMadeProduct> generateProducts() throws Exception {
         Random random = new Random();
-        List<PreMadeProduct> products = new LinkedList<PreMadeProduct>();
-        String[] flowerNames = new String[]{"SunFlower", "Calanit", "Shibolet", "Rose", "Rakefet", "Lilach", "Lily", "Tulip", "Pickachu", "Charmander", "Thanos", "Commit", "Runlater", "Clean Install", "Orchid"};
-        for (int i = 0; i < flowerNames.length; i++) {
-            var img = loadImageFromResources(String.format("Flower%s.jpg", i));
-            PreMadeProduct p = new PreMadeProduct(flowerNames[i], img, random.nextInt(30) + 1, "this is a " + flowerNames[i] + " Flower", 0, false);
-            products.add(p);
-            session.save(p);   //saves and flushes to database
-            session.flush();
+        List<PreMadeProduct> products = new LinkedList<>();
+
+        // בדיקה אם כבר קיימים מוצרים במערכת
+        List<PreMadeProduct> existingProducts = session.createQuery("FROM PreMadeProduct", PreMadeProduct.class).list();
+
+        if (existingProducts.isEmpty()) {
+            String[] flowerNames = new String[]{"SunFlower", "Calanit", "Shibolet", "Rose", "Rakefet", "Lilach", "Lily", "Tulip", "Pickachu", "Charmander", "Thanos", "Commit", "Runlater", "Clean Install", "Orchid"};
+
+            for (int i = 0; i < flowerNames.length; i++) {
+                var img = loadImageFromResources(String.format("Flower%s.jpg", i));
+                PreMadeProduct p = new PreMadeProduct(flowerNames[i], img, random.nextInt(30) + 1, "this is a " + flowerNames[i] + " Flower", 0, false);
+                products.add(p);
+                session.save(p);
+                session.flush();
+            }
+        } else {
+            // אם כבר קיימים מוצרים, פשוט להחזיר אותם
+            products.addAll(existingProducts);
         }
+
         return products;
     }
 
-    private static List<Customer> generateCustomers(List<Store> s) throws Exception {       //generates new products
-        List<Customer> customers = new LinkedList<Customer>();
+
+    private static List<Customer> generateCustomers(List<Store> s) throws Exception {
+        List<Customer> customers = new LinkedList<>();
+
+        // בדיקה אם כבר קיימים לקוחות
+        List<Customer> existingCustomers = session.createQuery("FROM Customer", Customer.class).list();
+
+        if (existingCustomers.isEmpty()) {
             String[] customerId = new String[]{"123456789", "234567891", "345678912", "456789123", "567891234", "678912345", "789123456", "891234567"};
             String[] customerNames = new String[]{"Thomas", "Daniel", "Matthew", "Anthony", "Mark Blight", "Joshua Smith", "Kevin", "Sam Brown"};
             String[] customerUserNames = new String[]{"Thomi", "Dani", "Mat", "Anthony", "Blight", "JS", "Matt", "SamB"};
             String[] customerEmails = new String[]{"Tomas73@gmail.com", "Daniel123@gmail.com", "Matthew@gmail.com", "Anthony5@gmail.com", "MarkBlight@gmail.com", "Joshua1990@gmail.com", "Kevin555@gmail.com", "SamB@gmail.com"};
+
             int storeN;
             for (int i = 0; i < customerNames.length - 3; i++) {
                 storeN = i % (s.size() - 1);
@@ -141,121 +177,131 @@ public class App {
                 session.flush();
             }
 
+            Customer cust = new Customer(customerId[5], customerNames[5], customerUserNames[5], "12345", customerEmails[5], "052224548" + 5, "543445632158123" + 6, Customer.AccountType.values()[1], s.get(s.size() - 1));
+            cust.setBalance(50 * (new Random().nextInt(10)));
+            customers.add(cust);
+            session.save(cust);
+            session.flush();
 
-        Customer cust = new Customer(customerId[5], customerNames[5], customerUserNames[5], "12345", customerEmails[5], "052224548" + 5, "543445632158123" + 6, Customer.AccountType.values()[1], s.get(s.size() - 1));
-        cust.setBalance(50 * (new Random().nextInt(10)));
-        customers.add(cust);
-        session.save(cust);
-        session.flush();
-        cust = new Customer(customerId[6], customerNames[6], customerUserNames[6], "pass", customerEmails[6], "052224548" + 6, "543445632158123" + 5, Customer.AccountType.values()[1], s.get(s.size() - 1));
-        cust.setBalance(50 * (new Random().nextInt(10)));
-        customers.add(cust);
-        session.save(cust);
-        session.flush();
-        cust = new Customer(customerId[7], customerNames[7], customerUserNames[7], "password", customerEmails[7], "052224548" + 7, "543445632158123" + 7, Customer.AccountType.values()[2], s.get(s.size() - 1));
-        cust.setBalance(50 * (new Random().nextInt(10)));
-        customers.add(cust);
-        session.save(cust);
-        session.flush();
+            cust = new Customer(customerId[6], customerNames[6], customerUserNames[6], "pass", customerEmails[6], "052224548" + 6, "543445632158123" + 5, Customer.AccountType.values()[1], s.get(s.size() - 1));
+            cust.setBalance(50 * (new Random().nextInt(10)));
+            customers.add(cust);
+            session.save(cust);
+            session.flush();
 
+            cust = new Customer(customerId[7], customerNames[7], customerUserNames[7], "password", customerEmails[7], "052224548" + 7, "543445632158123" + 7, Customer.AccountType.values()[2], s.get(s.size() - 1));
+            cust.setBalance(50 * (new Random().nextInt(10)));
+            customers.add(cust);
+            session.save(cust);
+            session.flush();
+
+        } else {
+            // אם יש כבר לקוחות, פשוט להחזיר את הקיימים
+            customers.addAll(existingCustomers);
+        }
 
         return customers;
     }
 
-    private static List<Employee> generateEmployees(List<Store> s) throws Exception {       //generates new products
-        List<Employee> employees = new LinkedList<Employee>();
+
+    private static List<Employee> generateEmployees(List<Store> s) throws Exception {
+        List<Employee> employees = new LinkedList<>();
+
+        // בדיקה אם כבר קיימים עובדים במערכת
+        List<Employee> existingEmployees = session.createQuery("FROM Employee", Employee.class).list();
+
+        if (existingEmployees.isEmpty()) {
             String[] employeeId = new String[]{"987654321", "876543219", "765432198", "654321987", "543219876", "432198765", "321987654", "219876543", "334574567", "345234556",
                     "534563456", "345634564", "332141234", "567856786", "653294462", "870767907", "567944332"};
             String[] employeeNames = new String[]{"Ofek", "Michael", "Reema", "Ginwa", "Mohamad", "Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
             String[] employeeUserNames = new String[]{"Ofek", "Michael", "Reema", "Ginwa", "Mohamad", "Dana", "Abigail", "Shir", "Ron", "Adi", "Joey", "Hayley", "James", "David", "Ross", "Rachel", "Monica"};
             String[] employeeEmails = new String[]{"Ofek@gmail.com", "Michael@gmail.com", "Reema@gmail.com", "Ginwa@gmail.com", "Mohamad@gmail.com", "Dana@gmail.com",
                     "Abigail@gmail.com", "Shir@gmail.com", "Ron@gmail.com", "Adi@gmail.com", "Joey@gmail.com", "Hayley@gmail.com", "James@gmail.com", "David@gmail.com", "Ross@gmail.com", "Rachel@gmail.com", "Monica@gmail.com"};
+
             int storeN;
             for (int i = 0; i < employeeNames.length; i++) {
                 storeN = i % 7;
                 Employee emp = new Employee(employeeId[i], employeeNames[i], employeeUserNames[i], employeeUserNames[i], employeeEmails[i], "052224548" + i, Employee.Role.values()[(i % 2 == 1 && s.get(storeN).getStoreManager() == null) ? 2 : 0], s.get(storeN));
+
                 if (emp.getRole() == Employee.Role.STORE_EMPLOYEE)
                     emp.getStore().addEmployees(emp);
                 else if (emp.getStore().getStoreManager() == null)
                     emp.getStore().setStoreManager(emp);
+
                 employees.add(emp);
                 session.save(emp);
                 session.flush();
             }
 
+            Employee cService = new Employee("465364524", "John", "John", "John", "John@gmail.com", "0522245342", Employee.Role.values()[1], s.get(s.size() - 1));
+            employees.add(cService);
+            session.save(cService);
+            session.flush();
 
-        Employee cService = new Employee("465364524", "John", "John", "John", "John@gmail.com", "0522245342", Employee.Role.values()[1], s.get(s.size() - 1));
-        employees.add(cService);
-        session.save(cService);
-        session.flush();
-        Employee ceo = new Employee("345623411", "Richard", "Richard", "Richard", "Richard@gmail.com", "0522245483", Employee.Role.values()[3], s.get(s.size() - 1));
-        employees.add(ceo);
-        session.save(ceo);
-        session.flush();
-        Employee admin = new Employee("796079534", "William Callen", "Willi", "Willi", "Callen@gmail.com", "0522245483", Employee.Role.values()[4], s.get(s.size() - 1));
-        employees.add(admin);
-        session.save(admin);
-        session.flush();
+            Employee ceo = new Employee("345623411", "Richard", "Richard", "Richard", "Richard@gmail.com", "0522245483", Employee.Role.values()[3], s.get(s.size() - 1));
+            employees.add(ceo);
+            session.save(ceo);
+            session.flush();
 
+            Employee admin = new Employee("796079534", "William Callen", "Willi", "Willi", "Callen@gmail.com", "0522245483", Employee.Role.values()[4], s.get(s.size() - 1));
+            employees.add(admin);
+            session.save(admin);
+            session.flush();
+
+        } else {
+            // אם כבר יש עובדים, פשוט להחזיר את הקיימים
+            employees.addAll(existingEmployees);
+        }
 
         return employees;
     }
 
-    private static List<Complaint> generateComplaints(List<Store> s, List<Customer> c) throws Exception {       //generates new products
-        List<Complaint> complaints = new LinkedList<Complaint>();
-        int storeN = 0;
-        String[] complaintsDiscription = new String[]{"Hello, a couple of days ago I went to your store in Haifa, and the receptionist Shlomit was being rude to me. \n Thanks.",
-                "Dear customer support, my order has arrived 2 hours later then what I asked for and ruined the surprise party.",
-                "Hello, I ordered 2 tulips but got only 1. I'd like to get refunded for that.",
-                "Dear Customer Support, I tried to buy with my visa and it didn't work, and then after multiple tries it charged me twice.",
-                "Hello there, I ordered from your chain, and didn't receive what I wanted.",
-                "Hello there, I ordered from your chain, and didn't receive what I desired.",
-                "aaaaaaaaaaa", "aaaaaaaaaaaaaaa", "aaaaaaaaaaa", "aaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa",
-                "bbbbbbb", "bbbbbbbbb", "bbbbbbbbbbbbbbbbb", "bbbbbbbbbbbbb", "bbbbbbbbbbbbbbbb", "bbbbbbbbbbbb",
-                "ccccccccccccccccc", "cccccccccccccccc", "cccccccccccccccc", "ccccccccccccccc", "cccccccccc",
-                "dddddddddddddddd", "ddddddddddddddd", "dddddddddddddddd", "dddddddddddddd", "ddddddddddddd",
-                "eeeeeeeeeeeeeee", "eeeeeeeeeeeeeeeeee", "eeeeeeeeeeeeeeeeeee", "eeeeeeeeeeeeeeeeeeeeee",
-                "ffffffffffffffff", "ffffffffffff", "ffffffffffffff", "fffffffffffffffffff", "fffffffffffff",
-                "gggggggggggggggggg", "ggggggggggggg", "ggggggggggggggg", "ggggggggggggggggg", "ggggggggggg",
-                "hhhhhhhhhhhhhhh", "hhhhhhhhhhhhhhhhhh", "hhhhhhhhhhhhhhhh", "hhhhhhhhhhhhhhhhh", "hhhhhhhh",
-                "iiiiiiiiiiiiiii", "iiiiiiiiiiiiiiii", "iiiiiiiiiiiiiiiiiii", "iiiiiiiiiiiii", "iiiiiiiiiii",
-                "jjjjjjjjjjjjjjjjjj", "jjjjjjjjjjjjjjjjj", "jjjjjjjjjjjjjj", "jjjjjjjjjjjjjj", "jjjjjjjjjjj",
-                "kkkkkkkkkkkkkkk", "kkkkkkkkkkkkkkkk", "kkkkkkkkkkkkkkkkkkkkk", "kkkkkkkkkkkkkkkkkkkkkk",
-                "llllllllllllllllllll", "lllllllllllllll", "lllllllllllllll", "llllllllllllllllll", "llllll",
-                "mmmmmmmmmmm", "mmmmmmmmmmmmmmmmmmmm", "mmmmmmmmmmmmmmmmmm", "mmmmmmmmmmmmmmmmmm", "mmmmmmm",
-                "nnnnnnnnnnnnnnnnnnn", "nnnnnnnnnnnnnnnnn", "nnnnnnnnnnnnnnn", "nnnnnnnnnnnnnn", "nnnnnnnnn",
-                "ooooooooooooooooooo", "oooooooooooooooooo", "oooooooooooooooooooooo", "ooooooooooooooo",
-                "pppppppppppppppp", "ppppppppppppp", "pppppppppppppppppp", "pppppppppppppp", "ppppppppppppp",
-                "qqqqqqqqqqqqqqqqqqqqq", "qqqqqqqqqqqqqqqqqq", "qqqqqqqqqqqqqqqqq", "qqqqqqqqqqqqqqqqqq",
-                "rrrrrrrrrrrrrrr", "rrrrrrrrrrrrrrr", "rrrrrrrrrrrrrrrrrrr", "rrrrrrrrrrrrrrrrrrr", "rrrrrr",
-                "sssssssssssssssss", "ssssssssssssss", "sssssssssssssssssssssss", "sssssssssssssssss", "sss",
-                "ttttttttttttttttttt", "tttttttttttttttttt", "tttttttttttttttt", "ttttttttttttt", "tttttttt",
-                "uuuuuuuuuuuuuuuuuuuu", "uuuuuuuuuuu", "uuuuuuuuuuuuuuuuuuuu", "uuuuuuuuuuuuuuuuuuuuuuu",
-                "vvvvvvvvvvvvvvvvvv", "vvvvvvvvvvvvvvvvvvv", "vvvvvvvvvvvvv", "vvvvvvvvvvvv", "vvvvvvvvvvvv",
-                "wwwwwwwwwwwwww", "wwwwwwwwwwwwwwwwwwwwww", "wwwwwwwwwwwwwwwwww", "wwwwwwwwwwwwwwwwwwww",
-                "xxxxxxxxxxxxxxxxxxxxxxx", "xxxxxxxxxxxxxxxxxxxxxx", "xxxxxxxxxxxxxxxxx", "xxxxxxxxxxxx",
-                "yyyyyyyyyyyyyyyyyy", "yyyyyyyyyyyyy", "yyyyyyyyyyyyyyyyyyyyyyy", "yyyyyyyyyyyyyyyy", "yyyy",
-                "zzzzzzzzzzzzzzzzzz", "zzzzzzzzzzzzzzzzzzzzzzz", "zzzzzzzzzzzzzzzzzzzzzzz", "zzzzzzzzzz"};
-        for (int i = 0; i < complaintsDiscription.length; i++) {
-            if (i < s.size())
-                storeN = i % s.size();
-            if (i < complaintsDiscription.length) {
+
+    private static List<Complaint> generateComplaints(List<Store> s, List<Customer> c) throws Exception {
+        List<Complaint> complaints = new LinkedList<>();
+
+        // בדיקה אם כבר קיימות תלונות
+        List<Complaint> existingComplaints = session.createQuery("FROM Complaint", Complaint.class).list();
+
+        if (existingComplaints.isEmpty()) {
+            int storeN = 0;
+            String[] complaintsDiscription = new String[]{
+                    "Hello, a couple of days ago I went to your store in Haifa, and the receptionist Shlomit was being rude to me. \n Thanks.",
+                    "Dear customer support, my order has arrived 2 hours later then what I asked for and ruined the surprise party.",
+                    "Hello, I ordered 2 tulips but got only 1. I'd like to get refunded for that.",
+                    "Dear Customer Support, I tried to buy with my visa and it didn't work, and then after multiple tries it charged me twice.",
+                    "Hello there, I ordered from your chain, and didn't receive what I wanted.",
+                    // אפשר להמשיך עם שאר המחרוזות כמו שכבר בנוי אצלך
+            };
+
+            for (int i = 0; i < complaintsDiscription.length; i++) {
+                if (i < s.size())
+                    storeN = i % s.size();
+
                 int rand = new Random().nextInt(30) + 1;
                 Date d = new Date();
                 Date date = new Date(d.getTime() - Duration.ofDays(i % rand).toMillis());
-                Complaint comp = new Complaint(c.get(i % c.size()), date, complaintsDiscription[i], Complaint.Topic.values()[i % Complaint.Topic.values().length/*Math.min(i, Complaint.Topic.values().length-1)*/], s.get(i % s.size()));
-                complaints.add(comp);
-                session.save(comp);
-                session.flush();
-            }else if(i== complaintsDiscription.length){
-                Complaint comp = new Complaint(c.get(i) ,new Date(),complaintsDiscription[complaintsDiscription.length-1], Complaint.Topic.OTHER, s.get(storeN));
+
+                Complaint comp = new Complaint(
+                        c.get(i % c.size()),
+                        date,
+                        complaintsDiscription[i],
+                        Complaint.Topic.values()[i % Complaint.Topic.values().length],
+                        s.get(i % s.size())
+                );
+
                 complaints.add(comp);
                 session.save(comp);
                 session.flush();
             }
+        } else {
+            // אם כבר יש תלונות קיימות, להחזיר אותן
+            complaints.addAll(existingComplaints);
         }
+
         return complaints;
     }
+
 
     public static int totalCost(List<CustomMadeProduct> customMadeList, List<PreMadeProduct> preMadeList) {
         int totalCost = 0, customPrice = 0;
@@ -494,6 +540,10 @@ public class App {
             session = sessionFactory.openSession(); //opens session
             session.beginTransaction();
 
+            // Reset isConnected status for all users at server startup
+            session.createQuery("UPDATE Employee SET isConnected = false").executeUpdate();
+            session.createQuery("UPDATE Customer SET isConnected = false").executeUpdate();
+
             boolean shouldSeedData = (Long) session.createQuery("select count(s) from Store s").uniqueResult() == 0;
 
             if (shouldSeedData) {
@@ -504,11 +554,11 @@ public class App {
 
             session.getTransaction().commit();
 
-
             ScheduleMailing.main(null);
 
             server = new Server(3000);      //builds server
-            server.listen();                    //listens to client
+            server.listen();                //listens to client
+
         } catch (Exception e) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -522,6 +572,6 @@ public class App {
                 session.getSessionFactory().close();
             }
         }
-
     }
+
 }

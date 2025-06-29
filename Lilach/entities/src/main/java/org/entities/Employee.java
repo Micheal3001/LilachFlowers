@@ -10,16 +10,21 @@ public class Employee extends User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public enum Role { STORE_EMPLOYEE, CUSTOMER_SERVICE, STORE_MANAGER, CEO, ADMIN}
+    public enum Role { STORE_EMPLOYEE, CUSTOMER_SERVICE, STORE_MANAGER, CEO, ADMIN }
+
     @Column(name = "employee_role")
     private Role role;
+
+    @Column(name = "isConnected")
+    private Boolean isConnected = false;
+
     public Employee(String userID, String name, String userName, String password, String email, String phone, Role role, Store store) {
-        super(userID, name, userName, password,  email, phone, store);
+        super(userID, name, userName, password, email, phone, store);
         this.role = role;
     }
 
     public Employee(String userID, String name, String userName, String password, String email, String phone, Role role, Store store, boolean frozen) {
-        super(userID, name, userName, password,  email, phone, store, frozen);
+        super(userID, name, userName, password, email, phone, store, frozen);
         this.role = role;
     }
 
@@ -31,6 +36,7 @@ public class Employee extends User {
     public int getId() {
         return id;
     }
+
     public Role getRole() {
         return role;
     }
@@ -38,7 +44,6 @@ public class Employee extends User {
     public void setRole(Role role) {
         this.role = role;
     }
-
 
     public String getRoleToString() {
         return switch (this.role) {
@@ -67,5 +72,13 @@ public class Employee extends User {
         roles[2] = "Store Manager";
         roles[3] = "CEO";
         return roles;
+    }
+
+    public Boolean getIsConnected() {
+        return isConnected;
+    }
+
+    public void setIsConnected(Boolean isConnected) {
+        this.isConnected = isConnected;
     }
 }
