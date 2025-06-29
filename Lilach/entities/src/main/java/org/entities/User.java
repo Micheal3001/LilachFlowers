@@ -17,7 +17,6 @@ public abstract class User extends Guest implements Serializable {
     private String email;
     private String phoneNum;
     protected Boolean frozen=false;
-    private Boolean connected;
     @ManyToOne
     protected Store store = null; 
 
@@ -29,7 +28,6 @@ public abstract class User extends Guest implements Serializable {
         this.password = password;
         this.email = email;
         this.phoneNum=phoneNum;
-        this.connected=false;
         this.store=store;
     }
     public User(String userID, String name, String userName, String password, String email, String phoneNum ,Store store, boolean frozen) {
@@ -39,7 +37,6 @@ public abstract class User extends Guest implements Serializable {
         this.password = password;
         this.email = email;
         this.phoneNum=phoneNum;
-        this.connected=false;
         this.store=store;
         this.frozen = frozen;
     }
@@ -72,14 +69,6 @@ public abstract class User extends Guest implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Boolean getConnected() {
-        return connected;
-    }
-
-    public void setConnected(Boolean connected) {
-        this.connected = connected;
     }
 
     public String getUserID() {
