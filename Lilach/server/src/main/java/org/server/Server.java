@@ -116,15 +116,19 @@ public class Server extends AbstractServer {
 
     public static void main(String[] args) throws IOException {
 
-
         if (args.length != 1) {
             System.out.println("Required argument: <port>");
         } else {
 
             Server server = new Server(Integer.parseInt(args[0]));
+
+            // קריאה לסימון תלונות קיימות
+            server.markAllExistingComplaintsAsNotified();
+
             server.listen();
         }
     }
+
 
     private void startComplaintChecker() {
         scheduler.scheduleAtFixedRate(() -> {
@@ -167,6 +171,16 @@ public class Server extends AbstractServer {
         App.session.merge(complaint);
         App.session.flush();
         App.session.getTransaction().commit();
+    }
+
+    private void markAllExistingComplaintsAsNotified() {
+        List<Complaint> complaints = App.session.createQuery("FROM Complaint", Complaint.class).list();
+
+        for (Complaint c : complaints) {
+            if (!c.isDelayedNotified()) {
+                markComplaintAsNotified(c);
+            }
+        }
     }
 
     @Override
