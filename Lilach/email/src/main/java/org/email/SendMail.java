@@ -15,21 +15,25 @@ public class SendMail {
         String to = args[0];
 
         // כתובת שולח (Outlook)
-        String from = "notreply_lilach@outlook.com";
+        String from = "notreply.lilach@gmail.com";
 
         // הגדרות שרת ה-SMTP של Outlook
-        String host = "smtp.office365.com";
+        String host = "smtp.gmail.com";
 
         Properties properties = System.getProperties();
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.host", "smtp.gmail.com"); // השרת של Gmail
+        properties.put("mail.smtp.port", "587");            // פורט מאובטח עם TLS
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.connectiontimeout", "10000");
+        properties.put("mail.smtp.timeout", "10000");
+
+
 
         // יצירת session עם אימות משתמש
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("notreply_lilach@outlook.com", "lilach1!");
+                return new PasswordAuthentication("notreply.lilach@gmail.com", "shloqmwedlmhtiep");
             }
         });
 
@@ -45,6 +49,7 @@ public class SendMail {
             System.out.println("Sent message successfully....");
 
         } catch (MessagingException mex) {
+            System.out.println("unsuccessfully sending: ");
             mex.printStackTrace();
         }
     }
