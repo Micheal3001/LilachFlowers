@@ -18,36 +18,56 @@ public class App {
     public static Session session;// encapsulation make public function so this can be private
     protected static Server server;
 
-    private static SessionFactory getSessionFactory() throws HibernateException {
-        // שלב 1: קלט סיסמה מהמשתמש
+    private static SessionFactory getSessionFactory() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your MySQL password: ");
-        String password = scanner.nextLine();
+        SessionFactory sessionFactory = null;
 
-        // שלב 2: טעינת ההגדרות מקובץ
-        Configuration configuration = new Configuration();
+        while (true) {
+            System.out.print("Enter your MySQL password: ");
+            System.out.flush(); // Ensure it prints only once
 
-        // שלב 3: הוספת מחלקות
-        configuration.addAnnotatedClass(Product.class);
-        configuration.addAnnotatedClass(PreMadeProduct.class);
-        configuration.addAnnotatedClass(CustomMadeProduct.class);
-        configuration.addAnnotatedClass(Guest.class);
-        configuration.addAnnotatedClass(User.class);
-        configuration.addAnnotatedClass(Customer.class);
-        configuration.addAnnotatedClass(Employee.class);
-        configuration.addAnnotatedClass(Complaint.class);
-        configuration.addAnnotatedClass(Order.class);
-        configuration.addAnnotatedClass(Store.class);
+            String password = scanner.nextLine().trim();
 
-        // שלב 4: דריסת הסיסמה מקלט המשתמש
-        configuration.setProperty("hibernate.connection.password", password);
+            if (password.isEmpty()) {
+                System.err.println("❌ Password cannot be empty. Try again.");
+                continue;
+            }
 
-        // שלב 5: יצירת sessionFactory
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
+            try {
+                Properties props = new Properties();
+                props.load(App.class.getClassLoader().getResourceAsStream("hibernate.properties"));
+                props.setProperty("hibernate.connection.password", password);
 
-        return configuration.buildSessionFactory(serviceRegistry);
+                Configuration configuration = new Configuration();
+                configuration.setProperties(props);
+
+                // Add entities
+                configuration.addAnnotatedClass(Product.class);
+                configuration.addAnnotatedClass(PreMadeProduct.class);
+                configuration.addAnnotatedClass(CustomMadeProduct.class);
+                configuration.addAnnotatedClass(Guest.class);
+                configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(Customer.class);
+                configuration.addAnnotatedClass(Employee.class);
+                configuration.addAnnotatedClass(Complaint.class);
+                configuration.addAnnotatedClass(Order.class);
+                configuration.addAnnotatedClass(Store.class);
+
+                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                        .applySettings(configuration.getProperties()).build();
+
+                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+                System.out.println("✅ Connected successfully.");
+                break;
+
+            } catch (Exception e) {
+                System.err.println("❌ Connection failed: " + e.getMessage());
+            }
+        }
+
+        return sessionFactory;
     }
+
 
     private static void generateEntities() throws Exception {       //generates all entities
         //--------------------STORES-----------------------------------------------------
