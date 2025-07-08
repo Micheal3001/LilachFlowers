@@ -417,10 +417,9 @@ public class Server extends AbstractServer {
 
     private void updateAccount(Customer customer, Customer.AccountType type) {
         App.session.beginTransaction();
-        App.session.evict(customer);
 
         if (type == Customer.AccountType.MEMBERSHIP) {
-            customer.setMemberShipExpire();
+            customer.setMemberShipExpire(); // מגדיר את התוקף החדש לפני ניתוק מה-session
             customer.setAccountType(type);
 
             Store chainStore = App.session.createQuery("FROM Store WHERE name = 'Chain'", Store.class).getSingleResult();
@@ -429,10 +428,12 @@ public class Server extends AbstractServer {
             customer.setAccountType(type);
         }
 
+        App.session.evict(customer); // רק אחרי ששינינו את כל הנתונים
         App.session.merge(customer);
         App.session.flush();
         App.session.getTransaction().commit();
     }
+
 
     private void closeComplaintAndCompensate(LinkedList<Object> msg/*, ConnectionToClient client*/) {
         Complaint complaint = (Complaint) msg.get(1);
