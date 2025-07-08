@@ -58,6 +58,8 @@ public class Client extends AbstractClient {
         return storeSkeleton;
     }
 
+    private boolean membershipOfferShown = false;
+
 
     @Override
     protected void handleMessageFromServer(Object msg) {     //function handles message from server
@@ -75,7 +77,7 @@ public class Client extends AbstractClient {
                 case "#DELETEORDER" -> deletedOrder((LinkedList<Object>)msg);//function gets all data from server to display to client
                 case "#PULLUSERS" -> pushUsers(msg);
                 case "#ERROR" -> errorMsg((LinkedList<Object>)msg);
-                case "#UPDATEBALANCE"-> updateBalance((Customer) ((LinkedList<Object>) msg).get(1));
+                case "#UPDATEBALANCE"-> updateBalance((Customer) ((LinkedList<Object>) msg).get(1),false);
                 case "#USERREFRESH"-> clientUserRefresh((LinkedList<Object>) msg);
                 case "#REFRESH" -> refresh((LinkedList<Object>) msg);
             }
@@ -96,10 +98,10 @@ public class Client extends AbstractClient {
                     logOut();
                 } else if (msg.get(1).toString().equals("BALANCEUPDATE")) {
                     user = (Customer) msg.get(2);
-                    updateBalance((Customer) msg.get(2));
+                    updateBalance((Customer) msg.get(2),false);
                 }else if(msg.get(1).toString().equals("NOTFROZEN")){
                     user = (Customer) msg.get(2);
-                    updateBalance((Customer) msg.get(2));
+                    updateBalance((Customer) msg.get(2),false);
                 } else if (msg.get(1).toString().equals("MEMBERSHIPUPDATE")) {
                     user = (Customer) msg.get(2);
                     if (controller instanceof CreateOrderController) {
@@ -297,10 +299,11 @@ public class Client extends AbstractClient {
         });
     }
 
-    private void updateBalance(Customer customer) {
-        this.user = customer; // לעדכן תמיד את האובייקט הראשי
+    private void updateBalance(Customer customer, boolean fromLogin) {
+        this.user = customer;
 
-        if (customer.getAccountType() != Customer.AccountType.MEMBERSHIP) {
+        if (fromLogin && customer.getAccountType() != Customer.AccountType.MEMBERSHIP && !membershipOfferShown) {
+            membershipOfferShown = true;
             Platform.runLater(() -> offerMembershipPurchase(customer));
         } else if (customer.getMemberShipExpire() != null &&
                 customer.getMemberShipExpire().before(new Date())) {
@@ -313,10 +316,12 @@ public class Client extends AbstractClient {
     }
 
 
+
+
     private void deletedOrder(LinkedList<Object> msg) {
         Controller.sendAlert((String) msg.get(1), (String) msg.get(2), Alert.AlertType.INFORMATION);
         App.client.user = (Customer) msg.get(3);
-        updateBalance((Customer) msg.get(3));
+        updateBalance((Customer) msg.get(3),false);
     }
 
     private void errorMsg(List<Object> msg) {
@@ -463,15 +468,20 @@ public class Client extends AbstractClient {
     }
 
     public void logOut() {
-        List<Object> msg = new LinkedList<Object>();
+        List<Object> msg = new LinkedList<>();
         msg.add("#LOGOUT");
         msg.add(user);
+
+        // אפס את הדגל שמונע הצעה חוזרת למועדון
+        membershipOfferShown = false;
+
         try {
             sendToServer(msg);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     private void loginClient(LinkedList<Object> msg) {
         if (msg.get(1).equals("ALREADYCONNECTED")) {
@@ -486,29 +496,26 @@ public class Client extends AbstractClient {
 
                 if (this.user instanceof Customer) {
                     Customer customer = (Customer) this.user;
-                    if (customer.getAccountType() == Customer.AccountType.MEMBERSHIP && customer.getMemberShipExpire().before(new Date())) {
+
+                    // אם מנוי בתוקף אבל תוקף נגמר
+                    if (customer.getAccountType() == Customer.AccountType.MEMBERSHIP &&
+                            customer.getMemberShipExpire() != null &&
+                            customer.getMemberShipExpire().before(new Date())) {
                         Platform.runLater(() -> updateAccountType(customer));
                     }
-                }
 
-                if (this.user instanceof Customer) {
-                    Customer customer = (Customer) this.user;
-                    if (customer.getAccountType() != Customer.AccountType.MEMBERSHIP) {
+                    // אם לא מנוי ולא הצענו עדיין – מציעים פעם אחת
+                    if (customer.getAccountType() != Customer.AccountType.MEMBERSHIP && !membershipOfferShown) {
+                        membershipOfferShown = true;
                         Platform.runLater(() -> offerMembershipPurchase(customer));
-                    } else if (customer.getMemberShipExpire() != null && customer.getMemberShipExpire().before(new Date())) {
-                        Platform.runLater(() -> updateAccountType(customer));
                     }
                 }
 
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        changeMenu();
-                    }
-                });
+                Platform.runLater(this::changeMenu);
             }
         }
     }
+
 
     @FXML
     private void updateAccountType(Customer customer) {
