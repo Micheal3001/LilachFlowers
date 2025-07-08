@@ -531,7 +531,7 @@ public class Client extends AbstractClient {
 
         List<Object> msg = new LinkedList<>();
         msg.add("#UPDATE_CUSTOMER_ACCOUNT");
-        msg.add(customer);
+        msg.add(customer.getId());
         if (result.get() == confirmBtn) {
             msg.add("CONFIRMED");
             if (customer.getBalance() > 0)
