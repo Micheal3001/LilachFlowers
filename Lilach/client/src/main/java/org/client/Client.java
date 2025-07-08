@@ -472,6 +472,9 @@ public class Client extends AbstractClient {
         msg.add("#LOGOUT");
         msg.add(user);
 
+        // 🟢 אפס עגלה עם יציאה מהמשתמש
+        cart = new Cart();
+
         // אפס את הדגל שמונע הצעה חוזרת למועדון
         membershipOfferShown = false;
 
@@ -481,6 +484,7 @@ public class Client extends AbstractClient {
             e.printStackTrace();
         }
     }
+
 
 
     private void loginClient(LinkedList<Object> msg) {
