@@ -28,8 +28,6 @@ public class SendMail {
         properties.put("mail.smtp.connectiontimeout", "10000");
         properties.put("mail.smtp.timeout", "10000");
 
-
-
         // יצירת session עם אימות משתמש
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {

@@ -53,20 +53,17 @@
             <groupId>org.entities</groupId>
             <artifactId>entities</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.server</groupId>
             <artifactId>server</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <build>
         <pluginManagement>
             <plugins>
-                <!-- כאן אין שינוי, נשאר רק לניהול גרסאות -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
@@ -118,7 +115,6 @@
         </pluginManagement>
 
         <plugins>
-            <!-- Plugin להפעלת JavaFX -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -128,7 +124,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Plugin להרצת Java -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -146,9 +141,9 @@
                 </configuration>
             </plugin>
 
-            <!-- Plugin ליצירת JAR עם כל התלויות -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -158,15 +153,23 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <finalName>G5_Client</finalName>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
-
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
-
     </build>
 </project>
