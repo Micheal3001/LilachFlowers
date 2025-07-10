@@ -8,6 +8,10 @@ public class WorkerMenuController extends Controller {
     @FXML
     protected Button editCatalogBtn;
 
+    @FXML
+    protected Button editComplementaryBtn;
+
+
     @FXML // fx:id="logoutBtn"
     protected Button logoutBtn; // Value injected by FXMLLoader
 
@@ -18,6 +22,14 @@ public class WorkerMenuController extends Controller {
     }
 
     @FXML
+    void goToEditComplementary(ActionEvent event) throws InterruptedException {
+        coolMenuClick((Button) event.getTarget());
+        this.getSkeleton().changeCenter("EditComplementary");
+    }
+
+
+
+    @FXML
     void logOut(ActionEvent event) throws InterruptedException {
         coolMenuClick((Button) event.getTarget());
         App.client.cart.emptyProducts();
@@ -26,8 +38,14 @@ public class WorkerMenuController extends Controller {
 
     protected void coolMenuClick(Button button) throws InterruptedException {
         editCatalogBtn.setStyle("-fx-background-color: #ffdcdc");
+
+        if (editComplementaryBtn != null) {
+            editComplementaryBtn.setStyle("-fx-background-color: #ffdcdc");
+        }
+
         button.setStyle("-fx-background-color: #ff9898");
     }
+
 
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

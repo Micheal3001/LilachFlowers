@@ -26,6 +26,18 @@
                   <Insets top="0.0" bottom="0.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="complementaryBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER"
+                    mnemonicParsing="false" onAction="#goToComplementary"
+                    prefHeight="50.0" prefWidth="220.0"
+                    style="-fx-background-color: FFDCDC;" text="complementary" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="0.0" bottom="0.0" />
+               </VBox.margin>
+            </Button>
+
             <Button fx:id="customMadeBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToCustomMade" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FFDCDC;" text="Custom made" textFill="WHITE">
                <font>
                   <Font size="20.0" />

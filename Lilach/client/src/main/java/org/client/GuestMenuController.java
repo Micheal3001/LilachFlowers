@@ -19,6 +19,9 @@ public class GuestMenuController extends Controller {
     @FXML
     private Button order;
 
+    @FXML
+    private Button complementaryBtn;
+
 
 
     @FXML // fx:id="loginBtn"
@@ -49,6 +52,13 @@ public class GuestMenuController extends Controller {
         this.getSkeleton().changeCenter("ComplaintSubmission");
     }
 
+    @FXML
+    void goToComplementary(ActionEvent event) throws InterruptedException {
+        coolMenuClick((Button) event.getTarget());
+        this.globalSkeleton.changeCenter("ComplementaryProducts");
+    }
+
+
 
     @FXML
     void goToLogin(ActionEvent event) throws InterruptedException {
@@ -75,6 +85,7 @@ public class GuestMenuController extends Controller {
         signUpBtn.setStyle("-fx-background-color: #ffdcdc");
         loginBtn.setStyle("-fx-background-color: #ffdcdc");
         customMade.setStyle("-fx-background-color: #ffdcdc");
+        complementaryBtn.setStyle("-fx-background-color: #ffdcdc");
         button.setStyle("-fx-background-color: #ff9898");
     }
 

@@ -15,7 +15,7 @@ public class PreMadeProduct extends Product {
     private int priceBeforeDiscount;
     private String mainColor;
 
-    public enum ProductType {CATALOG, CUSTOM_CATALOG}
+    public enum ProductType { CATALOG, CUSTOM_CATALOG, COMPLEMENTARY }
     private boolean isOrdered;
     private ProductType productType;
     private String description;
@@ -82,7 +82,20 @@ public class PreMadeProduct extends Product {
         this.productType = ProductType.CUSTOM_CATALOG;
         this.discount=discount;
         this.isOrdered = isOrdered;
+
     }
+
+    // חדש – עבור מוצר משלים בלי צבע
+    public PreMadeProduct(String name, byte[] image, int priceBeforeDiscount, int discount, boolean isOrdered) {
+        super(image, (int) (priceBeforeDiscount * (1 - discount * 0.01)));
+        this.priceBeforeDiscount = priceBeforeDiscount;
+        this.name = name;
+        this.description = description;
+        this.discount = discount;
+        this.isOrdered = isOrdered;
+        this.productType = ProductType.COMPLEMENTARY;
+    }
+
 
     public PreMadeProduct() {
 
@@ -119,6 +132,11 @@ public class PreMadeProduct extends Product {
     public ProductType getType() {
         return this.productType;
     }
+
+    public void setType(ProductType type) {
+        this.productType = type;
+    }
+
 
     public String getMainColor() {
         return this.mainColor;

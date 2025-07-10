@@ -105,6 +105,22 @@ public class Server extends AbstractServer {
         client.sendToClient(msgToClient);
     }
 
+    private void pullComplementaryProducts(List<Object> msg, ConnectionToClient client) throws IOException {
+        List<PreMadeProduct> allProducts = App.getAllProducts();
+        List<PreMadeProduct> complementaryProducts = allProducts.stream()
+                .filter(p -> p.getType() == PreMadeProduct.ProductType.COMPLEMENTARY)
+                .toList();
+
+        LinkedList<Object> msgToClient = new LinkedList<>();
+        msgToClient.add("#CATALOGDATA");  // חשוב לשלוח את הפקודה שהלקוח מצפה לה
+        msgToClient.add(complementaryProducts);
+
+        client.sendToClient(msgToClient);
+    }
+
+
+
+
     private static void pullStores(List<Object> msg, ConnectionToClient client) throws IOException {       //func pulls products from server
         List<Store> stores = App.getAllStores();
         String commandToClient = "#PULLSTORES";
@@ -193,6 +209,7 @@ public class Server extends AbstractServer {
             switch (((LinkedList<Object>) msg).get(0).toString()) {   //switch to see what client wants from server
                 case "#PULLCATALOG" ->
                         pullProducts(((LinkedList<Object>) msg), client);  //display updated catalog version
+                case "#PULLCOMPLEMENTARY" -> pullComplementaryProducts((LinkedList<Object>) msg, client);
                 case "#PULLBASES" ->
                         pullProducts(((LinkedList<Object>) msg), client);  //display updated catalog version
                 case "#SAVE" -> updateProduct((LinkedList<Object>) msg);           //save change to product details

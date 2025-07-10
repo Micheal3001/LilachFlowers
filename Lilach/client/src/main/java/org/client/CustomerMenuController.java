@@ -37,6 +37,9 @@ public class CustomerMenuController extends Controller {
     private Button ordersBtn; // Value injected by FXMLLoader
 
     @FXML
+    private Button complementaryBtn;
+
+    @FXML
     void goToCart(ActionEvent event) {
         coolMenuClick((Button) event.getTarget());
         this.globalSkeleton.changeCenter("Cart");
@@ -67,6 +70,14 @@ public class CustomerMenuController extends Controller {
     }
 
     @FXML
+    void goToComplementary(ActionEvent event) {
+        coolMenuClick((Button) event.getTarget());
+        this.globalSkeleton.changeCenter("ComplementaryProducts");
+    }
+
+
+
+    @FXML
     void logOut(ActionEvent event) throws InterruptedException {
         coolMenuClick((Button) event.getTarget());
         App.client.logOut();
@@ -78,9 +89,10 @@ public class CustomerMenuController extends Controller {
         complaintBtn.setStyle("-fx-background-color: #ffdcdc");
         customMadeBtn.setStyle("-fx-background-color: #ffdcdc");
         ordersBtn.setStyle("-fx-background-color: #ffdcdc");
+        complementaryBtn.setStyle("-fx-background-color: #ffdcdc");
         button.setStyle("-fx-background-color: #ff9898");
-
     }
+
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {

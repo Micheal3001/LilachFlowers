@@ -16,6 +16,16 @@ public class ManagerMenuController extends WorkerMenuController {
     private Button catalogBtn;
 
     @FXML
+    private Button editComplementaryBtn;
+
+    @FXML
+    void goToEditComplementary(ActionEvent event) throws InterruptedException {
+        coolMenuClick((Button) event.getTarget());
+        this.getSkeleton().changeCenter("EditComplementary");
+    }
+
+
+    @FXML
     void goToReports(ActionEvent event) throws InterruptedException {       // loads edit catalog view for worker
         coolMenuClick((Button) event.getTarget());
 
@@ -39,9 +49,10 @@ public class ManagerMenuController extends WorkerMenuController {
     protected void coolMenuClick(Button button) throws InterruptedException {
         editCatalogBtn.setStyle("-fx-background-color: #ffdcdc");
         reportsBtn.setStyle("-fx-background-color: #ffdcdc");
+        editComplementaryBtn.setStyle("-fx-background-color: #ffdcdc"); // 💡 הוספה חשובה
         button.setStyle("-fx-background-color: #ff9898");
-
     }
+
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {

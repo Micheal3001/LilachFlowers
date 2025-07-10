@@ -5,16 +5,24 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="371.0" prefWidth="659.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.client.ProductViewController">
     <children>
-        <ImageView fx:id="mainImage" fitHeight="274.0" fitWidth="286.0" layoutX="101.0" layoutY="50.0" pickOnBounds="true" />
+        <!-- עטפתי את ה-ImageView הראשי ב-VBox עם יישור למרכז -->
+        <VBox layoutX="101.0" layoutY="50.0" prefWidth="286.0" prefHeight="274.0" alignment="CENTER">
+            <children>
+                <ImageView fx:id="mainImage" fitHeight="274.0" fitWidth="286.0" pickOnBounds="true" />
+            </children>
+        </VBox>
+
         <ImageView fx:id="image1" fitHeight="53.0" fitWidth="57.0" layoutX="22.0" layoutY="50.0" onMouseClicked="#changeImage" opacity="0.5" pickOnBounds="true" />
         <ImageView fx:id="image2" fitHeight="53.0" fitWidth="57.0" layoutX="22.0" layoutY="124.0" onMouseClicked="#changeImage" opacity="0.5" pickOnBounds="true" />
         <ImageView fx:id="image3" fitHeight="53.0" fitWidth="57.0" layoutX="22.0" layoutY="194.0" onMouseClicked="#changeImage" opacity="0.5" pickOnBounds="true" />
         <ImageView fx:id="image4" fitHeight="53.0" fitWidth="57.0" layoutX="22.0" layoutY="268.0" onMouseClicked="#changeImage" opacity="0.5" pickOnBounds="true" />
+
         <Button fx:id="addToCartBtn" layoutX="405.0" layoutY="292.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: FFF2EB;" text="add to cart">
             <font>
                 <Font name="Cambria" size="15.0" />
