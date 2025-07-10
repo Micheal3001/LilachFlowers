@@ -179,8 +179,7 @@ public class App {
     private static List<PreMadeProduct> generateComplementaryProducts() throws IOException {
         List<PreMadeProduct> complementaryProducts = new LinkedList<>();
 
-
-        // בדיקה אם כבר קיימים מוצרים משלימים במסד הנתונים
+        // Check if complementary products already exist in the database
         List<PreMadeProduct> existingComplements = session.createQuery(
                         "FROM PreMadeProduct WHERE productType = :type", PreMadeProduct.class)
                 .setParameter("type", PreMadeProduct.ProductType.COMPLEMENTARY)
@@ -207,9 +206,21 @@ public class App {
 
             int[] prices = {20, 30, 40, 35, 35, 25, 50, 50, 50};
 
+            String[] descriptions = {
+                    "A small vase for elegant table decoration",
+                    "A medium vase perfect for flower arrangements",
+                    "A large and impressive vase for your living room",
+                    "Soft brown teddy bear – perfect for romantic gifts",
+                    "Classic white teddy bear with a cute smile",
+                    "A box of fine and indulgent chocolates",
+                    "Premium red wine – great for special occasions",
+                    "Light and chilled white wine – ideal for summer evenings",
+                    "Rosé wine – a refreshing and delicate blend"
+            };
+
             for (int i = 0; i < names.length; i++) {
                 byte[] img = loadImageFromResources(images[i]);
-                PreMadeProduct p = new PreMadeProduct(names[i], img, prices[i], 0, false);
+                PreMadeProduct p = new PreMadeProduct(names[i], img, prices[i], descriptions[i], 0, false);
                 p.setType(PreMadeProduct.ProductType.COMPLEMENTARY);
                 complementaryProducts.add(p);
                 session.save(p);
@@ -219,6 +230,7 @@ public class App {
 
         return complementaryProducts;
     }
+
 
 
 

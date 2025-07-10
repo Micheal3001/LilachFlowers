@@ -90,6 +90,7 @@ public class PreMadeProduct extends Product {
         super(image, (int) (priceBeforeDiscount * (1 - discount * 0.01)));
         this.priceBeforeDiscount = priceBeforeDiscount;
         this.name = name;
+        this.description = description;
         this.discount = discount;
         this.isOrdered = isOrdered;
         this.productType = ProductType.COMPLEMENTARY;
