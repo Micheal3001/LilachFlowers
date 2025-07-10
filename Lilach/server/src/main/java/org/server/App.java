@@ -92,6 +92,8 @@ public class App {
         List<PreMadeProduct> products = new LinkedList<PreMadeProduct>();
         products = generateProducts();
         products.addAll(generateBaseCustomMadeProduct());
+        products.addAll(generateComplementaryProducts());
+
         //--------------------END-OF-FLOWERS---------------------------------------------
 
         //--------------------ORDERS-----------------------------------------------------
@@ -173,6 +175,54 @@ public class App {
 
         return products;
     }
+
+    private static List<PreMadeProduct> generateComplementaryProducts() throws IOException {
+        List<PreMadeProduct> complementaryProducts = new LinkedList<>();
+
+
+        // בדיקה אם כבר קיימים מוצרים משלימים במסד הנתונים
+        List<PreMadeProduct> existingComplements = session.createQuery(
+                        "FROM PreMadeProduct WHERE productType = :type", PreMadeProduct.class)
+                .setParameter("type", PreMadeProduct.ProductType.COMPLEMENTARY)
+                .list();
+
+        if (!existingComplements.isEmpty()) {
+            System.out.println("Complementary products already exist. Skipping generation.");
+            complementaryProducts.addAll(existingComplements);
+        } else {
+
+            String[] names = {
+                    "Small Vase", "Medium Vase", "Large Vase",
+                    "Teddy Bear - Brown", "Teddy Bear - White",
+                    "Chocolate Box",
+                    "Red Wine", "White Wine", "Rosé Wine"
+            };
+
+            String[] images = {
+                    "vase_small.jpg", "vase_medium.jpg", "vase_large.jpg",
+                    "teddy_bear_brown.jpg", "teddy_bear_white.jpg",
+                    "chocolate_package.jpg",
+                    "wine_red.jpg", "wine_white.jpg", "wine_rose.jpg"
+            };
+
+            int[] prices = {20, 30, 40, 35, 35, 25, 50, 50, 50};
+
+            for (int i = 0; i < names.length; i++) {
+                byte[] img = loadImageFromResources(images[i]);
+                PreMadeProduct p = new PreMadeProduct(names[i], img, prices[i], 0, false);
+                p.setType(PreMadeProduct.ProductType.COMPLEMENTARY);
+                complementaryProducts.add(p);
+                session.save(p);
+                session.flush();
+            }
+        }
+
+        return complementaryProducts;
+    }
+
+
+
+
 
 
     private static List<Customer> generateCustomers(List<Store> s) throws Exception {

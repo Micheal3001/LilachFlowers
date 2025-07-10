@@ -18,6 +18,13 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="editComplementaryBtn" alignment="BASELINE_CENTER"
+                    contentDisplay="CENTER" mnemonicParsing="false"
+                    onAction="#goToEditComplementary" prefHeight="50.0" prefWidth="220.0"
+                    style="-fx-background-color: FFDCDC;" text="Edit Complementary" textFill="WHITE">
+               <font><Font size="20.0"/></font>
+               <VBox.margin><Insets top="10.0"/></VBox.margin>
+            </Button>
             <Button fx:id="reportsBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToReports" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FF9898;" text="Reports" textFill="WHITE">
                <font>
                   <Font size="20.0" />
