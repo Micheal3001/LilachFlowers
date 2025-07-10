@@ -24,7 +24,7 @@ public class WorkerMenuController extends Controller {
     @FXML
     void goToEditComplementary(ActionEvent event) throws InterruptedException {
         coolMenuClick((Button) event.getTarget());
-        this.getSkeleton().changeCenter("ComplementaryProducts");
+        this.getSkeleton().changeCenter("EditComplementary");
     }
 
 

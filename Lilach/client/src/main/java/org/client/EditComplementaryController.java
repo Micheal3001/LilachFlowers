@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
+import javafx.application.Platform;
+import org.entities.PreMadeProduct;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,14 +42,34 @@ public class EditComplementaryController extends CatalogController {
         }
     }
 
+    protected void displayProduct(PreMadeProduct product) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Product.fxml"));
+        mainPane.getChildren().add(fxmlLoader.load());
+        ProductController controller = fxmlLoader.getController();
+        controller.setSkeleton(this.getSkeleton());
+        controller.setProduct(product);
 
+    }
 
     public void displayAddItem() throws IOException {
-        System.out.println("displayAddItem called");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddItem.fxml"));
         mainPane.getChildren().add(fxmlLoader.load());
         AddItemController controller = fxmlLoader.getController();
         controller.setSkeleton(this.getSkeleton());
+    }
+
+    public void pullProductsToClient() throws IOException {
+        Platform.runLater(() -> {
+            for (PreMadeProduct product : Client.products) {
+                if (!product.isOrdered() && product.getType() == PreMadeProduct.ProductType.COMPLEMENTARY) {
+                    try {
+                        this.displayProduct(product);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
 

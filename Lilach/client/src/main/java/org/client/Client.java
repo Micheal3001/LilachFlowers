@@ -351,7 +351,7 @@ public class Client extends AbstractClient {
     }
 
     private void pushToCatalog(Object msg) throws IOException { // takes data received and sends to display function
-        products = (LinkedList<PreMadeProduct>) ((LinkedList<Object>) msg).get(1);
+        products = new LinkedList<>((List<PreMadeProduct>) ((LinkedList<Object>) msg).get(1));
         CatalogController catalogController = (CatalogController) controller;
         catalogController.pullProductsToClient();       //calls static function in client for display
     }
@@ -364,8 +364,7 @@ public class Client extends AbstractClient {
 
 
     private void pushToBases(Object msg) throws IOException {
-        products = (LinkedList<PreMadeProduct>) ((LinkedList<Object>) msg).get(1);
-
+        products = new LinkedList<>((List<PreMadeProduct>) ((LinkedList<Object>) msg).get(1));
         if (controller instanceof CreateCustomMadeController) {
             ((CreateCustomMadeController) controller).pullProductsToClient();
         } else if (controller instanceof ComplementaryProductsController) {
@@ -373,7 +372,6 @@ public class Client extends AbstractClient {
         } else if (controller instanceof CatalogController) {
             ((CatalogController) controller).pullProductsToClient();
         } else {
-            // אפשר להוסיף כאן טיפול ליתר סוגי הקונטרולרים או לזרוק שגיאה
             System.out.println("Warning: Unknown controller type in pushToBases.");
         }
     }

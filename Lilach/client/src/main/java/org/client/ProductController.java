@@ -1,10 +1,13 @@
 package org.client;
+
 import org.entities.PreMadeProduct;
+import org.entities.Customer;
+import org.entities.Guest;
+import org.entities.Employee;
 
 /**
  * Sample Skeleton for 'Product.fxml' Controller Class
  */
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,62 +18,76 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class ProductController extends ItemController{
+public class ProductController extends ItemController {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
 
-    @FXML // fx:id="button"
-    private Button button; // Value injected by FXMLLoader
+    @FXML
+    private Button button;
 
-    @FXML // fx:id="price"
-    private Text price; // Value injected by FXMLLoader
-    
+    @FXML
+    private Text price;
+
     private PreMadeProduct product;
 
-    @FXML // fx:id="priceBeforeDiscount"
-    private Text priceBeforeDiscount; // Value injected by FXMLLoader
+    @FXML
+    private Text priceBeforeDiscount;
 
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
     void initialize() {
         assert button != null : "fx:id=\"button\" was not injected: check your FXML file 'Product.fxml'.";
         assert name != null : "fx:id=\"name\" was not injected: check your FXML file 'Product.fxml'.";
         assert image != null : "fx:id=\"image\" was not injected: check your FXML file 'Product.fxml'.";
         assert price != null : "fx:id=\"price\" was not injected: check your FXML file 'Product.fxml'.";
         assert priceBeforeDiscount != null : "fx:id=\"priceBeforeDiscount\" was not injected: check your FXML file 'Product.fxml'.";
-
     }
 
     @FXML
     void addToCart(ActionEvent event) throws InterruptedException {
-        coolButtonClick((Button)event.getTarget());
-        //Check if you need to kill the thread.
+        coolButtonClick((Button) event.getTarget());
         this.product.setAmount(this.product.getAmount());
-        App.client.cart.insertSomeProduct(this.product,1);
+        App.client.cart.insertSomeProduct(this.product, 1);
     }
 
-
-    public void  setProduct(PreMadeProduct product) {
+    public void setProduct(PreMadeProduct product) {
         this.product = product;
         image.setImage(product.getImage());
         price.setText(product.getPrice() + "₪");
         name.setText(product.getName());
 
-        if(product.getDiscount() != 0)
+        if (product.getDiscount() != 0)
             priceBeforeDiscount.setText(product.getPriceBeforeDiscount() + " ₪");
         else
             priceBeforeDiscount.setText("");
+
+        // נסתיר את כפתור הוספה לעגלה רק אם מדובר בעובדים (לפי הקשר של המסך)
+        if (App.client.user instanceof Employee) {
+            button.setVisible(false);
+            button.setManaged(false);
+        } else {
+            button.setVisible(true);
+            button.setManaged(true);
+        }
     }
 
-    public void goToProductView (MouseEvent event) throws InterruptedException {        //clears page and displays solo product with info
+    public void goToProductView(MouseEvent event) throws InterruptedException {
         clickOnProductEffect(event);
-        Controller controller  = this.getSkeleton().changeCenter("ProductView");
-        ProductViewController productView = (ProductViewController) controller;
-        productView.setProductView(this.product);
-    }
 
+        // אם המשתמש הוא עובד → עובר למסך עריכה
+        if (App.client.user instanceof Employee) {
+            Controller controller = this.getSkeleton().changeCenter("EditProduct");
+            EditProductController editProductController = (EditProductController) controller;
+            editProductController.setProductView(this.product);
+        }
+        // אחרת (לקוח או אורח) → למסך רגיל
+        else {
+            Controller controller = this.getSkeleton().changeCenter("ProductView");
+            ProductViewController productView = (ProductViewController) controller;
+            productView.setProductView(this.product);
+        }
+    }
 }
