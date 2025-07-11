@@ -28,6 +28,12 @@
                 <Font name="Cambria" size="15.0" />
             </font>
         </Button>
+        <Text fx:id="catalogNumber" layoutX="10.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="214.0">
+            <font>
+                <Font name="Guttman-Aharoni Bold" size="14.0" />
+            </font>
+        </Text>
+
         <TextField fx:id="orderCount" alignment="CENTER" layoutX="561.0" layoutY="292.0" prefHeight="30.0" prefWidth="47.0" text="1" />
         <Button fx:id="plusBtn" contentDisplay="CENTER" layoutX="614.0" layoutY="291.0" mnemonicParsing="false" onAction="#plusAction" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: FFF2EB;" text="+" />
         <Button fx:id="minusBtn" contentDisplay="CENTER" layoutX="526.0" layoutY="291.0" mnemonicParsing="false" onAction="#minusAction" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: FFF2EB;" text="-" />
@@ -36,11 +42,12 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Label>
-        <Label fx:id="description" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="407.0" layoutY="103.0" prefHeight="128.0" prefWidth="238.0" text="description:">
+        <Label fx:id="description" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="407.0" layoutY="103.0" prefWidth="238.0" wrapText="true" text="description:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
+
         <Text fx:id="price" layoutX="487.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="78.51947021484375">
             <font>
                 <Font size="24.0" />

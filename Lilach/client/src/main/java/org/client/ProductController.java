@@ -38,6 +38,9 @@ public class ProductController extends ItemController {
     private Text priceBeforeDiscount;
 
     @FXML
+    private Text catalogNumber;
+
+    @FXML
     void initialize() {
         assert button != null : "fx:id=\"button\" was not injected: check your FXML file 'Product.fxml'.";
         assert name != null : "fx:id=\"name\" was not injected: check your FXML file 'Product.fxml'.";
@@ -64,7 +67,6 @@ public class ProductController extends ItemController {
         else
             priceBeforeDiscount.setText("");
 
-        // נסתיר את כפתור הוספה לעגלה רק אם מדובר בעובדים (לפי הקשר של המסך)
         if (App.client.user instanceof Employee) {
             button.setVisible(false);
             button.setManaged(false);
@@ -73,6 +75,7 @@ public class ProductController extends ItemController {
             button.setManaged(true);
         }
     }
+
 
     public void goToProductView(MouseEvent event) throws InterruptedException {
         clickOnProductEffect(event);

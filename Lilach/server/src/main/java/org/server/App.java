@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-
+import java.util.stream.Collectors;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import java.util.*;
 public class App {
     public static Session session;// encapsulation make public function so this can be private
     protected static Server server;
+    private static int currentCatalogNumber = 1;
 
     private static SessionFactory getSessionFactory() {
         Scanner scanner = new Scanner(System.in);
@@ -88,6 +89,19 @@ public class App {
         employees = generateEmployees(stores);
         //--------------------END-OF-EMPLOYEES-------------------------------------------
 
+        // אתחול currentCatalogNumber לפי המספר הגבוה ביותר במסד
+        Integer maxCatalogNumber = session.createQuery(
+                "SELECT MAX(CAST(p.catalogNumber AS int)) FROM PreMadeProduct p",
+                Integer.class
+        ).getSingleResult();
+
+        if (maxCatalogNumber == null) {
+            maxCatalogNumber = 0;
+        }
+
+        currentCatalogNumber = maxCatalogNumber + 1;
+
+
         //--------------------FLOWERS----------------------------------------------------
         List<PreMadeProduct> products = new LinkedList<PreMadeProduct>();
         products = generateProducts();
@@ -155,85 +169,95 @@ public class App {
         Random random = new Random();
         List<PreMadeProduct> products = new LinkedList<>();
 
-        // בדיקה אם כבר קיימים מוצרים במערכת
         List<PreMadeProduct> existingProducts = session.createQuery("FROM PreMadeProduct", PreMadeProduct.class).list();
 
         if (existingProducts.isEmpty()) {
-            String[] flowerNames = new String[]{"SunFlower", "Calanit", "Shibolet", "Rose", "Rakefet", "Lilach", "Lily", "Tulip", "Pickachu", "Charmander", "Thanos", "Commit", "Runlater", "Clean Install", "Orchid"};
+            String[] flowerNames = new String[]{
+                    "SunFlower", "Calanit", "Shibolet", "Rose", "Rakefet",
+                    "Lilach", "Lily", "Tulip", "Pickachu", "Charmander",
+                    "Thanos", "Commit", "Runlater", "Clean Install", "Orchid"
+            };
 
             for (int i = 0; i < flowerNames.length; i++) {
                 var img = loadImageFromResources(String.format("Flower%s.jpg", i));
-                PreMadeProduct p = new PreMadeProduct(flowerNames[i], img, random.nextInt(30) + 1, "this is a " + flowerNames[i] + " Flower", 0, false);
+                PreMadeProduct p = new PreMadeProduct(
+                        flowerNames[i], img, random.nextInt(30) + 1,
+                        "this is a " + flowerNames[i] + " Flower", 0, false
+                );
+
+                p.setCatalogNumber(String.format("%09d", currentCatalogNumber++)); // ✅ שימוש נכון במקט
                 products.add(p);
                 session.save(p);
                 session.flush();
             }
         } else {
-            // אם כבר קיימים מוצרים, פשוט להחזיר אותם
             products.addAll(existingProducts);
         }
 
         return products;
     }
 
+
+
     private static List<PreMadeProduct> generateComplementaryProducts() throws IOException {
         List<PreMadeProduct> complementaryProducts = new LinkedList<>();
 
-        // Check if complementary products already exist in the database
+        // משיכת המוצרים המשלימים שכבר קיימים
         List<PreMadeProduct> existingComplements = session.createQuery(
                         "FROM PreMadeProduct WHERE productType = :type", PreMadeProduct.class)
                 .setParameter("type", PreMadeProduct.ProductType.COMPLEMENTARY)
                 .list();
 
-        if (!existingComplements.isEmpty()) {
-            System.out.println("Complementary products already exist. Skipping generation.");
-            complementaryProducts.addAll(existingComplements);
-        } else {
+        Set<String> existingNames = existingComplements.stream()
+                .map(PreMadeProduct::getName)
+                .collect(Collectors.toSet());
 
-            String[] names = {
-                    "Small Vase", "Medium Vase", "Large Vase",
-                    "Teddy Bear - Brown", "Teddy Bear - White",
-                    "Chocolate Box",
-                    "Red Wine", "White Wine", "Rosé Wine"
-            };
+        String[] names = {
+                "Small Vase", "Medium Vase", "Large Vase",
+                "Teddy Bear - Brown", "Teddy Bear - White",
+                "Chocolate Box",
+                "Red Wine", "White Wine", "Rosé Wine"
+        };
 
-            String[] images = {
-                    "vase_small.jpg", "vase_medium.jpg", "vase_large.jpg",
-                    "teddy_bear_brown.jpg", "teddy_bear_white.jpg",
-                    "chocolate_package.jpg",
-                    "wine_red.jpg", "wine_white.jpg", "wine_rose.jpg"
-            };
+        String[] images = {
+                "vase_small.jpg", "vase_medium.jpg", "vase_large.jpg",
+                "teddy_bear_brown.jpg", "teddy_bear_white.jpg",
+                "chocolate_package.jpg",
+                "wine_red.jpg", "wine_white.jpg", "wine_rose.jpg"
+        };
 
-            int[] prices = {20, 30, 40, 35, 35, 25, 50, 50, 50};
+        int[] prices = {20, 30, 40, 35, 35, 25, 50, 50, 50};
 
-            String[] descriptions = {
-                    "A small vase for elegant table decoration",
-                    "A medium vase perfect for flower arrangements",
-                    "A large and impressive vase for your living room",
-                    "Soft brown teddy bear – perfect for romantic gifts",
-                    "Classic white teddy bear with a cute smile",
-                    "A box of fine and indulgent chocolates",
-                    "Premium red wine – great for special occasions",
-                    "Light and chilled white wine – ideal for summer evenings",
-                    "Rosé wine – a refreshing and delicate blend"
-            };
+        String[] descriptions = {
+                "A small vase for elegant table decoration",
+                "A medium vase perfect for flower arrangements",
+                "A large and impressive vase for your living room",
+                "Soft brown teddy bear – perfect for romantic gifts",
+                "Classic white teddy bear with a cute smile",
+                "A box of fine and indulgent chocolates",
+                "Premium red wine – great for special occasions",
+                "Light and chilled white wine – ideal for summer evenings",
+                "Rosé wine – a refreshing and delicate blend"
+        };
 
-            for (int i = 0; i < names.length; i++) {
-                byte[] img = loadImageFromResources(images[i]);
-                PreMadeProduct p = new PreMadeProduct(names[i], img, prices[i], descriptions[i], 0, false);
-                p.setType(PreMadeProduct.ProductType.COMPLEMENTARY);
-                complementaryProducts.add(p);
-                session.save(p);
-                session.flush();
+        for (int i = 0; i < names.length; i++) {
+            if (existingNames.contains(names[i])) {
+                continue;
             }
+
+            byte[] img = loadImageFromResources(images[i]);
+            PreMadeProduct p = new PreMadeProduct(names[i], img, prices[i], descriptions[i], 0, false);
+            p.setType(PreMadeProduct.ProductType.COMPLEMENTARY);
+            p.setCatalogNumber(String.format("%09d", currentCatalogNumber++)); // ✅ מק"ט ייחודי חדש
+            complementaryProducts.add(p);
+            session.save(p);
+            session.flush();
         }
+
+        complementaryProducts.addAll(existingComplements); // מחזירים גם את הקיימים
 
         return complementaryProducts;
     }
-
-
-
-
 
 
 
@@ -441,6 +465,7 @@ public class App {
             var img = loadImageFromResources(String.format("base%s.jpg", i));
             PreMadeProduct p = new PreMadeProduct(names[i], img, price = random.nextInt(15) + 5, random.nextInt(5) * 10, false, colors[i]);
             customProducts.add(p);
+            p.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
             session.save(p);   //saves and flushes to database
             session.flush();
         }
@@ -478,17 +503,30 @@ public class App {
 
     private static List<PreMadeProduct> getBaseProductList(List<PreMadeProduct> products) throws IOException {
         List<PreMadeProduct> baseProducts = getAllBaseCustomMadeProduct(products);
-        LinkedList<Integer> randomNumbers = new LinkedList<Integer>();
-        LinkedList<PreMadeProduct> productsForCustom = new LinkedList<PreMadeProduct>();
+        LinkedList<PreMadeProduct> productsForCustom = new LinkedList<>();
         Random random = new Random();
-        int rand, loopRand;
-        loopRand = random.nextInt(2) + 1;
-        for (int j = 0; j < loopRand; j++) {
-            rand = random.nextInt(11);
+        int loopRand = random.nextInt(2) + 1;
 
-            PreMadeProduct base = new PreMadeProduct(baseProducts.get(rand));
+        for (int j = 0; j < loopRand; j++) {
+            int rand = random.nextInt(baseProducts.size());
+
+            PreMadeProduct original = baseProducts.get(rand);
+
+            // אם למוצר המקורי אין מק"ט — ניתן לו ונשמור אותו
+            if (original.getCatalogNumber() == null) {
+                original.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
+                session.save(original);
+                session.flush();
+            }
+
+            // ניצור עותק ממנו עם כמות אקראית
+            PreMadeProduct base = new PreMadeProduct(original);
             base.setAmount(random.nextInt(5) + 1);
             base.setOrdered(true);
+
+            // לכל עותק תמיד ניתן מק"ט חדש
+            base.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
+
             productsForCustom.add(base);
             session.save(base);
             session.flush();
@@ -496,9 +534,11 @@ public class App {
         return productsForCustom;
     }
 
+
+
     private static List<PreMadeProduct> getPreMadeProductList(List<PreMadeProduct> products) throws IOException {
-        LinkedList<Integer> randomNumbers = new LinkedList<Integer>();
-        LinkedList<PreMadeProduct> productsList = new LinkedList<PreMadeProduct>();
+        LinkedList<Integer> randomNumbers = new LinkedList<>();
+        LinkedList<PreMadeProduct> productsList = new LinkedList<>();
         List<PreMadeProduct> allProducts = products;
         Random random = new Random();
         int rand, loopRand;
@@ -508,9 +548,14 @@ public class App {
             rand = random.nextInt(11);
 
             PreMadeProduct randomProduct = new PreMadeProduct(allProducts.get(rand));
+            randomProduct.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
             randomProduct.setAmount(random.nextInt(5) + 1);
             randomProduct = new PreMadeProduct(randomProduct);
             randomProduct.setOrdered(true);
+
+            // ✅ הוספת מספר קטלוגי ייחודי לפני שמירה
+            randomProduct.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
+
             productsList.add(randomProduct);
             App.session.save(randomProduct);
             App.session.flush();
@@ -518,6 +563,7 @@ public class App {
 
         return productsList;
     }
+
 
     static List<PreMadeProduct> getAllProducts() throws IOException {      //pulls all products from database
         CriteriaBuilder builder = session.getCriteriaBuilder();
