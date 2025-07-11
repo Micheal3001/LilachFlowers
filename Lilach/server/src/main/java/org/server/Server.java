@@ -56,6 +56,8 @@ public class Server extends AbstractServer {
         if (p.getType() == PreMadeProduct.ProductType.CUSTOM_CATALOG) {
             p.setMainColor(p2.getMainColor());
         }
+        p.setCatalogNumber(p2.getCatalogNumber());
+
     }
 
     private static void changeParamEmp(Employee e, Employee e2) {     //changes details

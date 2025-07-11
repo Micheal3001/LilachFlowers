@@ -8,7 +8,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.entities.Guest;
 import org.entities.User;
-
+import java.util.ArrayList;
+import java.util.List;
+import org.entities.PreMadeProduct;
 import java.io.IOException;
 
 
@@ -16,6 +18,7 @@ public class App extends Application {
 
     private static Scene scene;
     public static Client client;
+    public static List<PreMadeProduct> allProducts = new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws IOException {

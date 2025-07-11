@@ -135,6 +135,7 @@ public class Client extends AbstractClient {
 
     private void refresh(LinkedList<Object> msg) throws IOException {
         Client.products = new LinkedList<>((List<PreMadeProduct>) msg.get(1));
+        App.allProducts = Client.products;
         refreshCart();
 
         Platform.runLater(() -> {
@@ -352,12 +353,14 @@ public class Client extends AbstractClient {
 
     private void pushToCatalog(Object msg) throws IOException { // takes data received and sends to display function
         products = new LinkedList<>((List<PreMadeProduct>) ((LinkedList<Object>) msg).get(1));
+        App.allProducts = products;
         CatalogController catalogController = (CatalogController) controller;
         catalogController.pullProductsToClient();       //calls static function in client for display
     }
 
     private void pushComplementaryCatalog(Object msg) throws IOException {
         products = new LinkedList<>((List<PreMadeProduct>) ((LinkedList<Object>) msg).get(1));
+        App.allProducts = products;
         ComplementaryProductsController complementaryController = (ComplementaryProductsController) controller;
         complementaryController.pullProductsToClient();
     }
@@ -365,6 +368,7 @@ public class Client extends AbstractClient {
 
     private void pushToBases(Object msg) throws IOException {
         products = new LinkedList<>((List<PreMadeProduct>) ((LinkedList<Object>) msg).get(1));
+        App.allProducts = products;
         if (controller instanceof CreateCustomMadeController) {
             ((CreateCustomMadeController) controller).pullProductsToClient();
         } else if (controller instanceof ComplementaryProductsController) {

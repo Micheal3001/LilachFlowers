@@ -20,6 +20,9 @@ public class ProductViewController extends Controller{
     private Label productName;
 
     @FXML
+    private Text catalogNumber;
+
+    @FXML
     private Label description;
 
     @FXML
@@ -70,9 +73,13 @@ public class ProductViewController extends Controller{
         this.image1.setImage(product.getImage());
         this.description.setText(product.getDescription());
         this.price.setText(Integer.toString(product.getPrice()));
+
         if(product.getDiscount() != 0)
             this.priceBeforeDiscount.setText(Integer.toString(product.getPriceBeforeDiscount()));
+
+        this.catalogNumber.setText("Catalog #: " + product.getCatalogNumber());  // ✅ שורה חדשה
     }
+
 
     @FXML
     void plusAction(ActionEvent event) throws InterruptedException {
