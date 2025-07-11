@@ -566,6 +566,8 @@ public class Client extends AbstractClient {
                     msg.add(customer.getBalance() - 100);
         } else {
             msg.add("REJECTED");
+            msg.add(customer.getAccountType().ordinal()); // ← שולחים גם את סוג הלקוח המקורי
+
         }
 
         try {
@@ -599,6 +601,8 @@ public class Client extends AbstractClient {
                     msg.add(customer.getBalance() - 100);
         } else {
             msg.add("REJECTED");
+            msg.add(customer.getAccountType().ordinal()); // ← שולחים גם את סוג הלקוח המקורי
+
         }
 
         try {
