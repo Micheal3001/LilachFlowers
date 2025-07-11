@@ -415,8 +415,11 @@ public class Server extends AbstractServer {
         if (msg.get(2).toString().equals("CONFIRMED")) {
             updateAccount(customer, Customer.AccountType.MEMBERSHIP);
         } else {
-            updateAccount(customer, Customer.AccountType.STORE);
+            int originalType = (int) msg.get(3);
+            updateAccount(customer, Customer.AccountType.values()[originalType]);
         }
+
+
 
         Customer updatedCustomer = App.session.find(Customer.class, customerId);
 
@@ -700,8 +703,16 @@ public class Server extends AbstractServer {
                         msg.add("EMPLOYEE");
                     }
 
-                    connectedUsers.put(client, user);
-                    msg.add(user);
+                    if (user instanceof Customer) {
+                        Customer cust = App.session.get(Customer.class, user.getId());
+                        connectedUsers.put(client, cust);
+                        msg.add(cust);
+                    } else {
+                        connectedUsers.put(client, user);
+                        msg.add(user);
+                    }
+
+
                     client.sendToClient(msg);
                     return;
                 } else {
