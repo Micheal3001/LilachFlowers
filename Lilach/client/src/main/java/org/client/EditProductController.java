@@ -72,7 +72,7 @@ public class EditProductController extends Controller {
     void clickedSave(ActionEvent event) throws InterruptedException {
         coolButtonClick((Button) event.getTarget());
 
-        // 💡 בדיקת מק"ט כפול
+        // 💡 בדיקת מק"ט כפול (Check for duplicate catalog number)
         String newCatalogNumber = catalogText.getText();
         for (PreMadeProduct other : App.allProducts) {
             if (!other.equals(product) && other.getCatalogNumber() != null &&
@@ -84,9 +84,11 @@ public class EditProductController extends Controller {
 
         if (alertMsg("Edit Product", "change this product!", checkProduct())) {
             saveChanges();
-            this.globalSkeleton.changeCenter("EditCatalog");
+            // Comment out or remove this line so it doesn't switch the screen:
+            // this.globalSkeleton.changeCenter("EditCatalog");
         }
     }
+
 
     private boolean checkProduct() {
         return nameText.getText().isEmpty()
