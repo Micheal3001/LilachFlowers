@@ -60,6 +60,12 @@ public class EditComplementaryController extends CatalogController {
 
     public void pullProductsToClient() throws IOException {
         Platform.runLater(() -> {
+            mainPane.getChildren().clear();  // Clear all previous nodes first
+            try {
+                displayAddItem();             // Add the "Add Item" button or panel back
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             for (PreMadeProduct product : Client.products) {
                 if (!product.isOrdered() && product.getType() == PreMadeProduct.ProductType.COMPLEMENTARY) {
                     try {
@@ -71,6 +77,7 @@ public class EditComplementaryController extends CatalogController {
             }
         });
     }
+
 
 
 }

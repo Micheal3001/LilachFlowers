@@ -33,10 +33,7 @@
                 <Insets />
             </VBox.margin>
         </Button>
-        <Button fx:id="complementaryBtn"
-                onAction="#goToComplementary"
-                prefHeight="50.0" prefWidth="220.0"
-                style="-fx-background-color: FFDCDC;" text="complementary" textFill="WHITE">
+        <Button fx:id="complementaryBtn" onAction="#goToComplementary" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FFDCDC;" text="Complementary" textFill="WHITE">
             <font>
                 <Font size="20.0" />
             </font>

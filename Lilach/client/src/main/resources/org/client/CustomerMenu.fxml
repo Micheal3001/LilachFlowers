@@ -15,7 +15,7 @@
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="0.0" bottom="0.0" />
+                  <Insets bottom="0.0" top="0.0" />
                </VBox.margin>
             </Button>
             <Button fx:id="catalogBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToCatalog" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FF9898;" text="Catalog" textFill="WHITE">
@@ -23,18 +23,15 @@
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="0.0" bottom="0.0" />
+                  <Insets bottom="0.0" top="0.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="complementaryBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER"
-                    mnemonicParsing="false" onAction="#goToComplementary"
-                    prefHeight="50.0" prefWidth="220.0"
-                    style="-fx-background-color: FFDCDC;" text="complementary" textFill="WHITE">
+            <Button fx:id="complementaryBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToComplementary" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FFDCDC;" text="Complementary" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="0.0" bottom="0.0" />
+                  <Insets bottom="0.0" top="0.0" />
                </VBox.margin>
             </Button>
 
@@ -43,7 +40,7 @@
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="0.0" bottom="0.0" />
+                  <Insets bottom="0.0" top="0.0" />
                </VBox.margin>
             </Button>
             <Button fx:id="ordersBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToOrders" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FFDCDC;" text="Orders" textFill="WHITE">
@@ -51,7 +48,7 @@
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="0.0" bottom="0.0" />
+                  <Insets bottom="0.0" top="0.0" />
                </VBox.margin>
             </Button>
             <Button fx:id="complaintBtn" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToComplaints" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: FFDCDC;" text="Complaint" textFill="WHITE">
@@ -59,7 +56,7 @@
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="0.0" bottom="0.0" />
+                  <Insets bottom="0.0" top="0.0" />
                </VBox.margin>
             </Button>
          </children>
