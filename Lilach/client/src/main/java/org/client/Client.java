@@ -144,34 +144,45 @@ public class Client extends AbstractClient {
                 String alertMsg = null;
 
                 if (this.controller instanceof CatalogController) {
-                    try {
-                        ((CatalogController) this.controller).pullProductsToClient();
+                    ((CatalogController) this.controller).pullProductsToClient();
 
-                        // Show alert only if current screen is Catalog or EditCatalog
-                        if ("Catalog".equals(currentScreen) || "EditCatalog".equals(currentScreen)) {
-                            alertMsg = (this.user instanceof Employee)
-                                    ? "Notice that there were made some changes in the catalog! Have a nice shift :)"
-                                    : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if ("Catalog".equals(currentScreen) || "EditCatalog".equals(currentScreen)) {
+                        alertMsg = (this.user instanceof Employee)
+                                ? "Notice that there were made some changes in the catalog! Have a nice shift :)"
+                                : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
+                    }
+
+                    // If user is Employee and is in Catalog editing screen, ensure stays there
+                    if (this.user instanceof Employee && ("Catalog".equals(currentScreen) || "EditCatalog".equals(currentScreen))) {
+                        this.getSkeleton().changeCenter("EditCatalog"); // or "Catalog" depending on your workflow
+                    }
+
+                } else if (this.controller instanceof ComplementaryProductsController
+                        || this.controller instanceof EditComplementaryController) {
+
+                    ((ComplementaryProductsController) this.controller).pullProductsToClient();
+
+                    if ("ComplementaryProducts".equals(currentScreen) || "EditComplementary".equals(currentScreen)) {
+                        alertMsg = (this.user instanceof Employee)
+                                ? "Notice that there were made some changes in the complementary! Have a nice shift :)!"
+                                : "We are sorry for the inconvenience, we made some changes in our complementary and updated your cart too! Hope you like it :)";
+                    }
+
+                    // If user is Employee and is in Complementary editing screen, ensure stays there
+                    if (this.user instanceof Employee && ("ComplementaryProducts".equals(currentScreen) || "EditComplementary".equals(currentScreen))) {
+                        this.getSkeleton().changeCenter("EditComplementary");
                     }
 
                 } else if (this.controller instanceof CartController) {
                     this.getSkeleton().changeCenter("Cart");
 
                 } else if (this.controller instanceof CreateOrderController) {
-                    try {
-                        if (this.cart.getProducts().isEmpty()) {
-                            this.getSkeleton().changeCenter("Catalog");
-                            alertMsg = "We are sorry for the inconvenience, your products are no longer available! Check out the catalog :)";
-                        } else {
-                            ((CreateOrderController) this.controller).displaySummary();
-                            ((CreateOrderController) this.controller).setPrices();
-                            // No alert unless on Catalog/EditCatalog
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (this.cart.getProducts().isEmpty()) {
+                        this.getSkeleton().changeCenter("Catalog");
+                        alertMsg = "We are sorry for the inconvenience, your products are no longer available! Check out the catalog :)";
+                    } else {
+                        ((CreateOrderController) this.controller).displaySummary();
+                        ((CreateOrderController) this.controller).setPrices();
                     }
                 }
 
@@ -185,6 +196,8 @@ public class Client extends AbstractClient {
             }
         });
     }
+
+
 
 
 
