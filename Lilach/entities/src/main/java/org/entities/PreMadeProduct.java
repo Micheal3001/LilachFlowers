@@ -23,7 +23,7 @@ public class PreMadeProduct extends Product {
     private String description;
     private int discount;
 
-    @Column(name = "catalog_number", unique = true)
+    @Column(name = "catalog_number")
     private String catalogNumber;  // 💡 חדש – מק"ט
 
     // ===== Constructors =====
