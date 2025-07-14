@@ -17,22 +17,30 @@ import java.util.stream.IntStream;
 
 public abstract class AbstractReport extends Controller{
 
-    public Map<String,Integer> getMap(LinkedList<Order> orders) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
+    public Map<String, Integer> getMap(LinkedList<Order> orders) {
+        Map<String, Integer> map = new HashMap<>();
 
-        for(Product product : Client.products)
+        // Initialize map with product names and 0 count
+        for (Product product : Client.products)
             map.put(((PreMadeProduct) product).getName(), 0);
 
-        for(Order order : orders) {
-            for(PreMadeProduct product : order.getPreMadeProducts())
-                map.put(product.getName(), map.get(product.getName()) + product.getAmount());
+        // Count pre-made product orders
+        for (Order order : orders) {
+            for (PreMadeProduct product : order.getPreMadeProducts()) {
+                map.put(product.getName(), map.getOrDefault(product.getName(), 0) + product.getAmount());
+            }
 
-            for(CustomMadeProduct customProduct : order.getCustomMadeProducts())
-                for(PreMadeProduct baseProduct : customProduct.getProducts())
-                    map.put(baseProduct.getName(), map.get(baseProduct.getName()) + baseProduct.getAmount());
+            // Count custom-made base products
+            for (CustomMadeProduct customProduct : order.getCustomMadeProducts()) {
+                for (PreMadeProduct baseProduct : customProduct.getProducts()) {
+                    map.put(baseProduct.getName(), map.getOrDefault(baseProduct.getName(), 0) + baseProduct.getAmount());
+                }
+            }
         }
+
         return map;
     }
+
 
     static int numOfDays(Date d1, Date d2) {
         long difference_In_Time = d2.getTime() - d1.getTime();
