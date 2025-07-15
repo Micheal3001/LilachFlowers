@@ -57,6 +57,7 @@ public class Server extends AbstractServer {
             p.setMainColor(p2.getMainColor());
         }
         p.setCatalogNumber(p2.getCatalogNumber());
+        p.setDescription(p2.getDescription());
 
     }
 
