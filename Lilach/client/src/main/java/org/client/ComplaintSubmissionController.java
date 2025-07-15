@@ -55,41 +55,67 @@ public class ComplaintSubmissionController extends Controller {
     }
 
     private boolean checkEmpty() {
-        if (complaintText.getText().isEmpty() || complaintTopic.getValue().equals("Set Complaint Topic") || storePick.getValue().equals("Set Store")) {
-            sendAlert("Some fields have not been filled", " Empty or Missing Fields", Alert.AlertType.WARNING);
+        if (complaintText.getText().isEmpty()
+                || complaintTopic.getValue() == null
+                || storePick.getValue() == null) {
+            sendAlert("Some fields have not been filled", "Empty or Missing Fields", Alert.AlertType.WARNING);
             return false;
         }
         return true;
     }
 
+
     @FXML
     void sendComplaint(ActionEvent event) {
-
         if (checkEmpty()) {
             List<Object> msg = new LinkedList<>();
+            Complaint complaint = new Complaint(
+                    (Customer) App.client.user,
+                    new Date(),
+                    complaintText.getText(),
+                    Complaint.convertToTopic(complaintTopic.getValue()),
+                    getSelectedStore()
+            );
             msg.add("#COMPLAINT");
-            Complaint complaint = new Complaint((Customer) App.client.user, new Date(), complaintText.getText(), Complaint.convertToTopic(complaintTopic.getValue()), getSelectedStore());
             msg.add(complaint);
+
             try {
                 App.client.sendToServer(msg);
             } catch (IOException e) {
-
                 e.printStackTrace();
+                return;
             }
 
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Complaint submitted, moving to catalog.");
+                alert.setHeaderText("Your complaint was submitted successfully!");
+                alert.setContentText(null);
                 alert.show();
+
                 PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
-                pause.setOnFinished((e -> {
+                pause.setOnFinished(e -> {
                     alert.close();
-                    this.getSkeleton().changeCenter("Catalog");
-                }));
+
+                    // איפוס שדות הטופס
+                    complaintText.clear();
+
+
+                    complaintTopic.getSelectionModel().clearSelection();
+                    complaintTopic.setPromptText(""); // שלב ביניים לרענון
+                    Platform.runLater(() -> complaintTopic.setPromptText("Set Complaint Topic"));
+
+
+                    storePick.getSelectionModel().clearSelection();
+                    storePick.setPromptText(""); // שלב ביניים לרענון
+                    Platform.runLater(() -> storePick.setPromptText("Set Store"));
+
+
+                });
                 pause.play();
             });
         }
     }
+
 
     private void getStores() {
         this.stores = App.client.getStores();
@@ -101,16 +127,29 @@ public class ComplaintSubmissionController extends Controller {
 
     @FXML
         // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-        assert complaintText != null : "fx:id=\"complaintText\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
-        assert complaintTopic != null : "fx:id=\"complaintTopic\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
-        assert submitBtn != null : "fx:id=\"submitBtn\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
-        assert storePick != null : "fx:id=\"storePick\" was not injected: check your FXML file 'ComplaintSubmission.fxml'.";
-        complaintTopic.getItems().addAll("Bad service", "Order didn't arrive in time",
-                "Defective product/ not what you ordered", "Payment issue", "Other");
-        complaintTopic.setValue("Set Complaint Topic");
-        getStores();
+    public void initialize() {
+        assert complaintText != null : "fx:id=\"complaintText\" was not injected: check your FXML file.";
+        assert complaintTopic != null : "fx:id=\"complaintTopic\" was not injected: check your FXML file.";
+        assert submitBtn != null : "fx:id=\"submitBtn\" was not injected: check your FXML file.";
+        assert storePick != null : "fx:id=\"storePick\" was not injected: check your FXML file.";
 
+        // אתחול נושאי תלונה
+        complaintTopic.setPromptText("Set Complaint Topic");
+        complaintTopic.getItems().addAll(
+                "Bad service",
+                "Order didn't arrive in time",
+                "Defective product/ not what you ordered",
+                "Payment issue",
+                "Other"
+        );
+
+        // אתחול חנויות
+        stores = App.client.getStores(); // הנחה שזו הפונקציה שמחזירה את החנויות
+        storePick.setPromptText("Set Store");
+        for (Store s : stores) {
+            storePick.getItems().add(s.getName());
+        }
     }
+
 
 }
