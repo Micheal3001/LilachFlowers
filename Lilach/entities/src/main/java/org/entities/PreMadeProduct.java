@@ -3,7 +3,7 @@ package org.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "premadeProducts")
+@Table(name = "premadeproducts")
 public class PreMadeProduct extends Product {
 
     @Id

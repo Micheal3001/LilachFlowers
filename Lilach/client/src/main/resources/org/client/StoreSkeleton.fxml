@@ -17,7 +17,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                            <ToolBar style="-fx-background-color: FF9898;" HBox.hgrow="ALWAYS">
+                            <ToolBar prefHeight="57.0" prefWidth="921.0" style="-fx-background-color: FF9898;" HBox.hgrow="ALWAYS">
                                 <items>
                                     <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="178.0" style="-fx-background-color: FF9898;" text="Lilach Store" textFill="WHITE">
                                         <font>
@@ -26,9 +26,9 @@
                                     </Button>
                                 </items>
                             </ToolBar>
-                        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: FF9898; -fx-background-radius: 0 0 20 0;">
+                        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="57.0" prefWidth="571.0" style="-fx-background-color: FF9898; -fx-background-radius: 0 0 20 0;">
                            <items>
-                              <Label fx:id="helloLabel" alignment="CENTER_RIGHT" text="Hello Guest" textFill="WHITE">
+                              <Label fx:id="helloLabel" alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="400.0" text="Hello Guest" textAlignment="JUSTIFY" textFill="WHITE">
                                  <font>
                                     <Font name="Script MT Bold" size="24.0" />
                                  </font>

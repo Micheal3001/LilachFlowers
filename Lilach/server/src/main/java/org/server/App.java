@@ -141,7 +141,7 @@ public class App {
         List<Store> existingStores = session.createQuery("FROM Store", Store.class).list();
 
         if (existingStores.isEmpty()) {
-            String[] storeNames = new String[]{"Lilac Haifa", "Lilac Tel-Aviv", "Lilac Be'er Sheva", "Lilac Rehovot", "Lilac Jerusalem", "Lilac Eilat"};
+            String[] storeNames = new String[]{"Lilach Haifa", "Lilach Tel-Aviv", "Lilach Be'er Sheva", "Lilach Rehovot", "Lilach Jerusalem", "Lilach Eilat"};
             String[] storeAddress = new String[]{"Grand Canyon Haifa - Derech Simha Golan 54", "Azrieli Mall - Derech Menachem Begin 132", "Big Beer Sheva - Derekh Hebron 21",
                     "Rehovot Mall - Bilu St 2", "Malcha Mall - Derech Agudat Sport Beitar 1", "Kanyon ha-Ir - HaMelacha St 12"};
 
@@ -166,26 +166,54 @@ public class App {
 
 
     private static List<PreMadeProduct> generateProducts() throws Exception {
-        Random random = new Random();
+        System.out.println("🛠 generateProducts() was called");
+
         List<PreMadeProduct> products = new LinkedList<>();
 
         List<PreMadeProduct> existingProducts = session.createQuery("FROM PreMadeProduct", PreMadeProduct.class).list();
 
         if (existingProducts.isEmpty()) {
-            String[] flowerNames = new String[]{
-                    "SunFlower", "Calanit", "Shibolet", "Rose", "Rakefet",
-                    "Lilach", "Lily", "Tulip", "Pickachu", "Charmander",
-                    "Thanos", "Commit", "Runlater", "Clean Install", "Orchid"
+            System.out.println("🛠 generateProducts() was called");
+            String[] flowerNames = {
+                    "Sunflower", "Peonies", "Lilies", "Tulips", "Gerberas", "Hydrangea",
+                    "Alstroemerias", "Chrysanthemums", "Orchids", "Irises", "Carnations"
+            };
+
+            String[] flowerDescriptions = {
+                    "Bright and cheerful, sunflowers symbolize adoration and loyalty.",
+                    "Peonies are lush and fragrant, representing romance and prosperity.",
+                    "Elegant lilies stand for purity and refined beauty.",
+                    "Tulips bring vibrant colors and signify perfect love.",
+                    "Gerberas are playful flowers that symbolize cheerfulness and innocence.",
+                    "Hydrangeas express heartfelt emotions and gratitude.",
+                    "Alstroemerias, also known as Peruvian lilies, signify friendship and devotion.",
+                    "Chrysanthemums represent optimism and joy.",
+                    "Orchids are exotic and rare, symbolizing luxury and strength.",
+                    "Irises stand for wisdom, hope, and trust.",
+                    "Carnations are classic flowers meaning fascination and love."
+            };
+
+            // Specific prices (some with and some without discount)
+            int[] prices = {
+                    180, 220, 150, 130, 170, 200, 190, 160, 210, 140, 155
+            };
+
+            int[] priceBeforeDiscounts = {
+                    0, 15, 10, 0, 0, 10, 5, 15, 0, 0, 10
             };
 
             for (int i = 0; i < flowerNames.length; i++) {
                 var img = loadImageFromResources(String.format("Flower%s.jpg", i));
+
                 PreMadeProduct p = new PreMadeProduct(
-                        flowerNames[i], img, random.nextInt(30) + 1,
-                        "this is a " + flowerNames[i] + " Flower", 0, false
+                        flowerNames[i], img,
+                        prices[i],
+                        flowerDescriptions[i],
+                        priceBeforeDiscounts[i],
+                        false
                 );
 
-                p.setCatalogNumber(String.format("%09d", currentCatalogNumber++)); // ✅ שימוש נכון במקט
+                p.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
                 products.add(p);
                 session.save(p);
                 session.flush();
@@ -196,6 +224,9 @@ public class App {
 
         return products;
     }
+
+
+
 
 
 
@@ -454,114 +485,127 @@ public class App {
 
     }
 
-    private static List<PreMadeProduct> generateBaseCustomMadeProduct() throws Exception {       //generates new base products
-        Random random = new Random();
-        List<PreMadeProduct> customProducts = new LinkedList<PreMadeProduct>();
-        int price;
-        int num_products = 10; //change according to the real
-        String[] colors = {"Red", "Pink", "Yellow", "White", "Pink", "White", "White", "Green", "Blue", "Green", "Green"};
-        String[] names = {"Red Rose", "Pink Plants", "Sunflower", "White Plants", "Pink Rose", "White Rose", "White Flower", "Leaves1", "Blue Flower", "Leaves2", "Leaves3"};
-        for (int i = 0; i <= num_products; i++) {
+    private static List<PreMadeProduct> generateBaseCustomMadeProduct() throws Exception {
+        List<PreMadeProduct> customProducts = new LinkedList<>();
+
+        String[] colors = {
+                "Red", "Pink", "Yellow", "White", "Pink", "White", "White", "Green", "Blue", "Green", "Green"
+        };
+
+        String[] names = {
+                "Red Rose", "Pink Plants", "Sunflower", "White Plants", "Pink Rose",
+                "White Rose", "White Flower", "Lily Leave", "Blue Flower", "Tulip Leave", "Lavender Leave"
+        };
+
+        String[] descriptions = {
+                "A vibrant red rose symbolizing deep love and passion.",
+                "Delicate pink plants adding charm and grace to any bouquet.",
+                "Bright sunflower radiating warmth and happiness.",
+                "Pure white plants evoking serenity and peace.",
+                "Soft pink rose perfect for admiration and joy.",
+                "Elegant white rose representing purity and innocence.",
+                "Lovely white flower bringing calm and freshness.",
+                "Lily leave with graceful elegance and subtle beauty.",
+                "Blue flower expressing tranquility and inspiration.",
+                "Tulip leave bursting with color and springtime cheer.",
+                "Lavender leave known for its calming scent and soothing vibes."
+        };
+
+        // Assigned prices (some with and some without discount)
+        int[] prices = {
+                50, 75, 60, 75, 100, 65, 100, 50, 65, 50, 100
+        };
+
+        int[] priceBeforeDiscounts = {
+                0, 15, 10, 5, 5, 5, 0, 10, 5, 5, 0
+        };
+
+        int num_products = Math.min(names.length, colors.length);
+
+        for (int i = 0; i < num_products; i++) {
             var img = loadImageFromResources(String.format("base%s.jpg", i));
-            PreMadeProduct p = new PreMadeProduct(names[i], img, price = random.nextInt(15) + 5, random.nextInt(5) * 10, false, colors[i]);
-            customProducts.add(p);
+
+            PreMadeProduct p = new PreMadeProduct(
+                    names[i], img,
+                    prices[i],
+                    priceBeforeDiscounts[i],
+                    false,
+                    colors[i]
+            );
+
+            p.setDescription(descriptions[i]);
             p.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
-            session.save(p);   //saves and flushes to database
+
+            customProducts.add(p);
+            session.save(p);
             session.flush();
         }
+
         return customProducts;
     }
 
-    private static List<PreMadeProduct> getAllBaseCustomMadeProduct(List<PreMadeProduct> productsList) throws IOException {
-        List<PreMadeProduct> products = productsList, baseProducts = new LinkedList<PreMadeProduct>();
-        for (PreMadeProduct product : products)
-            if (product.getType() == PreMadeProduct.ProductType.CUSTOM_CATALOG)
-                baseProducts.add(product);
 
+    private static List<PreMadeProduct> getAllBaseCustomMadeProduct(List<PreMadeProduct> productsList) throws IOException {
+        List<PreMadeProduct> baseProducts = new LinkedList<>();
+        for (PreMadeProduct product : productsList) {
+            if (product.getType() == PreMadeProduct.ProductType.CUSTOM_CATALOG) {
+                baseProducts.add(product);
+            }
+        }
         return baseProducts;
     }
 
     private static List<CustomMadeProduct> getCustomMadeProductList(List<PreMadeProduct> products) throws IOException {
-        List<CustomMadeProduct> custom = new LinkedList<CustomMadeProduct>();
-        int price = 0;
-        Random rand = new Random();
-        int size = rand.nextInt(2) + 1;
-        // make 10 customMadeProducts,
-        for (int i = 0; i < size; i++) {
-            // make a customMadeProduct from 3-10 random baseCustomMadeProducts
-            int type = rand.nextInt(3);
-            List<PreMadeProduct> list = getBaseProductList(products);
-            CustomMadeProduct c = new CustomMadeProduct(list, price);
-            c.setItemTypeCustom(CustomMadeProduct.ItemType.values()[type]);
-            c.setAmount(rand.nextInt(4) + 1);
+        List<CustomMadeProduct> custom = new LinkedList<>();
+        int fixedCustomCount = 2;
+
+        // Use only base products (type == CUSTOM_CATALOG)
+        List<PreMadeProduct> baseProducts = getAllBaseCustomMadeProduct(products);
+
+        for (int i = 0; i < fixedCustomCount; i++) {
+            List<PreMadeProduct> fixedList = new LinkedList<>();
+
+            for (int j = 0; j < Math.min(3, baseProducts.size()); j++) {
+                PreMadeProduct base = baseProducts.get(j);
+
+                // 💡 Use the existing product object, just set the amount for this use
+                base.setAmount(1);
+
+                fixedList.add(base);
+            }
+
+            int totalPrice = fixedList.stream()
+                    .mapToInt(p -> p.getPrice() * p.getAmount())
+                    .sum();
+
+            CustomMadeProduct c = new CustomMadeProduct(fixedList, totalPrice);
+            c.setItemTypeCustom(CustomMadeProduct.ItemType.values()[i % CustomMadeProduct.ItemType.values().length]);
+            c.setAmount(1);
+
+            session.save(c);
+            session.flush();
+
             custom.add(c);
-            App.session.save(c);
-            App.session.flush();
         }
+
         return custom;
     }
 
     private static List<PreMadeProduct> getBaseProductList(List<PreMadeProduct> products) throws IOException {
-        List<PreMadeProduct> baseProducts = getAllBaseCustomMadeProduct(products);
-        LinkedList<PreMadeProduct> productsForCustom = new LinkedList<>();
-        Random random = new Random();
-        int loopRand = random.nextInt(2) + 1;
-
-        for (int j = 0; j < loopRand; j++) {
-            int rand = random.nextInt(baseProducts.size());
-
-            PreMadeProduct original = baseProducts.get(rand);
-
-            // אם למוצר המקורי אין מק"ט — ניתן לו ונשמור אותו
-            if (original.getCatalogNumber() == null) {
-                original.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
-                session.save(original);
-                session.flush();
-            }
-
-            // ניצור עותק ממנו עם כמות אקראית
-            PreMadeProduct base = new PreMadeProduct(original);
-            base.setAmount(random.nextInt(5) + 1);
-            base.setOrdered(true);
-
-            // לכל עותק תמיד ניתן מק"ט חדש
-            base.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
-
-            productsForCustom.add(base);
-            session.save(base);
-            session.flush();
-        }
-        return productsForCustom;
+        // Just return the base custom made products as is, without creating copies or random amounts
+        return getAllBaseCustomMadeProduct(products);
     }
 
-
-
     private static List<PreMadeProduct> getPreMadeProductList(List<PreMadeProduct> products) throws IOException {
-        LinkedList<Integer> randomNumbers = new LinkedList<>();
-        LinkedList<PreMadeProduct> productsList = new LinkedList<>();
-        List<PreMadeProduct> allProducts = products;
-        Random random = new Random();
-        int rand, loopRand;
-        loopRand = random.nextInt(4) + 1;
+        // Return all premade products as is, without random selection or copies
 
-        for (int j = 0; j < loopRand; j++) {
-            rand = random.nextInt(11);
-
-            PreMadeProduct randomProduct = new PreMadeProduct(allProducts.get(rand));
-            randomProduct.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
-            randomProduct.setAmount(random.nextInt(5) + 1);
-            randomProduct = new PreMadeProduct(randomProduct);
-            randomProduct.setOrdered(true);
-
-            // ✅ הוספת מספר קטלוגי ייחודי לפני שמירה
-            randomProduct.setCatalogNumber(String.format("%09d", currentCatalogNumber++));
-
-            productsList.add(randomProduct);
-            App.session.save(randomProduct);
-            App.session.flush();
+        List<PreMadeProduct> premade = new LinkedList<>();
+        for (PreMadeProduct p : products) {
+            if (p.getType() == PreMadeProduct.ProductType.CATALOG) {
+                premade.add(p);
+            }
         }
-
-        return productsList;
+        return premade;
     }
 
 
