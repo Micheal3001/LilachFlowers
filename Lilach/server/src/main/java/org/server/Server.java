@@ -99,14 +99,19 @@ public class Server extends AbstractServer {
         App.session.getTransaction().commit();
     }
 
-    private static void pullProducts(List<Object> msg, ConnectionToClient client) throws IOException {       //func pulls products from server
-        List<PreMadeProduct> products = App.getAllProducts();
+    private static void pullProducts(List<Object> msg, ConnectionToClient client) throws IOException {
+        List<PreMadeProduct> products = App.session.createQuery(
+                        "FROM PreMadeProduct WHERE productType != :type", PreMadeProduct.class)
+                .setParameter("type", PreMadeProduct.ProductType.COMPLEMENTARY)
+                .list();
+
         String commandToClient = msg.get(0).toString();
         List<Object> msgToClient = new LinkedList<Object>();
         msgToClient.add(commandToClient);
         msgToClient.add(products);
         client.sendToClient(msgToClient);
     }
+
 
     private void pullComplementaryProducts(List<Object> msg, ConnectionToClient client) throws IOException {
         List<PreMadeProduct> allProducts = App.getAllProducts();
