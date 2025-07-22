@@ -84,12 +84,14 @@ public class ProductController extends ItemController {
         if (App.client.user instanceof Employee) {
             Controller controller = this.getSkeleton().changeCenter("EditProduct");
             EditProductController editProductController = (EditProductController) controller;
+            App.client.controller = editProductController;
             editProductController.setProductView(this.product);
         }
         // אחרת (לקוח או אורח) → למסך רגיל
         else {
             Controller controller = this.getSkeleton().changeCenter("ProductView");
             ProductViewController productView = (ProductViewController) controller;
+            App.client.controller = productView;
             productView.setProductView(this.product);
         }
     }

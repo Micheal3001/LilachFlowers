@@ -23,7 +23,7 @@ public class Client extends AbstractClient {
 
     protected static LinkedList<Order> orders = new LinkedList<Order>();
 
-    private Controller controller;
+    public Controller controller;
 
     public Cart cart = new Cart();
 
@@ -139,7 +139,7 @@ public class Client extends AbstractClient {
         refreshCart();
 
         Platform.runLater(() -> {
-            try {
+                        try {
                 String currentScreen = this.getSkeleton().getCurrentCenter();
                 String alertMsg = null;
 
@@ -188,10 +188,27 @@ public class Client extends AbstractClient {
 
                 // Handle ProductView alert separately (even if controller is not CatalogController)
                 if ("ProductView".equals(currentScreen)) {
+                    if (this.controller instanceof ProductViewController) {
+                        ProductViewController pvc = (ProductViewController) this.controller;
+
+                        String currentCatalogNumber = pvc.getProduct() != null ? pvc.getProduct().getCatalogNumber() : null;
+
+                        PreMadeProduct updatedProduct = App.allProducts.stream()
+                                .filter(p -> p.getCatalogNumber().equals(currentCatalogNumber))
+                                .findFirst().orElse(null);
+
+                        if (updatedProduct != null) {
+                            pvc.onProductUpdate(updatedProduct);
+                        }
+
+
                     alertMsg = (this.user instanceof Employee)
                             ? "Notice that there were made some changes in the catalog! Have a nice shift :)"
                             : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
                 }
+
+
+
 
                 if (alertMsg != null) {
                     Controller.sendAlert(alertMsg, "Catalog Update", Alert.AlertType.INFORMATION);

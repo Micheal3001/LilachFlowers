@@ -98,6 +98,30 @@ public class ProductViewController extends Controller{
             this.product.setAmount(count);
         }
     }
+    public PreMadeProduct getProduct() {
+        return this.product;
+    }
+
+    public void onProductUpdate(PreMadeProduct updatedProduct) {
+        this.product = updatedProduct;
+        refreshView();
+    }
+
+    private void refreshView() {
+        this.productName.setText(product.getName());
+        this.mainImage.setImage(product.getImage());
+        this.image1.setImage(product.getImage()); // תמונה ראשית – אפשר לשנות אם יש נוספות
+        this.description.setText(product.getDescription());
+        this.price.setText(Integer.toString(product.getPrice()));
+
+        if (product.getDiscount() != 0)
+            this.priceBeforeDiscount.setText(Integer.toString(product.getPriceBeforeDiscount()));
+        else
+            this.priceBeforeDiscount.setText("");
+
+        this.catalogNumber.setText("Catalog #: " + product.getCatalogNumber());
+    }
+
 
     @FXML
     void addToCart(ActionEvent event) throws InterruptedException {
