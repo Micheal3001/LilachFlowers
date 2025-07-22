@@ -152,9 +152,9 @@ public class Client extends AbstractClient {
                                 : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
                     }
 
-                    // If user is Employee and is in Catalog editing screen, ensure stays there
-                    if (this.user instanceof Employee && ("Catalog".equals(currentScreen) || "EditCatalog".equals(currentScreen))) {
-                        this.getSkeleton().changeCenter("EditCatalog"); // or "Catalog" depending on your workflow
+                    if (this.user instanceof Employee &&
+                            ("Catalog".equals(currentScreen) || "EditCatalog".equals(currentScreen))) {
+                        this.getSkeleton().changeCenter("EditCatalog");
                     }
 
                 } else if (this.controller instanceof ComplementaryProductsController
@@ -168,8 +168,8 @@ public class Client extends AbstractClient {
                                 : "We are sorry for the inconvenience, we made some changes in our complementary and updated your cart too! Hope you like it :)";
                     }
 
-                    // If user is Employee and is in Complementary editing screen, ensure stays there
-                    if (this.user instanceof Employee && ("ComplementaryProducts".equals(currentScreen) || "EditComplementary".equals(currentScreen))) {
+                    if (this.user instanceof Employee &&
+                            ("ComplementaryProducts".equals(currentScreen) || "EditComplementary".equals(currentScreen))) {
                         this.getSkeleton().changeCenter("EditComplementary");
                     }
 
@@ -186,6 +186,13 @@ public class Client extends AbstractClient {
                     }
                 }
 
+                // Handle ProductView alert separately (even if controller is not CatalogController)
+                if ("ProductView".equals(currentScreen)) {
+                    alertMsg = (this.user instanceof Employee)
+                            ? "Notice that there were made some changes in the catalog! Have a nice shift :)"
+                            : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
+                }
+
                 if (alertMsg != null) {
                     Controller.sendAlert(alertMsg, "Catalog Update", Alert.AlertType.INFORMATION);
                 }
@@ -196,6 +203,7 @@ public class Client extends AbstractClient {
             }
         });
     }
+
 
 
 

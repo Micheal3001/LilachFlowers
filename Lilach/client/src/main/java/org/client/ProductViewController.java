@@ -107,4 +107,5 @@ public class ProductViewController extends Controller{
 //            App.client.cart.insertProduct(this.product);
         App.client.cart.insertSomeProduct(this.product,Integer.parseInt(orderCount.getText()));
     }
+
 }

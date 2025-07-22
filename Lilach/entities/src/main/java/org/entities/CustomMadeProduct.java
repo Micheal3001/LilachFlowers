@@ -3,9 +3,12 @@ package org.entities;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.Transient;
+
 
 @Entity
 @Table(name = "customProducts")
@@ -14,9 +17,7 @@ public class CustomMadeProduct extends Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;         // id generated for each product
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
-    @Column(name= "products")
+    @Transient
     private List<PreMadeProduct> products = new LinkedList<PreMadeProduct>();
 
 

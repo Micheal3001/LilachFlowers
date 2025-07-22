@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -23,12 +24,10 @@ public class Order implements Serializable {     //Product class entity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;         // id generated for each product
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
+    @Transient
     protected List<PreMadeProduct> preMadeProducts;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
+    @Transient
     protected List<CustomMadeProduct> customMadeProducts;
 
     @ManyToOne
