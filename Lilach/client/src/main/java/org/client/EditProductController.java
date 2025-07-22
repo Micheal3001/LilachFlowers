@@ -85,7 +85,7 @@ public class EditProductController extends Controller {
         if (alertMsg("Edit Product", "change this product!", checkProduct())) {
             saveChanges();
             // Comment out or remove this line so it doesn't switch the screen:
-            // this.globalSkeleton.changeCenter("EditCatalog");
+            this.globalSkeleton.changeCenter("EditCatalog");
         }
     }
 
