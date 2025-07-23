@@ -139,7 +139,7 @@ public class Client extends AbstractClient {
         refreshCart();
 
         Platform.runLater(() -> {
-                        try {
+            try {
                 String currentScreen = this.getSkeleton().getCurrentCenter();
                 String alertMsg = null;
 
@@ -186,7 +186,7 @@ public class Client extends AbstractClient {
                     }
                 }
 
-                // Handle ProductView alert separately (even if controller is not CatalogController)
+                // Handle ProductView alert separately
                 if ("ProductView".equals(currentScreen)) {
                     if (this.controller instanceof ProductViewController) {
                         ProductViewController pvc = (ProductViewController) this.controller;
@@ -201,14 +201,11 @@ public class Client extends AbstractClient {
                             pvc.onProductUpdate(updatedProduct);
                         }
 
-
-                    alertMsg = (this.user instanceof Employee)
-                            ? "Notice that there were made some changes in the catalog! Have a nice shift :)"
-                            : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
+                        alertMsg = (this.user instanceof Employee)
+                                ? "Notice that there were made some changes in the catalog! Have a nice shift :)"
+                                : "We are sorry for the inconvenience, we made some changes in our catalog and updated your cart too! Hope you like it :)";
+                    }
                 }
-
-
-
 
                 if (alertMsg != null) {
                     Controller.sendAlert(alertMsg, "Catalog Update", Alert.AlertType.INFORMATION);
@@ -220,11 +217,6 @@ public class Client extends AbstractClient {
             }
         });
     }
-
-
-
-
-
 
     private void refreshCart() {
         List<Product> cartProducts = this.cart.getProducts();
@@ -405,8 +397,29 @@ public class Client extends AbstractClient {
 
 
     private void pushToBases(Object msg) throws IOException {
-        products = new LinkedList<>((List<PreMadeProduct>) ((LinkedList<Object>) msg).get(1));
+        List<PreMadeProduct> received = (List<PreMadeProduct>) ((LinkedList<Object>) msg).get(1);
+        List<PreMadeProduct> filtered = new LinkedList<>();
+        Set<String> seenCatalogNumbers = new HashSet<>();
+
+        for (PreMadeProduct product : received) {
+            String catalog = product.getCatalogNumber();
+            // אם יש catalogNumber – נסנן כפילויות לפי זה
+            if (catalog != null && !catalog.isEmpty()) {
+                if (!seenCatalogNumbers.contains(catalog)) {
+                    seenCatalogNumbers.add(catalog);
+                    product.setAmount(0); // איפוס הכמות
+                    filtered.add(product);
+                }
+            } else {
+                // אם אין catalogNumber – נוסיף בכל מקרה
+                product.setAmount(0); // איפוס הכמות
+                filtered.add(product);
+            }
+        }
+
+        products = new LinkedList<>(filtered);
         App.allProducts = products;
+
         if (controller instanceof CreateCustomMadeController) {
             ((CreateCustomMadeController) controller).pullProductsToClient();
         } else if (controller instanceof ComplementaryProductsController) {
@@ -417,6 +430,7 @@ public class Client extends AbstractClient {
             System.out.println("Warning: Unknown controller type in pushToBases.");
         }
     }
+
 
 
     private void authenticationReply(LinkedList<Object> msg) {

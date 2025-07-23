@@ -166,14 +166,12 @@ public class App {
 
 
     private static List<PreMadeProduct> generateProducts() throws Exception {
-        System.out.println("🛠 generateProducts() was called");
 
         List<PreMadeProduct> products = new LinkedList<>();
 
         List<PreMadeProduct> existingProducts = session.createQuery("FROM PreMadeProduct", PreMadeProduct.class).list();
 
         if (existingProducts.isEmpty()) {
-            System.out.println("🛠 generateProducts() was called");
             String[] flowerNames = {
                     "Sunflower", "Peonies", "Lilies", "Tulips", "Gerberas", "Hydrangea",
                     "Alstroemerias", "Chrysanthemums", "Orchids", "Irises", "Carnations"

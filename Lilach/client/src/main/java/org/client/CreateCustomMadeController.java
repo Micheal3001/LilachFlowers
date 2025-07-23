@@ -19,6 +19,9 @@ import javafx.scene.layout.FlowPane;
 import org.entities.CustomMadeProduct;
 import org.entities.PreMadeProduct;
 import java.io.InputStream;
+import java.util.Set;
+import java.util.HashSet;
+
 
 
 public class CreateCustomMadeController extends Controller{
@@ -227,24 +230,48 @@ public class CreateCustomMadeController extends Controller{
     }
 
 
-    public void pullProductsToClient() throws IOException {         //function is called to display all products when returning with data from server
+    public void pullProductsToClient() throws IOException {
         CreateCustomMadeController createCustomMadeController = this;
-        Platform.runLater(new Runnable() {      //runlater used to wait for server and client threads to finish
-            @Override
-            public void run() {
-                mainPane.getChildren().clear();
-                for (PreMadeProduct product : Client.products) {
-                    try {
-                        if(product.getType()== PreMadeProduct.ProductType.CUSTOM_CATALOG)
+
+        Platform.runLater(() -> {
+            mainPane.getChildren().clear();
+
+            Set<String> shownCatalogNumbers = new HashSet<>();
+            Set<Integer> shownIds = new HashSet<>();
+
+            for (PreMadeProduct product : Client.products) {
+                try {
+                    if (product.getType() == PreMadeProduct.ProductType.CUSTOM_CATALOG) {
+                        String catalogNum = product.getCatalogNumber();
+                        int productId = product.getId();
+
+                        boolean alreadyShown = false;
+
+                        if (catalogNum != null && !catalogNum.isEmpty()) {
+                            alreadyShown = shownCatalogNumbers.contains(catalogNum);
+                        } else {
+                            alreadyShown = shownIds.contains(productId);
+                        }
+
+                        if (!alreadyShown) {
+                            product.setAmount(0);
                             displayProduct(product, createCustomMadeController);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                            if (catalogNum != null && !catalogNum.isEmpty()) {
+                                shownCatalogNumbers.add(catalogNum);
+                            } else {
+                                shownIds.add(productId);
+                            }
+                        }
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
-
-
     }
+
+
+
 
 }
