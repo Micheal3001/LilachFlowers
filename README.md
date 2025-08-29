@@ -32,7 +32,6 @@ The system allows both customers and store managers to interact with the shop th
 
 ## 🚀 Getting Started
 1. Clone the repository:  
-   ```bash
   git clone https://github.com/Micheal3001/LilachFlowers.git
 
 
